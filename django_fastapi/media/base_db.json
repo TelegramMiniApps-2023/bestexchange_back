@@ -1,0 +1,1005 @@
+[
+    {
+        "model": "general_models.valute",
+        "pk": 1,
+        "fields": {
+            "name": "Bitcoin",
+            "code_name": "BTC",
+            "type_valute": "Криптовалюта",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 2,
+        "fields": {
+            "name": "Bitcoin Cash",
+            "code_name": "BCH",
+            "type_valute": "Криптовалюта",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 3,
+        "fields": {
+            "name": "Ethereum",
+            "code_name": "ETH",
+            "type_valute": "Криптовалюта",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 4,
+        "fields": {
+            "name": "Ethereum Classic",
+            "code_name": "ETC",
+            "type_valute": "Криптовалюта",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Litecoin",
+            "code_name": "LTC",
+            "type_valute": "Криптовалюта",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Ripple",
+            "code_name": "XRP",
+            "type_valute": "Криптовалюта",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Monero",
+            "code_name": "XMR",
+            "type_valute": "Криптовалюта",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Dogecoin",
+            "code_name": "DOGE",
+            "type_valute": "Криптовалюта",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Dash",
+            "code_name": "DASH",
+            "type_valute": "Криптовалюта",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Tether ERC20 USDT",
+            "code_name": "USDTERC20",
+            "type_valute": "Криптовалюта",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Tether TRC20 USDT",
+            "code_name": "USDTTRC20",
+            "type_valute": "Криптовалюта",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Tether BEP20 USDT",
+            "code_name": "USDTBEP20",
+            "type_valute": "Криптовалюта",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "TRON",
+            "code_name": "TRX",
+            "type_valute": "Криптовалюта",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "BinanceCoin BEP20 BNB",
+            "code_name": "BNBBEP20",
+            "type_valute": "Криптовалюта",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Solana",
+            "code_name": "SOL",
+            "type_valute": "Криптовалюта",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Toncoin",
+            "code_name": "TON",
+            "type_valute": "Криптовалюта",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "WebMoney",
+            "code_name": "WMZ",
+            "type_valute": "Электронные деньги",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Perfect Money USD",
+            "code_name": "PMUSD",
+            "type_valute": "Электронные деньги",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "ЮMoney RUB",
+            "code_name": "YAMRUB",
+            "type_valute": "Электронные деньги",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "QIWI RUB",
+            "code_name": "QWRUB",
+            "type_valute": "Электронные деньги",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "PayPal USD",
+            "code_name": "PPUSD",
+            "type_valute": "Электронные деньги",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Advanced Cash USD",
+            "code_name": "ADVCUSD",
+            "type_valute": "Электронные деньги",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Advanced Cash RUB",
+            "code_name": "ADVCRUB",
+            "type_valute": "Электронные деньги",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Payeer USD",
+            "code_name": "PRUSD",
+            "type_valute": "Электронные деньги",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Payeer RUB",
+            "code_name": "PRRUB",
+            "type_valute": "Электронные деньги",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Skrill USD",
+            "code_name": "SKLUSD",
+            "type_valute": "Электронные деньги",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Exmo USD",
+            "code_name": "EXMUSD",
+            "type_valute": "Балансы криптобирж",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Binance RUB",
+            "code_name": "BNACRUB",
+            "type_valute": "Балансы криптобирж",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Сбербанк RUB",
+            "code_name": "SBERRUB",
+            "type_valute": "Интернет-банкинг",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Альфа-Банк RUB",
+            "code_name": "ACRUB",
+            "type_valute": "Интернет-банкинг",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Тинькофф RUB",
+            "code_name": "TCSBRUB",
+            "type_valute": "Интернет-банкинг",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "ВТБ RUB",
+            "code_name": "TBRUB",
+            "type_valute": "Интернет-банкинг",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Приват 24 UAH",
+            "code_name": "P24UAH",
+            "type_valute": "Интернет-банкинг",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Kaspi Bank KZT",
+            "code_name": "KSPBKZT",
+            "type_valute": "Интернет-банкинг",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Visa/MasterCard USD",
+            "code_name": "CARDUSD",
+            "type_valute": "Интернет-банкинг",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Visa/MasterCard RUB",
+            "code_name": "CARDRUB",
+            "type_valute": "Интернет-банкинг",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Visa/MasterCard UAH",
+            "code_name": "CARDUAH",
+            "type_valute": "Интернет-банкинг",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Visa/MasterCard BYN",
+            "code_name": "CARDBYN",
+            "type_valute": "Интернет-банкинг",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Visa/MasterCard KZT",
+            "code_name": "CARDKZT",
+            "type_valute": "Интернет-банкинг",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "Карта Мир RUB",
+            "code_name": "MIRCRUB",
+            "type_valute": "Интернет-банкинг",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 5,
+        "fields": {
+            "name": "WU USD",
+            "code_name": "WUUSD",
+            "type_valute": "Интернет-банкинг",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+
+
+
+
+
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "JPMarket",
+            "xml_url": "https://jpmarket.cc/request-exportxml.xml",
+            "partner_link": "https://jpmarket.cc?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "Finex24",
+            "xml_url": "https://finex24.io/request-exportxml.xml",
+            "partner_link": "https://finex24.io?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "Nadex",
+            "xml_url": "https://nadex.io/request-exportxml.xml",
+            "partner_link": "https://nadex.io?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "99Francs",
+            "xml_url": "https://99francs.pro/request-exportxml.xml",
+            "partner_link": "https://99francs.pro?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "CoolCoin",
+            "xml_url": "https://coolcoin.best/request-exportxml.xml",
+            "partner_link": "https://coolcoin.best?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "ChangeProject",
+            "xml_url": "https://changeproject.bz/request-exportxml.xml",
+            "partner_link": "https://changeproject.bz?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "50Cents",
+            "xml_url": "https://50cents.pro/request-exportxml.xml",
+            "partner_link": "https://50cents.pro?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "КриптоКасса",
+            "xml_url": "https://cryptokacca.pro/request-exportxml.xml",
+            "partner_link": "https://cryptokacca.pro?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "UniCash",
+            "xml_url": "https://unicash.pro/request-exportxml.xml",
+            "partner_link": "https://unicash.pro?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "Пандпэй",
+            "xml_url": "https://pandpay.net/request-exportxml.xml",
+            "partner_link": "https://pandpay.net?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "ГоугоуБит",
+            "xml_url": "https://gogobit.cc/request-exportxml.xml",
+            "partner_link": "https://gogobit.cc?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "BroExchange",
+            "xml_url": "https://bro.exchange/request-exportxml.xml",
+            "partner_link": "https://bro.exchange?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "CashBox",
+            "xml_url": "https://cashbox.exchange/request-exportxml.xml",
+            "partner_link": "https://cashbox.exchange?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "КупиБит",
+            "xml_url": "https://kupibit.me/request-exportxml.xml",
+            "partner_link": "https://kupibit.me?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "CryptoHome",
+            "xml_url": "https://cryptohome.me/request-exportxml.xml",
+            "partner_link": "https://cryptohome.me?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "БухтаОбмена",
+            "xml_url": "https://buhtaobmena.me/request-exportxml.xml",
+            "partner_link": "https://buhtaobmena.me?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "Excoin",
+            "xml_url": "https://excoin.in/request-exportxml.xml",
+            "partner_link": "https://excoin.in?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "Adb",
+            "xml_url": "https://adb.bz/request-exportxml.xml",
+            "partner_link": "https://adb.bz?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "BitBong",
+            "xml_url": "https://bitbong.pro/request-exportxml.xml",
+            "partner_link": "https://bitbong.pro?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "SwiftChange",
+            "xml_url": "https://swiftchange.net/request-exportxml.xml",
+            "partner_link": "https://swiftchange.net?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "CryptoMax",
+            "xml_url": "https://cryptomax.ru/request-exportxml.xml",
+            "partner_link": "https://cryptomax.ru?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "YaObmen",
+            "xml_url": "https://yaobmen.cash/request-exportxml.xml",
+            "partner_link": "https://yaobmen.cash?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "Обменко",
+            "xml_url": "https://obmenko.org/request-exportxml.xml",
+            "partner_link": "https://obmenko.org?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "WMSell",
+            "xml_url": "https://wmsell.biz/request-exportxml.xml",
+            "partner_link": "https://wmsell.biz?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "Bitcoin24Pro",
+            "xml_url": "https://bitcoin-24.pro/request-exportxml.xml",
+            "partner_link": "https://bitcoin-24.pro?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "Crypto-Market24",
+            "xml_url": "https://cryptomarket24.top/request-exportxml.xml",
+            "partner_link": "https://cryptomarket24.top?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "TraiderIdeal",
+            "xml_url": "https://traiderideal.ru/request-exportxml.xml",
+            "partner_link": "https://traiderideal.ru?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "VV-Obmen",
+            "xml_url": "https://vv-obmen.net/request-exportxml.xml",
+            "partner_link": "https://vv-obmen.net?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "КриптоРай",
+            "xml_url": "https://cryptor.ai/request-exportxml.xml",
+            "partner_link": "https://cryptor.ai?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "CryptoShopping",
+            "xml_url": "https://cryptoshopping.ru/request-exportxml.xml",
+            "partner_link": "https://cryptoshopping.ru?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "FehuPay",
+            "xml_url": "https://fehupay.com/request-exportxml.xml",
+            "partner_link": "https://fehupay.com?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "N1ex",
+            "xml_url": "https://n1ex.exchange.zone/request-exportxml.xml",
+            "partner_link": "https://n1ex.exchange.zone?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "Об-мен",
+            "xml_url": "https://ob-men.com/request-exportxml.xml",
+            "partner_link": "https://ob-men.com?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "ТочкаОбмена",
+            "xml_url": "https://tochkaobmena.com/request-exportxml.xml",
+            "partner_link": "https://tochkaobmena.com?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "Criptify",
+            "xml_url": "https://criptify.com/request-exportxml.xml",
+            "partner_link": "https://criptify.com?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "X-Obmen",
+            "xml_url": "https://x-obmen.biz/request-exportxml.xml",
+            "partner_link": "https://x-obmen.biz?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "BTCSale",
+            "xml_url": "https://btcsale.me/request-exportxml.xml",
+            "partner_link": "https://btcsale.me?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "Оборот",
+            "xml_url": "https://oborot.net/request-exportxml.xml",
+            "partner_link": "https://oborot.net?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "SpbWMCasher",
+            "xml_url": "https://spbwmcasher.ru/request-exportxml.xml",
+            "partner_link": "https://spbwmcasher.ru?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "GlobalBits",
+            "xml_url": "https://globalbits.org/request-exportxml.xml",
+            "partner_link": "https://globalbits.org?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "Apexchange",
+            "xml_url": "https://apexchange.cc/request-exportxml.xml",
+            "partner_link": "https://apexchange.cc?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "Perfect-Change",
+            "xml_url": "https://perfect-change.com/request-exportxml.xml",
+            "partner_link": "https://perfect-change.com?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "Coin-Bank",
+            "xml_url": "https://coin-bank.co/request-exportxml.xml",
+            "partner_link": "https://coin-bank.co?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "Top-Exchange",
+            "xml_url": "https://top-exchange.com/request-exportxml.xml",
+            "partner_link": "https://top-exchange.com?"
+        }
+    },
+    {
+        "model": "no_cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "FlashObmen",
+            "xml_url": "https://flashobmen.com/request-exportxml.xml",
+            "partner_link": "https://flashobmen.com?"
+        }
+    },
+    {
+        "model": "cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "Transfer24",
+            "xml_url": "https://transfer24.pro/request-exportxml.xml",
+            "partner_link": "https://transfer24.pro?"
+        }
+    },
+    {
+        "model": "cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "Alfa-trades",
+            "xml_url": "https://alfa-trades.com/request-exportxml.xml",
+            "partner_link": "https://alfa-trades.com?"
+        }
+    },
+    {
+        "model": "cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "Btchange",
+            "xml_url": "https://btchange.ru/request-exportxml.xml",
+            "partner_link": "https://btchange.ru?"
+        }
+    },
+    {
+        "model": "cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "cripthub",
+            "xml_url": "https://cripthub.ru/request-exportxml.xml",
+            "partner_link": "https://cripthub.ru?"
+        }
+    },
+    {
+        "model": "cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "1-online",
+            "xml_url": "https://1-online.ru/request-exportxml.xml",
+            "partner_link": "https://1-online.ru?"
+        }
+    },
+    {
+        "model": "cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "City-exchange",
+            "xml_url": "https://city-exchange.io/request-exportxml.xml",
+            "partner_link": "https://city-exchange.io?"
+        }
+    },
+    {
+        "model": "cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "Swiftchange",
+            "xml_url": "https://swiftchange.net/request-exportxml.xml",
+            "partner_link": "https://swiftchange.net?"
+        }
+    },
+    {
+        "model": "cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "Bitbong",
+            "xml_url": "https://bitbong.pro/request-exportxml.xml",
+            "partner_link": "https://bitbong.pro?"
+        }
+    },
+    {
+        "model": "cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "Obmenlite24",
+            "xml_url": "https://obmenlite24.ru/request-exportxml.xml",
+            "partner_link": "https://obmenlite24.ru?"
+        }
+    },
+    {
+        "model": "cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "Goldobmen",
+            "xml_url": "https://goldobmen.com/request-exportxml.xml",
+            "partner_link": "https://goldobmen.com?"
+        }
+    },
+    {
+        "model": "cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "Allmoney",
+            "xml_url": "https://allmoney.market/request-exportxml.xml",
+            "partner_link": "https://allmoney.market?"
+        }
+    },
+    {
+        "model": "cash.exchange",
+        "pk": 1,
+        "fields": {
+            "name": "24expay",
+            "xml_url": "https://24expay.com/request-exportxml.xml",
+            "partner_link": "https://24expay.com?"
+        }
+    },
+
+
+    
+
+    {
+        "model": "general_models.valute",
+        "pk": 1,
+        "fields": {
+            "name": "Доллар",
+            "code_name": "CASHUSD",
+            "type_valute": "Наличные",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 1,
+        "fields": {
+            "name": "Рубли",
+            "code_name": "CASHRUB",
+            "type_valute": "Наличные",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 1,
+        "fields": {
+            "name": "Евро",
+            "code_name": "CASHEUR",
+            "type_valute": "Наличные",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 1,
+        "fields": {
+            "name": "Дирхам",
+            "code_name": "CASHAED",
+            "type_valute": "Наличные",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 1,
+        "fields": {
+            "name": "Тенге",
+            "code_name": "CASHKZT",
+            "type_valute": "Наличные",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 1,
+        "fields": {
+            "name": "Польский злотый",
+            "code_name": "CASHPLN",
+            "type_valute": "Наличные",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    },
+    {
+        "model": "general_models.valute",
+        "pk": 1,
+        "fields": {
+            "name": "Тайский бат",
+            "code_name": "CASHTHB",
+            "type_valute": "Наличные",
+            "icon_url": "./icons/Bitcoin.svg"
+                }
+    }
+
+]

@@ -1,0 +1,68 @@
+services:
+
+  django_fastapi:
+    build: .
+    environment:
+      - POSTGRES_HOST=psql_db
+      - DJANGO_SUPERUSER_USERNAME=admin
+      - DJANGO_SUPERUSER_PASSWORD=1234
+      - DJANGO_SUPERUSER_EMAIL=yashenkov.q@gmail.com
+    env_file:
+      - ./.env
+    container_name: django_fastapi
+    ports:
+      - '80:8000'
+    depends_on:
+      - psql_db
+      - rabbitmq3
+    command: sh -c "python manage.py makemigrations &&
+                    python manage.py migrate &&
+                    python manage.py loaddata media/base_db.json &&
+                    python manage.py loaddata media/country.json &&
+                    python manage.py create_periodic_task_for_delete_reviews &&
+                    python manage.py create_cities &&
+                    python manage.py createsuperuser --no-input &&
+                    uvicorn project.asgi:app --host 0.0.0.0"
+
+  rabbitmq3:
+    image: rabbitmq:3.6.9
+    ports:
+    - "5672:5672"
+    - "15672:15672"
+
+
+  celery_worker:
+    build: .
+    command: sh -c 'celery -A project worker -l info -c 20 -Ofair'
+    environment:
+      - POSTGRES_HOST=psql_db
+    env_file:
+      - ./.env
+    depends_on:
+      - rabbitmq3
+      - psql_db
+      - django_fastapi
+
+  celery_beat:
+    build: .
+    restart: on-failure
+    command: sh -c 'celery -A project beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler'
+    environment:
+      - POSTGRES_HOST=psql_db
+    env_file:
+      - ./.env
+    depends_on:
+      - rabbitmq3
+      - psql_db
+      - celery_worker
+      - django_fastapi
+
+  psql_db:
+    image: postgres:14
+    env_file:
+      - ./.env
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
