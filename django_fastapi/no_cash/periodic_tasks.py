@@ -75,6 +75,6 @@ def manage_periodic_task_for_parse_black_list(exchange_name: str, interval: int)
             task.enabled = False
         else:
             task.enabled = True
-            schedule = get_or_create_schedule(interval, IntervalSchedule.SECONDS)
+            schedule = get_or_create_schedule(interval, IntervalSchedule.HOURS)
             task.interval = schedule
         task.save()

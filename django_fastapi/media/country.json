@@ -8,707 +8,707 @@
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 2,
         "fields": {
             "name": "Словакия"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 3,
         "fields": {
             "name": "Хорватия"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 4,
         "fields": {
             "name": "Мали"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 5,
         "fields": {
             "name": "Греция"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 6,
         "fields": {
             "name": "Армения"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 7,
         "fields": {
             "name": "Кипр"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 8,
         "fields": {
             "name": "Монако"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 9,
         "fields": {
             "name": "Ангола"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 10,
         "fields": {
             "name": "Перу"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 11,
         "fields": {
             "name": "Казахстан"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 12,
         "fields": {
             "name": "Италия"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 13,
         "fields": {
             "name": "Аргентина"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 14,
         "fields": {
             "name": "Ливия"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 15,
         "fields": {
             "name": "Япония"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 16,
         "fields": {
             "name": "Великобритания"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 17,
         "fields": {
             "name": "Бельгия"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 18,
         "fields": {
             "name": "Ливан"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 19,
         "fields": {
             "name": "Сингапур"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 20,
         "fields": {
             "name": "Танзания"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 21,
         "fields": {
             "name": "Либерия"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 22,
         "fields": {
             "name": "Канада"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 23,
         "fields": {
             "name": "Колумбия"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 24,
         "fields": {
             "name": "Германия"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 25,
         "fields": {
             "name": "Гвинея"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 26,
         "fields": {
             "name": "Гамбия"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 27,
         "fields": {
             "name": "Мексика"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 28,
         "fields": {
             "name": "Швеция"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 29,
         "fields": {
             "name": "Нигерия"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 30,
         "fields": {
             "name": "Сербия"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 31,
         "fields": {
             "name": "Сомали"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 32,
         "fields": {
             "name": "Эстония"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 33,
         "fields": {
             "name": "Панама"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 34,
         "fields": {
             "name": "Кыргызстан"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 35,
         "fields": {
             "name": "Австрия"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 36,
         "fields": {
             "name": "Республика Корея"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 37,
         "fields": {
             "name": "Таиланд"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 38,
         "fields": {
             "name": "Дания"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 39,
         "fields": {
             "name": "Бенин"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 40,
         "fields": {
             "name": "Турция"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 41,
         "fields": {
             "name": "Португалия"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 42,
         "fields": {
             "name": "Македония"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 43,
         "fields": {
             "name": "Южно-Африканская Республика"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 44,
         "fields": {
             "name": "Азербайджан"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 45,
         "fields": {
             "name": "Объединенные Арабские Эмираты"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 46,
         "fields": {
             "name": "Габон"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 47,
         "fields": {
             "name": "Ирландия"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 48,
         "fields": {
             "name": "Уганда"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 49,
         "fields": {
             "name": "Нидерланды"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 50,
         "fields": {
             "name": "Венгрия"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 51,
         "fields": {
             "name": "Норвегия"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 52,
         "fields": {
             "name": "Албания"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 53,
         "fields": {
             "name": "Чехия"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 54,
         "fields": {
             "name": "Литва"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 55,
         "fields": {
             "name": "Камерун"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 56,
         "fields": {
             "name": "Люксембург"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 57,
         "fields": {
             "name": "Джибути"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 58,
         "fields": {
             "name": "Доминиканская республика"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 59,
         "fields": {
             "name": "Сьерра-Леоне"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 60,
         "fields": {
             "name": "Узбекистан"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 61,
         "fields": {
             "name": "Болгария"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 62,
         "fields": {
             "name": "Индонезия"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 63,
         "fields": {
             "name": "Буркина Фасо"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 64,
         "fields": {
             "name": "Швейцария"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 65,
         "fields": {
             "name": "Бразилия"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 66,
         "fields": {
             "name": "Эквадор"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 67,
         "fields": {
             "name": "США"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 68,
         "fields": {
             "name": "Сенегал"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 69,
         "fields": {
             "name": "Румыния"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 70,
         "fields": {
             "name": "Нигер"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 71,
         "fields": {
             "name": "Польша"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 72,
         "fields": {
             "name": "Эфиопия"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 73,
         "fields": {
             "name": "Саудовская Аравия"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 74,
         "fields": {
             "name": "Словения"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 75,
         "fields": {
             "name": "Финляндия"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 76,
         "fields": {
             "name": "Таджикистан"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 77,
         "fields": {
             "name": "Испания"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 78,
         "fields": {
             "name": "Зимбабве"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 79,
         "fields": {
             "name": "Тунис"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 80,
         "fields": {
             "name": "Украина"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 81,
         "fields": {
             "name": "Австралия"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 82,
         "fields": {
             "name": "Конго"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 83,
         "fields": {
             "name": "Кот-д'Ивуар"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 84,
         "fields": {
             "name": "Грузия"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 85,
         "fields": {
             "name": "Мальта"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 86,
         "fields": {
             "name": "Кения"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 87,
         "fields": {
             "name": "Израиль"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 88,
         "fields": {
             "name": "Катар"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 89,
         "fields": {
             "name": "Латвия"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 90,
         "fields": {
             "name": "Коста-Рика"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 91,
         "fields": {
             "name": "Иран"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 92,
         "fields": {
             "name": "Франция"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 93,
         "fields": {
             "name": "Беларусь"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 94,
         "fields": {
             "name": "Россия"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 95,
         "fields": {
             "name": "Китай"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 96,
         "fields": {
             "name": "Молдова"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 97,
         "fields": {
             "name": "Бахрейн"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 98,
         "fields": {
             "name": "Малайзия"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 99,
         "fields": {
             "name": "Египет"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 100,
         "fields": {
             "name": "Черногория"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 101,
         "fields": {
             "name": "Того"
         }
     },
     {
         "model": "cash.country",
-        "pk": 1,
+        "pk": 102,
         "fields": {
             "name": "Гана"
         }

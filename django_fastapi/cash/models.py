@@ -10,7 +10,7 @@ from general_models.models import (BaseExchangeDirection,
 
 
 class Country(models.Model):
-    name = models.CharField('Название страны', max_length=100, primary_key=True)
+    name = models.CharField('Название страны', max_length=100, unique=True)
 
     class Meta:
         verbose_name = 'Страна'
@@ -22,7 +22,7 @@ class Country(models.Model):
 
 
 class City(models.Model):
-    name = models.CharField('Название города', max_length=100, primary_key=True)
+    name = models.CharField('Название города', max_length=100, unique=True)
     code_name = models.CharField('Кодовое имя', max_length=10, unique=True)
     country = models.ForeignKey(Country,
                                 on_delete=models.CASCADE,
@@ -34,6 +34,9 @@ class City(models.Model):
         verbose_name = 'Город'
         verbose_name_plural = 'Города'
         ordering = ['is_parse', 'name']
+        indexes = [
+            models.Index(fields=['code_name', ])
+        ]
 
     def __str__(self):
         return self.name
@@ -108,6 +111,9 @@ class ExchangeDirection(BaseExchangeDirection):
         verbose_name = 'Готовое направление'
         verbose_name_plural = 'Готовые направления'
         ordering = ['-is_active', 'exchange', 'city', 'valute_from', 'valute_to']
+        indexes = [
+            models.Index(fields=['city', 'valute_from', 'valute_to'])
+        ]
 
     def __str__(self):
         return f'{self.city}: {self.valute_from} -> {self.valute_to}'
@@ -123,6 +129,9 @@ class BlackListElement(models.Model):
         verbose_name_plural = 'Элементы чёрного списка'
         unique_together = (("city",  "valute_from", "valute_to"), )
         ordering = ['city', 'valute_from', 'valute_to']
+        indexes = [
+            models.Index(fields=['city', 'valute_from', 'valute_to'])
+        ]
 
     def __str__(self):
         return f'({self.city}): {self.valute_from} -> {self.valute_to}\n\n'

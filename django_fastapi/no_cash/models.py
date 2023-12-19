@@ -74,6 +74,9 @@ class ExchangeDirection(BaseExchangeDirection):
         verbose_name = 'Готовое направление'
         verbose_name_plural = 'Готовые направления'
         ordering = ['-is_active', 'exchange', 'valute_from', 'valute_to']
+        indexes = [
+            models.Index(fields=['valute_from', 'valute_to'])
+        ]
 
     def __str__(self):
         return f'{self.exchange}:  {self.valute_from} -> {self.valute_to}'

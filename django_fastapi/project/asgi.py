@@ -9,11 +9,12 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings")
 apps.populate(settings.INSTALLED_APPS)
 
 
-from fastapi import FastAPI
+from fastapi import FastAPI, APIRouter
 from fastapi.middleware.wsgi import WSGIMiddleware
 from starlette.middleware.cors import CORSMiddleware
 
-from no_cash.endpoints import api_router, no_cash_router
+from no_cash.endpoints import no_cash_router
+from cash.endpoints import cash_router
 
 
 def get_application() -> FastAPI:
@@ -25,8 +26,11 @@ def get_application() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
+    api_router = APIRouter(prefix=settings.FASTAPI_PREFIX)
     api_router.include_router(no_cash_router)
-    app.include_router(api_router, prefix=settings.FASTAPI_PREFIX)
+    api_router.include_router(cash_router)
+
+    app.include_router(api_router)
     app.mount(settings.DJANGO_PREFIX, WSGIMiddleware(get_wsgi_application()))
 
     return app

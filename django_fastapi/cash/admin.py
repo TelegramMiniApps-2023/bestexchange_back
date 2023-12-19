@@ -105,3 +105,6 @@ class DirectionAdmin(BaseDirectionAdmin):
 class ExchangeDirectionAdmin(BaseExchangeDirectionAdmin):
     def get_display_name(self, obj):
         return f'{obj.exchange} ({obj.city}: {obj.valute_from} -> {obj.valute_to})'
+    
+    def get_queryset(self, request):
+        return super().get_queryset(request).select_related('exchange')

@@ -30,6 +30,9 @@ class Valute(models.Model):
         verbose_name = 'Валюта'
         verbose_name_plural = 'Валюты'
         ordering = ['code_name']
+        indexes = [
+            models.Index(fields=['code_name', ])
+        ]
 
     def __str__(self):
         return self.code_name
@@ -127,6 +130,9 @@ class BaseDirection(models.Model):
         verbose_name = 'Направление для обмена'
         verbose_name_plural = 'Направления для обмена'
         ordering = ['valute_from', 'valute_to']
+        indexes = [
+            models.Index(fields=['valute_from', 'valute_to'])
+        ]
     
     def __str__(self):
         return self.valute_from.code_name + ' -> ' + self.valute_to.code_name

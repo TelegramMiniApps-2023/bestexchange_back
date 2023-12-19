@@ -1,11 +1,12 @@
 from celery import shared_task
 
-from django.core.cache import cache
 
 from general_models.utils.exc import NoFoundXmlElement
-from general_models.utils.periodic_tasks import check_exchange_and_try_get_xml_file
+from general_models.utils.periodic_tasks import try_get_xml_file
 from .utils.periodic_tasks import run_no_cash_background_tasks
 from .utils.parsers import no_cash_parse_xml
+from .utils.tasks import (get_or_set_no_cash_directions_cache,
+                          get_no_cash_direction_set_for_creating)
 from .models import Exchange, ExchangeDirection, Direction
 
 
@@ -13,30 +14,12 @@ from .models import Exchange, ExchangeDirection, Direction
 @shared_task(name='create_no_cash_directions_for_exchange')
 def create_no_cash_directions_for_exchange(exchange_name: str):
     exchange = Exchange.objects.get(name=exchange_name)
-    xml_file = check_exchange_and_try_get_xml_file(exchange)
+    xml_file = try_get_xml_file(exchange)
     
-    if xml_file is not None:
-        if exchange.is_active:
-            #CACHE
-            all_no_cash_directions = cache.get('all_no_cash_directions')
-            if not all_no_cash_directions:
-                all_no_cash_directions = Direction.objects\
-                                        .select_related('valute_from', 'valute_to')\
-                                        .values_list('valute_from', 'valute_to').all()
-                cache.set('all_no_cash_directions', all_no_cash_directions, 60)
-                print('SET VALUE TO CACHE')
-            else:
-                print('VALUE GETTING FROM CACHE')
-                  
-            exchange_directions = exchange.directions\
-                                        .values_list('valute_from', 'valute_to').all()
-            exchange_black_list_directions = exchange.direction_black_list\
-                                        .values_list('valute_from', 'valute_to').all()
-            print('ALL DIRECTION', all_no_cash_directions)
-            print('EXCHANGE DIRECTION', exchange_directions)
-            print('BLACK LIST', exchange_black_list_directions)
-            direction_list = set(all_no_cash_directions) - set(exchange_directions) - set(exchange_black_list_directions)
-
+    if xml_file is not None and exchange.is_active:
+            all_no_cash_directions = get_or_set_no_cash_directions_cache()
+            direction_list = get_no_cash_direction_set_for_creating(all_no_cash_directions,
+                                                                    exchange)
             if direction_list:
                 run_no_cash_background_tasks(create_direction,
                                              exchange,
@@ -74,7 +57,7 @@ def create_direction(dict_for_parse: dict,
 @shared_task(name='update_no_cash_diretions_for_exchange')
 def update_no_cash_diretions_for_exchange(exchange_name: str):
     exchange = Exchange.objects.get(name=exchange_name)
-    xml_file = check_exchange_and_try_get_xml_file(exchange)
+    xml_file = try_get_xml_file(exchange)
 
     if xml_file is not None:
         if exchange.is_active:
@@ -118,7 +101,7 @@ def try_update_direction(dict_for_parse: dict,
 @shared_task(name='try_create_no_cash_directions_from_black_list')
 def try_create_no_cash_directions_from_black_list(exchange_name: str):
     exchange = Exchange.objects.get(name=exchange_name)
-    xml_file = check_exchange_and_try_get_xml_file(exchange)
+    xml_file = try_get_xml_file(exchange)
     
     if xml_file is not None:
         if exchange.is_active:
@@ -152,8 +135,9 @@ def try_create_black_list_direction(dict_for_parse: dict,
         try:
             ExchangeDirection.objects.create(**dict_for_exchange_direction)
 
-            direction = Direction.objects.get(valute_from=dict_for_exchange_direction['valute_from'],
-                                            valute_to=dict_for_exchange_direction['valute_to'])
+            direction = Direction.objects\
+                        .get(valute_from=dict_for_exchange_direction['valute_from'],
+                             valute_to=dict_for_exchange_direction['valute_to'])
             exchange.direction_black_list.remove(direction)
         except Exception:
             pass
