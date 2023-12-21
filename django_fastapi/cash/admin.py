@@ -21,6 +21,7 @@ from .models import (Country,
                      Review,
                      Comment)
 
+
 @admin.register(City)
 class CityAdmin(admin.ModelAdmin):
     list_display = ('name', 'code_name', 'country', 'is_parse')

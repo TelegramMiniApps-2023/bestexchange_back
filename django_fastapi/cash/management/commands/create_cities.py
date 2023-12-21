@@ -3,6 +3,11 @@ from django.core.management.base import BaseCommand, CommandError
 from cash.models import Country, City
 
 
+#Скрипт для создания городов в БД при запуске приложения
+# python manage.py create_cities в docker-compose файле
+
+
+
 parse_cities = {
     'Киев',
     'Чернигов',

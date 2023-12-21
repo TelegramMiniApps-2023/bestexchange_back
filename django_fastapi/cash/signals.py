@@ -11,7 +11,8 @@ from .periodic_tasks import (manage_periodic_task_for_create,
                              manage_periodic_task_for_parse_black_list)
 
 
-#Signal to delete all related direction records
+#Сигнал для удаления всех связанных готовых направлений
+#при удалении направления из БД
 @receiver(post_delete, sender=Direction)
 def delete_directions_from_exchanges(sender, instance, **kwargs):
     direction_list = ExchangeDirection.objects.filter(valute_from=instance.valute_from,
@@ -19,7 +20,8 @@ def delete_directions_from_exchanges(sender, instance, **kwargs):
     direction_list.delete()
 
 
-#Signal to create periodic task for exchange
+#Сигнал для создания периодических задач
+#при создании обменника в БД
 @receiver(post_save, sender=Exchange)
 def create_tasks_for_exchange(sender, instance, created, **kwargs):
     if created:
@@ -32,18 +34,23 @@ def create_tasks_for_exchange(sender, instance, created, **kwargs):
                                                   instance.period_for_parse_black_list)
 
 
-#Signal to delete related periodic task for Exchange
+#Сигнал для удаления периодических задач
+#при удалении обменника из БД
 @receiver(post_delete, sender=Exchange)
 def delete_task_for_exchange(sender, instance, **kwargs):
     PeriodicTask.objects.filter(name__startswith=f'{instance.name} cash').delete()
 
 
+#Сигнал для автоматической установки времени
+#по московскому часовому поясу при создании отзыва в БД
 @receiver(pre_save, sender=Review)
 def change_time_create_for_review(sender, instance, **kwargs):
     if instance.time_create is None:
         instance.time_create = datetime.datetime.now() + datetime.timedelta(hours=9)
 
 
+#Сигнал для автоматической установки времени
+#по московскому часовому поясу при создании комментария в БД
 @receiver(pre_save, sender=Comment)
 def change_time_create_for_comment(sender, instance, **kwargs):
     if instance.time_create is None:

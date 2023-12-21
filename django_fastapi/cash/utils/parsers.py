@@ -32,6 +32,10 @@ def cash_parse_xml(dict_for_parse: dict,
         
 
 def check_city_in_xml_file(city: str, xml_file: str):
+    '''
+    Проверка города на наличие в XML файле
+    '''
+    
     root = ET.fromstring(xml_file)
     element = root.find(f'item[city="{city.upper()}"]')
     if element is None:
@@ -43,6 +47,10 @@ def generate_exchange_direction_dict(element: Element,
                                      valute_from: str,
                                      valute_to: str,
                                      city: str):
+    '''
+    Генерирует словарь готового направления
+    '''
+    
     fromfee = element.find('fromfee')
     if fromfee is not None:
         fromfee = fromfee.text

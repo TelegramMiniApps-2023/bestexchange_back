@@ -9,6 +9,11 @@ def run_cash_background_tasks(task: Proxy,
                               direction_dict: dict,
                               xml_file: str,
                               black_list_parse=False):
+    '''
+    Запуск фоновых задач для создания
+    наличных готовых направлений
+    '''
+
     for city in direction_dict:
         if not check_city_in_xml_file(city, xml_file):
             print(f'Нет города {city} в {exchange.name}')
@@ -39,6 +44,11 @@ def run_update_tasks(task: Proxy,
                      exchange: CashExchange,
                      direction_list: list,
                      xml_file: str):
+    '''
+    Запуск фоновых задач для обновления
+    наличных готовых направлений
+    '''
+
     for direction in direction_list:
         city, valute_from_id, valute_to_id = direction
         dict_for_parse = exchange.__dict__.copy()

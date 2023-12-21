@@ -11,6 +11,12 @@ from general_models.schemas import ValuteModel
 
 
 def try_generate_icon_url(valute: str | Valute) -> str | None:
+    '''
+    Генерирует путь иконки валюты.
+    На вход принимает как объект Valute,
+    так и кодовое сокращение валюты(BTC)
+    '''
+    
     if not isinstance(valute, Valute):
         valute = Valute.objects.get(code_name=valute)
     

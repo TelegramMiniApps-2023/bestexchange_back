@@ -4,9 +4,6 @@ services:
     build: .
     environment:
       - POSTGRES_HOST=psql_db
-      - DJANGO_SUPERUSER_USERNAME=admin
-      - DJANGO_SUPERUSER_PASSWORD=1234
-      - DJANGO_SUPERUSER_EMAIL=yashenkov.q@gmail.com
     env_file:
       - ./.env
     container_name: django_fastapi
@@ -17,12 +14,12 @@ services:
       - rabbitmq3
     command: sh -c "python manage.py makemigrations &&
                     python manage.py migrate &&
-                    python manage.py loaddata media/base_db.json &&
-                    python manage.py loaddata media/country.json &&
-                    python manage.py create_periodic_task_for_delete_reviews &&
-                    python manage.py create_cities &&
-                    python manage.py createsuperuser --no-input &&
                     uvicorn project.asgi:app --host 0.0.0.0"
+                    # python manage.py loaddata media/base_db.json &&
+                    # python manage.py loaddata media/country.json &&
+                    # python manage.py create_periodic_task_for_delete_reviews &&
+                    # python manage.py create_cities &&
+                    # python manage.py createsuperuser --no-input &&
 
   rabbitmq3:
     image: rabbitmq:3.6.9

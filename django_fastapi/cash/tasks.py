@@ -62,8 +62,8 @@ def create_direction(dict_for_parse: dict,
 
 
 #PERIODIC UPDATE
-@shared_task(name='update_cash_diretions_for_exchange')
-def update_cash_diretions_for_exchange(exchange_name: str):
+@shared_task(name='update_cash_directions_for_exchange')
+def update_cash_directions_for_exchange(exchange_name: str):
     exchange = Exchange.objects.get(name=exchange_name)
     xml_file = try_get_xml_file(exchange)
 

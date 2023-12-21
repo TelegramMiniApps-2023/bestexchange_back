@@ -10,6 +10,9 @@ from .exc import RobotCheckError
 
 
 def get_or_create_schedule(interval: int, period: str):
+    '''
+    Получить или создать расписание для периодической задачи в БД
+    '''
     schedule, _ = IntervalSchedule.objects.get_or_create(
                             every=interval,
                             period=period,
@@ -17,23 +20,25 @@ def get_or_create_schedule(interval: int, period: str):
     return schedule
    
 
-def try_get_xml_file(exchange: BaseExchange):
+def try_get_xml_file(exchange: BaseExchange) -> str | None:
+    '''
+    Возвращает XML файл в формате строки или None
+    '''
+    
     try:
         is_active, xml_file = request_to_xml_file(exchange.xml_url)
     except Exception as ex:
         print('CHECK ACTIVE EXCEPTION!!!', ex)
-        exchange.is_active = False
-        exchange.save()
-    else:
-        if exchange.period_for_update == 0:
+        if exchange.is_active:
             exchange.is_active = False
-        else:
-            exchange.is_active = is_active
-        
-        exchange.save()
+            exchange.save()
+    else:
+        if exchange.period_for_update != 0:
+            if exchange.is_active != is_active:
+                exchange.is_active = is_active
+                exchange.save()
+            return xml_file
 
-        return xml_file
-    
 
 def request_to_xml_file(xml_url: str):
     headers = requests.utils.default_headers()

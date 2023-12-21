@@ -4,8 +4,15 @@ from django_celery_beat.models import PeriodicTask, IntervalSchedule
 
 from general_models.utils.periodic_tasks import get_or_create_schedule
 
+from .models import Exchange
+
 
 def manage_periodic_task_for_create(exchange_name: str, interval: int):
+    '''
+    Создание, изменение, остановка периодической задачи
+    для создания готовых направлений обменника
+    '''
+    
     try:
         task = PeriodicTask.objects.get(name=f'{exchange_name} cash task creation')
     except PeriodicTask.DoesNotExist:
@@ -31,6 +38,11 @@ def manage_periodic_task_for_create(exchange_name: str, interval: int):
 
 
 def manage_periodic_task_for_update(exchange_name: str, interval: int):
+    '''
+    Создание, изменение, остановка периодической задачи
+    для обновления готовых направлений обменника
+    '''
+
     try:
         task = PeriodicTask.objects.get(name=f'{exchange_name} cash task update')
     except PeriodicTask.DoesNotExist:
@@ -42,20 +54,30 @@ def manage_periodic_task_for_update(exchange_name: str, interval: int):
             PeriodicTask.objects.create(
                     interval=schedule,
                     name=f'{exchange_name} cash task update',
-                    task='update_cash_diretions_for_exchange',
+                    task='update_cash_directions_for_exchange',
                     args=json.dumps([exchange_name,]),
                     )
     else:
         if interval == 0:
+            #остановить задачу периодических обновлений
             task.enabled = False
+            #сделать обменник неактивным из-за неактуальных данных
+            exchange_active = False
         else:
             task.enabled = True
+            exchange_active = True
             schedule = get_or_create_schedule(interval, IntervalSchedule.SECONDS)
             task.interval = schedule
+        Exchange.objects.filter(name=exchange_name).update(is_active=exchange_active)
         task.save()
 
 
 def manage_periodic_task_for_parse_black_list(exchange_name: str, interval: int):
+    '''
+    Создание, изменение, остановка периодической задачи
+    для парсинга чёрного списка обменника
+    '''
+
     try:
         task = PeriodicTask.objects.get(name=f'{exchange_name} cash task black list')
     except PeriodicTask.DoesNotExist:
