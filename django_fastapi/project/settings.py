@@ -119,13 +119,13 @@ DJANGO_PREFIX = "/django"
 # DEBUG = True
 DEBUG = False
 
-# SITE_DOMAIN = 'wttonline.ru'
-SITE_DOMAIN = '127.0.0.1:81'
+SITE_DOMAIN = 'wttonline.ru'
+# SITE_DOMAIN = '127.0.0.1:81'
 
 # ALLOWED_HOSTS = [SITE_DOMAIN]
 ALLOWED_HOSTS = ['*']
 
-# CSRF_TRUSTED_ORIGINS = [f'https://{SITE_DOMAIN}']
+CSRF_TRUSTED_ORIGINS = [f'https://{SITE_DOMAIN}']
 
 CELERY_BROKER_URL='amqp://guest:guest@rabbitmq3:5672/'
 
