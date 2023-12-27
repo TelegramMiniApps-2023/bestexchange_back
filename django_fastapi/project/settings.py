@@ -129,4 +129,4 @@ CSRF_TRUSTED_ORIGINS = [f'https://{SITE_DOMAIN}']
 
 CELERY_BROKER_URL='amqp://guest:guest@rabbitmq3:5672/'
 
-PROTOCOL = 'http://'
+PROTOCOL = 'https://'
