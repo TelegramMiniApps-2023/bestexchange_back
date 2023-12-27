@@ -3,6 +3,7 @@ from django.db import models
 from .utils.model_validators import is_positive_validate
 
 
+#Модель валюты
 class Valute(models.Model):
     type_valute_list = [
         ('Криптовалюта', 'Криптовалюта'),
@@ -22,7 +23,7 @@ class Valute(models.Model):
                                    max_length=30,
                                    choices=type_valute_list)
     icon_url = models.FileField('Иконка валюты',
-                                upload_to='icons/',
+                                upload_to='icons/valute/',
                                 blank=True,
                                 null=True)
 
@@ -38,6 +39,7 @@ class Valute(models.Model):
         return self.code_name
 
 
+#Абстрактная модель отзыва/комментария (для наследования)
 class BaseReviewComment(models.Model):
     status_list = [
     ('Опубликован', 'Опубликован'),
@@ -63,6 +65,7 @@ class BaseReviewComment(models.Model):
         abstract = True
 
 
+#Абстрактная модель отзыва (для наследования)
 class BaseReview(BaseReviewComment):
     class Meta:
         abstract = True
@@ -72,6 +75,7 @@ class BaseReview(BaseReviewComment):
         return f' отзыв {self.pk}, Обменник: {self.exchange}, Пользователь: {self.username}, Время создания: {date}'
 
 
+#Абстрактная модель комментария (для наследования)
 class BaseComment(BaseReviewComment):
     class Meta:
         abstract = True
@@ -81,6 +85,7 @@ class BaseComment(BaseReviewComment):
         return f' комментарий {self.pk}, Отзыв №{self.review.pk}, Обменник: {self.review.exchange}, Пользователь: {self.username}, Время создания: {date}'
 
 
+#Абстрактная модель обменника (для наследования)
 class BaseExchange(models.Model):
     name = models.CharField('Название обменника',
                             max_length=20,
@@ -122,6 +127,7 @@ class BaseExchange(models.Model):
         return self.name
     
 
+#Абстрактная модель направления (для наследования)
 class BaseDirection(models.Model):
     
     class Meta:
@@ -138,6 +144,7 @@ class BaseDirection(models.Model):
         return self.valute_from.code_name + ' -> ' + self.valute_to.code_name
     
 
+#Абстрактная модель готового направления (для наследования)
 class BaseExchangeDirection(models.Model):
     valute_from = models.CharField('Отдаём', max_length=10)
     valute_to = models.CharField('Получаем', max_length=10)

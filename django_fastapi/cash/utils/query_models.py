@@ -10,6 +10,11 @@ class AvailableCitiesQuery:
                                       example='Россия')):
         self.country = country
 
+    def params(self):
+        return {
+            'country': self.country
+        }
+
 
 #Описание для Swagger`a
 #Query параметры для эндпоинта /available_valutes
@@ -26,7 +31,10 @@ class AvailableValutesQuery:
         self.base = base.upper()
 
     def params(self):
-        return (self.city, self.base)
+        return {
+            'city': self.city,
+            'base': self.base,
+        }
 
 
 #Описание для Swagger`a
@@ -40,8 +48,12 @@ class SpecificDirectionsQuery:
                  valute_to: str = Query(description='Кодовое сокращение валюты',
                                         example='cashrub')):
         self.city = city.upper()
-        self.vaute_from = valute_from.upper()
-        self.vaute_to = valute_to.upper()
+        self.valute_from = valute_from.upper()
+        self.valute_to = valute_to.upper()
 
     def params(self):
-        return (self.city, self.vaute_from, self.vaute_to)
+        return {
+            'city': self.city,
+            'valute_from': self.valute_from,
+            'valute_to': self.valute_to,
+        }

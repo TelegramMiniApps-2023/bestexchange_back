@@ -7,19 +7,44 @@ services:
     env_file:
       - ./.env
     container_name: django_fastapi
-    ports:
-      - '80:8000'
+    # ports:
+    #   - '8000:8000'
     depends_on:
       - psql_db
       - rabbitmq3
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "20m"
+
+    volumes:
+      - static:/app/staticfiles
+      - media:/app/media
     command: sh -c "python manage.py makemigrations &&
                     python manage.py migrate &&
+                    python manage.py collectstatic --no-input &&
+                    python manage.py loaddata media/base_db.json &&
+                    python manage.py loaddata media/country.json &&
+                    python manage.py create_periodic_task_for_delete_reviews &&
+                    python manage.py create_cities &&
+                    python manage.py createsuperuser --no-input &&
                     uvicorn project.asgi:app --host 0.0.0.0"
-                    # python manage.py loaddata media/base_db.json &&
-                    # python manage.py loaddata media/country.json &&
-                    # python manage.py create_periodic_task_for_delete_reviews &&
-                    # python manage.py create_cities &&
-                    # python manage.py createsuperuser --no-input &&
+
+  nginx:
+    build: ./nginx
+    volumes:
+      - static:/static
+      - media:/media
+    ports:
+      - '81:80'
+      # - '80:80'
+    depends_on:
+      - django_fastapi
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "20m"
+    
 
   rabbitmq3:
     image: rabbitmq:3.6.9
@@ -41,6 +66,10 @@ services:
       - rabbitmq3
       - psql_db
       - django_fastapi
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "20m"
 
   celery_beat:
     build: .
@@ -55,6 +84,10 @@ services:
       - psql_db
       - celery_worker
       - django_fastapi
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "20m"
 
   psql_db:
     image: postgres:14
@@ -62,7 +95,13 @@ services:
       - ./.env
     volumes:
       - postgres-data:/var/lib/postgresql/data
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "20m"
 
 volumes:
   postgres-data:
   rabbitmq_data:
+  static:
+  media:

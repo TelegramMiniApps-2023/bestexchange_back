@@ -11,7 +11,12 @@ class AvailbleValuteQuery:
                                         'Валюты, доступные для обмена': Example(value='all'),
                                         'Валюты, в которые можно обменять': Example(value='btc'),
                                    })):
-        self.valute = base.upper()
+        self.base = base.upper()
+
+    def params(self):
+        return {
+            'base': self.base,
+        }
 
 
 #Описание для Swagger`a
@@ -26,4 +31,7 @@ class SpecificDirectionsQuery:
         self.valute_to = valute_to.upper()
 
     def params(self):
-        return (self.valute_from, self.valute_to)
+        return {
+            'valute_from': self.valute_from,
+            'valute_to': self.valute_to,
+        }

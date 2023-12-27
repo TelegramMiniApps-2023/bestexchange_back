@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 
 
+#Схема валюты для отображения в json ответе
 class ValuteModel(BaseModel):
     id: int
     name: str
@@ -8,6 +9,7 @@ class ValuteModel(BaseModel):
     icon_url: str | None
 
 
+#Схема готового направления для отображения в json ответе
 class SpecialDirectionModel(BaseModel):
     id: int
     name: str

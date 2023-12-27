@@ -1,13 +1,11 @@
 import os
 
-from config import DB_USER, DB_PASS, DB_HOST, DB_NAME, DB_PORT
+from config import DB_USER, DB_PASS, DB_HOST, DB_NAME, DB_PORT, CSRF_TOKEN
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = "secret-key"
-
-DEBUG = True
+SECRET_KEY = CSRF_TOKEN
 
 LANGUAGE_CODE = 'ru'
 
@@ -91,11 +89,15 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
+#DEV
+# STATIC_URL = "/django/static/"
+#PROD
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-STATIC_URL = "/django/static/"
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
 
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
@@ -114,13 +116,17 @@ DJANGO_PREFIX = "/django"
 
 ####SWITCH FOR DEV/PROD####
 
-SITE_DOMAIN = 'wttonline.ru'
-# SITE_DOMAIN = '127.0.0.1:8000'
+# DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = [SITE_DOMAIN]
+# SITE_DOMAIN = 'wttonline.ru'
+SITE_DOMAIN = '127.0.0.1:81'
 
-CSRF_TRUSTED_ORIGINS = [f'https://{SITE_DOMAIN}']
+# ALLOWED_HOSTS = [SITE_DOMAIN]
+ALLOWED_HOSTS = ['*']
+
+# CSRF_TRUSTED_ORIGINS = [f'https://{SITE_DOMAIN}']
 
 CELERY_BROKER_URL='amqp://guest:guest@rabbitmq3:5672/'
 
-PROTOCOL = 'https://'
+PROTOCOL = 'http://'

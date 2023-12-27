@@ -37,11 +37,7 @@ def get_cash_direction_set_for_creating(directions: set[tuple[str,str,str]],
                                 .direction_black_list\
                                 .values_list('city', 'valute_from', 'valute_to').all()
     checked_directions_by_exchange = exchange_black_list_directions.union(exchange_directions)
-    # print('ALL DIRECTION', all_cash_directions)
-    # print('EXCHANGE DIRECTION', exchange_directions)
-    # print('BLACK LIST', exchange_black_list_directions)
-    # directions -= set(exchange_directions)
-    # directions -= set(exchange_black_list_directions)
+
     directions -= set(checked_directions_by_exchange)
     print('DIRECTIONS FOR CREATING', directions)
 
@@ -49,6 +45,10 @@ def get_cash_direction_set_for_creating(directions: set[tuple[str,str,str]],
 
 
 def generate_direction_dict(directions: tuple[str,str,str]):
+    '''
+    Генерирует словарь в формате: ключ - кодовое сокращение города,
+    значение - список направлений. Пример направления: ('BTC', 'CASHRUB').
+    '''
     direction_dict = {}
     for city, valute_from, valute_to in directions:
         direction_dict[city] = direction_dict.get(city, []) + [(valute_from, valute_to)]

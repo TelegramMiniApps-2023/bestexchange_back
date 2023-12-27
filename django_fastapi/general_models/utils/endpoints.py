@@ -3,29 +3,23 @@ from collections import defaultdict
 
 from django.conf import settings
 
-from cash.models import ExchangeDirection as CashExDir
+from cash.models import ExchangeDirection as CashExDir, City
 from no_cash.models import ExchangeDirection as NoCashExDir
 
 from general_models.models import Valute
 from general_models.schemas import ValuteModel
 
 
-def try_generate_icon_url(valute: str | Valute) -> str | None:
+def try_generate_icon_url(obj: City | Valute) -> str | None:
     '''
-    Генерирует путь иконки валюты.
-    На вход принимает как объект Valute,
-    так и кодовое сокращение валюты(BTC)
+    Генерирует путь до иконки переданного объекта.
     '''
-    
-    if not isinstance(valute, Valute):
-        valute = Valute.objects.get(code_name=valute)
     
     icon_url = None
 
-    if valute.icon_url.name:
+    if obj.icon_url.name:
         icon_url = settings.PROTOCOL + settings.SITE_DOMAIN\
-                                        + settings.DJANGO_PREFIX\
-                                            + valute.icon_url.url
+                                            + obj.icon_url.url
     return icon_url
 
 
@@ -33,8 +27,11 @@ def get_exchange_direction_list(queries: List[NoCashExDir | CashExDir],
                                 valute_from: str,
                                 valute_to: str,
                                 city: str = None):
-    icon_url_valute_from = try_generate_icon_url(valute_from)
-    icon_url_valute_to = try_generate_icon_url(valute_to)
+    valute_from_obj = Valute.objects.get(code_name=valute_from)
+    icon_url_valute_from = try_generate_icon_url(valute_from_obj)
+
+    valute_to_obj = Valute.objects.get(code_name=valute_to)
+    icon_url_valute_to = try_generate_icon_url(valute_to_obj)
 
     direction_list = []
 

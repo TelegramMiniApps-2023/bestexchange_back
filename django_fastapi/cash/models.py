@@ -9,8 +9,13 @@ from general_models.models import (BaseExchangeDirection,
                                    BaseComment)
 
 
+#Модель страны
 class Country(models.Model):
     name = models.CharField('Название страны', max_length=100, unique=True)
+    icon_url = models.FileField('Флаг страны',
+                                upload_to='icons/country/',
+                                blank=True,
+                                null=True)
 
     class Meta:
         verbose_name = 'Страна'
@@ -21,6 +26,7 @@ class Country(models.Model):
         return self.name
 
 
+#Модель города
 class City(models.Model):
     name = models.CharField('Название города', max_length=100, unique=True)
     code_name = models.CharField('Кодовое имя', max_length=10, unique=True)
@@ -41,12 +47,14 @@ class City(models.Model):
     def __str__(self):
         return self.name
 
-    
+
+#Модель обменника    
 class Exchange(BaseExchange):
     direction_black_list = models.ManyToManyField('BlackListElement',
                                                   verbose_name='Чёрный список')
     
 
+#Модель отзыва
 class Review(BaseReview):
     exchange = models.ForeignKey(Exchange,
                                  on_delete=models.CASCADE,
@@ -62,6 +70,7 @@ class Review(BaseReview):
         return 'Наличный ' + super().__str__()
 
 
+#Модель комментария
 class Comment(BaseComment):
     review = models.ForeignKey(Review,
                                on_delete=models.CASCADE,
@@ -77,6 +86,7 @@ class Comment(BaseComment):
         return 'Наличный ' + super().__str__()
 
 
+#Модель направления
 class Direction(BaseDirection):
     valute_from = models.ForeignKey(Valute,
                                     to_field='code_name',
@@ -97,6 +107,7 @@ class Direction(BaseDirection):
             raise ValidationError('Одно из значений "Отдаём" и "Получаем" должно иметь наличный тип валюты, другое - безналичный')
 
 
+#Модель готового направления
 class ExchangeDirection(BaseExchangeDirection):
     exchange = models.ForeignKey(Exchange,
                                  on_delete=models.CASCADE,
@@ -119,6 +130,7 @@ class ExchangeDirection(BaseExchangeDirection):
         return f'{self.city}: {self.valute_from} -> {self.valute_to}'
 
 
+#Модель элемента чёрного списка
 class BlackListElement(models.Model):
     city = models.CharField('Город', max_length=100)
     valute_from = models.CharField('Отдаём', max_length=10)

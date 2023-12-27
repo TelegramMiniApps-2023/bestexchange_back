@@ -1,5 +1,5 @@
 from typing import List
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Request
 
 from general_models.schemas import ValuteModel, SpecialDirectionModel
 from general_models.utils.http_exc import http_exception_json
@@ -16,11 +16,14 @@ no_cash_router = APIRouter(prefix='/no_cash',
 
 #Эндпоинт для получения доступных валют
 @no_cash_router.get('/available_valutes',
-                    response_model=dict[str, List[ValuteModel]] | list)
-def get_available_valutes(base: AvailbleValuteQuery = Depends()):
-    base = base.valute
-    if not base:
-        http_exception_json(status_code=400)
+                    response_model=dict[str, List[ValuteModel]])
+def get_available_valutes(request: Request,
+                          query: AvailbleValuteQuery = Depends()):
+    for param in query.params():
+        if not query.params()[param]:
+            http_exception_json(status_code=400, param=param)
+
+    base = query.params()['base']
 
     if base == 'ALL':
         queries = ExchangeDirection.objects\
@@ -33,7 +36,7 @@ def get_available_valutes(base: AvailbleValuteQuery = Depends()):
                                     .values_list('valute_to').all()
         
     if not queries:
-        http_exception_json(status_code=404)
+        http_exception_json(status_code=404, param=request.url)
 
     return get_valute_json(queries)
 
@@ -41,12 +44,14 @@ def get_available_valutes(base: AvailbleValuteQuery = Depends()):
 #Эндпоинт для получения доступных готовых направлений
 #по выбранным валютам
 @no_cash_router.get('/directions',
-                    response_model=List[SpecialDirectionModel] | None)
-def get_specific_exchange_directions(query: SpecificDirectionsQuery = Depends()):
-    if not all(param for param in query.params()):
-        http_exception_json(status_code=400)
+                    response_model=List[SpecialDirectionModel])
+def get_specific_exchange_directions(request: Request,
+                                     query: SpecificDirectionsQuery = Depends()):
+    for param in query.params():
+        if not query.params()[param]:
+            http_exception_json(status_code=400, param=param)
     
-    valute_from, valute_to = query.params()
+    valute_from, valute_to = (query.params()[key] for key in query.params())
 
     queries = ExchangeDirection.objects\
                                 .select_related('exchange')\
@@ -56,7 +61,7 @@ def get_specific_exchange_directions(query: SpecificDirectionsQuery = Depends())
                                         exchange__is_active=True).all()
     
     if not queries:
-        http_exception_json(status_code=404)
+        http_exception_json(status_code=404, param=request.url)
     
     return get_exchange_direction_list(queries,
                                        valute_from,

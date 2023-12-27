@@ -3,7 +3,6 @@ from typing import Any
 from django.contrib import admin
 from django.contrib.auth.models import User, Group
 from django.utils.safestring import mark_safe
-from django.conf import settings
 from django.http.request import HttpRequest
 
 from django_celery_beat.models import (SolarSchedule,
@@ -11,7 +10,9 @@ from django_celery_beat.models import (SolarSchedule,
                                        IntervalSchedule,
                                        ClockedSchedule,
                                        CrontabSchedule)
+
 from .utils.admin import ReviewAdminMixin
+from .utils.endpoints import try_generate_icon_url
 from .models import Valute
 
 
@@ -27,6 +28,7 @@ admin.site.unregister(User)
 admin.site.unregister(Group)
 
 
+#Отображение валют в админ панели
 @admin.register(Valute)
 class ValuteAdmin(admin.ModelAdmin):
     list_display = ('name', 'code_name', 'get_icon', 'type_valute')
@@ -36,11 +38,13 @@ class ValuteAdmin(admin.ModelAdmin):
 
     def get_icon(self, obj):
         if obj.icon_url:
-            return mark_safe(f"<img src='{settings.PROTOCOL}{settings.SITE_DOMAIN}{settings.DJANGO_PREFIX}{obj.icon_url.url}' width=40")
-        
+            icon_url = try_generate_icon_url(obj)
+            return mark_safe(f"<img src='{icon_url}' width=40")
+
     get_icon.short_description = 'Текущая иконка'
 
 
+#Базовое отображение комментариев в админ панели
 class BaseCommentAdmin(ReviewAdminMixin, admin.ModelAdmin):
     list_display = ("username", "time_create", "moderation")
     readonly_fields = ('moderation', 'review')
@@ -50,12 +54,14 @@ class BaseCommentAdmin(ReviewAdminMixin, admin.ModelAdmin):
         return False
     
 
+#Базовое отображение комментариев на странице связанного отзыва
 class BaseCommentStacked(admin.StackedInline):
     extra = 0
     readonly_fields = ('moderation', )
     ordering = ('-time_create', 'status')
 
 
+#Базовое отображение отзывов в админ панели
 class BaseReviewAdmin(ReviewAdminMixin, admin.ModelAdmin):
     list_display = ("username", "exchange", "time_create", "comment_count", "moderation")
     readonly_fields = ('moderation', )
@@ -67,12 +73,14 @@ class BaseReviewAdmin(ReviewAdminMixin, admin.ModelAdmin):
     comment_count.short_description = 'Число комментариев'
 
 
+#Базовое отображение отзывов на странице связанного обменника
 class BaseReviewStacked(admin.StackedInline):
     extra = 0
     readonly_fields = ('moderation', )
     show_change_link = True
 
 
+#Базовое отображение готовых направлений в админ панели
 class BaseExchangeDirectionAdmin(admin.ModelAdmin):
     list_display = ("get_display_name", )
 
@@ -83,6 +91,7 @@ class BaseExchangeDirectionAdmin(admin.ModelAdmin):
         return False
 
 
+#Базовое отображение готовых направлений на странице связанного обменника
 class BaseExchangeDirectionStacked(admin.StackedInline):
     
     def has_change_permission(self, request: HttpRequest, obj: Any | None = ...) -> bool:
@@ -92,6 +101,7 @@ class BaseExchangeDirectionStacked(admin.StackedInline):
         return False
     
 
+#Базовое отображение направлений в админ панели
 class BaseDirectionAdmin(admin.ModelAdmin):
     list_display = ('get_direction_name', )
     list_select_related = ('valute_from', 'valute_to')
