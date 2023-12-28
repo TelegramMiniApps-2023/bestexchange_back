@@ -100,8 +100,10 @@ def get_available_valutes_for_current_city(request: Request,
     city, base = (query.params()[key] for key in query.params())
 
     queries = ExchangeDirection.objects\
+                                .select_related('exchange')\
                                 .filter(city=city,
-                                        is_active=True)
+                                        is_active=True,
+                                        exchange__is_active=True)
 
     if base == 'ALL':
         queries = queries.values_list('valute_from').all()
@@ -125,8 +127,10 @@ def cash_valutes(request: Request,
     city, base = (params[key] for key in params)
 
     queries = ExchangeDirection.objects\
+                                .select_related('exchange')\
                                 .filter(city=city,
-                                        is_active=True)
+                                        is_active=True,
+                                        exchange__is_active=True)
 
     if base == 'ALL':
         queries = queries.values_list('valute_from').all()
