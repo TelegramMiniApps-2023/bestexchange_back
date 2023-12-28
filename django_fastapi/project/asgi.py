@@ -13,6 +13,7 @@ from fastapi import FastAPI, APIRouter
 from fastapi.middleware.wsgi import WSGIMiddleware
 from starlette.middleware.cors import CORSMiddleware
 
+from general_models.endpoints import common_router
 from no_cash.endpoints import no_cash_router
 from cash.endpoints import cash_router
 
@@ -31,6 +32,7 @@ def get_application() -> FastAPI:
         allow_headers=["*"],
     )
     api_router = APIRouter(prefix=settings.FASTAPI_PREFIX)
+    api_router.include_router(common_router)
     api_router.include_router(no_cash_router)
     api_router.include_router(cash_router)
 

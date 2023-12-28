@@ -115,6 +115,31 @@ def get_available_valutes_for_current_city(request: Request,
     return get_valute_json(queries)
 
 
+##################
+def cash_valutes(request: Request,
+                 params: dict):
+    for param in params:
+        if not params[param]:
+            http_exception_json(status_code=400, param=param)
+    
+    city, base = (params[key] for key in params)
+
+    queries = ExchangeDirection.objects\
+                                .filter(city=city,
+                                        is_active=True)
+
+    if base == 'ALL':
+        queries = queries.values_list('valute_from').all()
+    else:
+        queries = queries.filter(valute_from=base)\
+                            .values_list('valute_to').all()
+        
+    if not queries:
+        http_exception_json(status_code=404, param=request.url)
+
+    return get_valute_json(queries)
+
+
 #Эндпоинт для получения доступных готовых направлений
 #по выбранным валютам и городу
 @cash_router.get('/directions',
@@ -126,6 +151,33 @@ def get_current_exchange_directions(request: Request,
             http_exception_json(status_code=400, param=param)
 
     city, valute_from, valute_to = (query.params()[key] for key in query.params())
+
+    queries = ExchangeDirection.objects\
+                                .select_related('exchange')\
+                                .filter(city=city,
+                                        valute_from=valute_from,
+                                        valute_to=valute_to,
+                                        is_active=True,
+                                        exchange__is_active=True).all()
+    
+    if not queries:
+        http_exception_json(status_code=404, param=request.url)
+
+    return get_exchange_direction_list(queries,
+                                       valute_from,
+                                       valute_to,
+                                       city=city)
+
+
+
+#############################
+def cash_exchange_directions(request: Request,
+                             params: dict):
+    for param in params:
+        if not params[param]:
+            http_exception_json(status_code=400, param=param)
+
+    city, valute_from, valute_to = (params[key] for key in params)
 
     queries = ExchangeDirection.objects\
                                 .select_related('exchange')\

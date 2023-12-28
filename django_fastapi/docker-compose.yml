@@ -22,13 +22,13 @@ services:
       - media:/app/media
     command: sh -c "python manage.py makemigrations &&
                     python manage.py migrate &&
-                    python manage.py collectstatic --no-input &&
-                    python manage.py loaddata media/base_db.json &&
-                    python manage.py loaddata media/country.json &&
-                    python manage.py create_periodic_task_for_delete_reviews &&
-                    python manage.py create_cities &&
-                    python manage.py createsuperuser --no-input &&
                     uvicorn project.asgi:app --host 0.0.0.0"
+                    # python manage.py collectstatic --no-input &&
+                    # python manage.py loaddata media/base_db.json &&
+                    # python manage.py loaddata media/country.json &&
+                    # python manage.py create_periodic_task_for_delete_reviews &&
+                    # python manage.py create_cities &&
+                    # python manage.py createsuperuser --no-input &&
 
   nginx:
     build: ./nginx
