@@ -938,7 +938,7 @@
             "name": "Доллар",
             "code_name": "CASHUSD",
             "type_valute": "Наличные",
-            "icon_url": "./icons/Bitcoin.svg"
+            "icon_url": "./icons/valute/Bitcoin.svg"
                 }
     },
     {
@@ -948,7 +948,7 @@
             "name": "Рубли",
             "code_name": "CASHRUB",
             "type_valute": "Наличные",
-            "icon_url": "./icons/Bitcoin.svg"
+            "icon_url": "./icons/valute/Bitcoin.svg"
                 }
     },
     {
@@ -958,7 +958,7 @@
             "name": "Евро",
             "code_name": "CASHEUR",
             "type_valute": "Наличные",
-            "icon_url": "./icons/Bitcoin.svg"
+            "icon_url": "./icons/valute/Bitcoin.svg"
                 }
     },
     {
@@ -968,7 +968,7 @@
             "name": "Дирхам",
             "code_name": "CASHAED",
             "type_valute": "Наличные",
-            "icon_url": "./icons/Bitcoin.svg"
+            "icon_url": "./icons/valute/Bitcoin.svg"
                 }
     },
     {
@@ -978,7 +978,7 @@
             "name": "Тенге",
             "code_name": "CASHKZT",
             "type_valute": "Наличные",
-            "icon_url": "./icons/Bitcoin.svg"
+            "icon_url": "./icons/valute/Bitcoin.svg"
                 }
     },
     {
@@ -988,7 +988,7 @@
             "name": "Польский злотый",
             "code_name": "CASHPLN",
             "type_valute": "Наличные",
-            "icon_url": "./icons/Bitcoin.svg"
+            "icon_url": "./icons/valute/Bitcoin.svg"
                 }
     },
     {
@@ -998,7 +998,7 @@
             "name": "Тайский бат",
             "code_name": "CASHTHB",
             "type_valute": "Наличные",
-            "icon_url": "./icons/Bitcoin.svg"
+            "icon_url": "./icons/valute/Bitcoin.svg"
                 }
     }
 

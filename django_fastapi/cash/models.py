@@ -145,5 +145,6 @@ class BlackListElement(models.Model):
             models.Index(fields=['city', 'valute_from', 'valute_to'])
         ]
 
+    #для более красивого вывода в чёрном списке
     def __str__(self):
         return f'({self.city}): {self.valute_from} -> {self.valute_to}\n\n'

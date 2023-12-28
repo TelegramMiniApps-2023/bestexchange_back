@@ -7,11 +7,11 @@ from .periodic_tasks import (manage_periodic_task_for_create,
                              manage_periodic_task_for_update,
                              manage_periodic_task_for_parse_black_list)
 
-from general_models.utils.admin import ReviewAdminMixin
 from general_models.admin import (BaseCommentAdmin,
                                   BaseCommentStacked,
                                   BaseReviewAdmin,
                                   BaseReviewStacked,
+                                  BaseExchangeAdmin,
                                   BaseExchangeDirectionAdmin,
                                   BaseExchangeDirectionStacked,
                                   BaseDirectionAdmin)
@@ -89,9 +89,7 @@ class ExchangeDirectionStacked(BaseExchangeDirectionStacked):
 
 #Отображение обменников в админ панели
 @admin.register(Exchange)
-class ExchangeAdmin(ReviewAdminMixin, admin.ModelAdmin):
-    list_display = ("name", 'is_active')
-    readonly_fields = ('is_active', 'direction_black_list')
+class ExchangeAdmin(BaseExchangeAdmin):
     inlines = [ExchangeDirectionStacked, ReviewStacked]
 
     def save_model(self, request, obj, form, change):

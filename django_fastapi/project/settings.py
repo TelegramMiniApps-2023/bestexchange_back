@@ -91,7 +91,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 #DEV
 # STATIC_URL = "/django/static/"
-#PROD
+# PROD
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 

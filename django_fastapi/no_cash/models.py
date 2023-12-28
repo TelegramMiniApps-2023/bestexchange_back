@@ -10,10 +10,12 @@ from general_models.models import (Valute,
                                    BaseComment)
 
 
+#Модель обменника 
 class Exchange(BaseExchange):
     direction_black_list = models.ManyToManyField('Direction', verbose_name='Чёрный список')
 
 
+#Модель отзыва
 class Review(BaseReview):
     exchange = models.ForeignKey(Exchange,
                                  on_delete=models.CASCADE,
@@ -29,6 +31,7 @@ class Review(BaseReview):
         return 'Безналичный' + super().__str__()
 
 
+#Модель комментария
 class Comment(BaseComment):
     review = models.ForeignKey(Review,
                                on_delete=models.CASCADE,
@@ -44,6 +47,7 @@ class Comment(BaseComment):
         return 'Безналичный' + super().__str__()
 
 
+#Модель направления
 class Direction(BaseDirection):
     valute_from = models.ForeignKey(Valute,
                                     to_field='code_name',
@@ -63,6 +67,7 @@ class Direction(BaseDirection):
             raise ValidationError('Валюты "Отдаём" и "Получаем" должны быть разные')
 
 
+#Модель готового направления
 class ExchangeDirection(BaseExchangeDirection):
     exchange = models.ForeignKey(Exchange,
                                  on_delete=models.CASCADE,

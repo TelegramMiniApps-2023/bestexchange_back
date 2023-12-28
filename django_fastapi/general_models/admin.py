@@ -99,7 +99,28 @@ class BaseExchangeDirectionStacked(admin.StackedInline):
     
     def has_add_permission(self, request: HttpRequest, obj: Any | None = ...) -> bool:
         return False
-    
+
+
+#Базовое отображение обменника в админ панели
+class BaseExchangeAdmin(ReviewAdminMixin, admin.ModelAdmin):
+    list_display = ("name", "xml_url", 'is_active')
+    readonly_fields = ('direction_black_list', 'is_active')
+    fieldsets = [
+        (
+            None,
+            {
+                "fields": ["name", "xml_url", "partner_link", "is_active", ("period_for_create", "period_for_update", "period_for_parse_black_list")],
+            },
+        ),
+        (
+            "Отсутствующие направления",
+            {
+                "classes": ["collapse"],
+                "fields": ["direction_black_list"],
+            },
+        ),
+    ]
+
 
 #Базовое отображение направлений в админ панели
 class BaseDirectionAdmin(admin.ModelAdmin):

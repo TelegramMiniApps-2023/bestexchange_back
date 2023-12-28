@@ -5,36 +5,42 @@ from no_cash.periodic_tasks import (manage_periodic_task_for_create,
                                     manage_periodic_task_for_update,
                                     manage_periodic_task_for_parse_black_list)
 
-from general_models.utils.admin import ReviewAdminMixin
 from general_models.admin import (BaseCommentAdmin,
                                   BaseCommentStacked,
                                   BaseReviewAdmin,
                                   BaseReviewStacked,
+                                  BaseExchangeAdmin,
                                   BaseExchangeDirectionAdmin,
                                   BaseExchangeDirectionStacked,
                                   BaseDirectionAdmin)
 
 
+#Отображение комментариев в админ панели
 @admin.register(Comment)
 class CommentAdmin(BaseCommentAdmin):
     pass
 
 
+#Отображение комментариев на странице связанного отзыва
 class CommentStacked(BaseCommentStacked):
     model = Comment
 
 
+#Отображение отзывов в админ панели
 @admin.register(Review)
 class ReviewAdmin(BaseReviewAdmin):
     inlines = [CommentStacked]
 
 
+#Отображение отзывов на странице связанного обменника
 class ReviewStacked(BaseReviewStacked):
     model = Review
 
     def get_queryset(self, request):
         return super().get_queryset(request).select_related('exchange')
 
+
+#Отображение готовых направлений на странице связанного обменника
 class ExchangeDirectionStacked(BaseExchangeDirectionStacked):
     model = ExchangeDirection
 
@@ -42,16 +48,16 @@ class ExchangeDirectionStacked(BaseExchangeDirectionStacked):
         return super().get_queryset(request).select_related('exchange')
 
 
+#Отображение обменников в админ панели
 @admin.register(Exchange)
-class ExchangeAdmin(ReviewAdminMixin, admin.ModelAdmin):
-    list_display = ("name", "xml_url", 'is_active')
-    readonly_fields = ('direction_black_list', 'is_active')
+class ExchangeAdmin(BaseExchangeAdmin):
     inlines = [ExchangeDirectionStacked, ReviewStacked]
 
     def save_model(self, request, obj, form, change):
         update_fields = []
 
-        if change: 
+        if change:
+            print('CHANGE!!!')
             for key, value in form.cleaned_data.items():
                 # print(obj.name)
                 # print('key', key)
@@ -71,11 +77,13 @@ class ExchangeAdmin(ReviewAdminMixin, admin.ModelAdmin):
             return super().save_model(request, obj, form, change)
 
 
+#Отображение направлений в админ панели
 @admin.register(Direction)
 class DirectionAdmin(BaseDirectionAdmin):
     pass
 
 
+#Отображение готовых направлений в админ панели
 @admin.register(ExchangeDirection)
 class ExchangeDirectionAdmin(BaseExchangeDirectionAdmin):
     def get_display_name(self, obj):

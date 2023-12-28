@@ -140,8 +140,9 @@ class BaseDirection(models.Model):
             models.Index(fields=['valute_from', 'valute_to'])
         ]
     
+    #для более красивого вывода в чёрном списке
     def __str__(self):
-        return self.valute_from.code_name + ' -> ' + self.valute_to.code_name
+        return self.valute_from.code_name + ' -> ' + self.valute_to.code_name + '\n\n'
     
 
 #Абстрактная модель готового направления (для наследования)
