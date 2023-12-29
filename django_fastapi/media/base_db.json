@@ -425,7 +425,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 2,
         "fields": {
             "name": "Finex24",
             "xml_url": "https://finex24.io/request-exportxml.xml",
@@ -434,7 +434,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 3,
         "fields": {
             "name": "Nadex",
             "xml_url": "https://nadex.io/request-exportxml.xml",
@@ -443,7 +443,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 4,
         "fields": {
             "name": "99Francs",
             "xml_url": "https://99francs.pro/request-exportxml.xml",
@@ -452,7 +452,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 5,
         "fields": {
             "name": "CoolCoin",
             "xml_url": "https://coolcoin.best/request-exportxml.xml",
@@ -461,7 +461,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 6,
         "fields": {
             "name": "ChangeProject",
             "xml_url": "https://changeproject.bz/request-exportxml.xml",
@@ -470,7 +470,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 7,
         "fields": {
             "name": "50Cents",
             "xml_url": "https://50cents.pro/request-exportxml.xml",
@@ -479,7 +479,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 8,
         "fields": {
             "name": "КриптоКасса",
             "xml_url": "https://cryptokacca.pro/request-exportxml.xml",
@@ -488,7 +488,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 9,
         "fields": {
             "name": "UniCash",
             "xml_url": "https://unicash.pro/request-exportxml.xml",
@@ -497,7 +497,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 10,
         "fields": {
             "name": "Пандпэй",
             "xml_url": "https://pandpay.net/request-exportxml.xml",
@@ -506,7 +506,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 11,
         "fields": {
             "name": "ГоугоуБит",
             "xml_url": "https://gogobit.cc/request-exportxml.xml",
@@ -515,7 +515,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 12,
         "fields": {
             "name": "BroExchange",
             "xml_url": "https://bro.exchange/request-exportxml.xml",
@@ -524,7 +524,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 13,
         "fields": {
             "name": "CashBox",
             "xml_url": "https://cashbox.exchange/request-exportxml.xml",
@@ -533,7 +533,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 14,
         "fields": {
             "name": "КупиБит",
             "xml_url": "https://kupibit.me/request-exportxml.xml",
@@ -542,7 +542,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 15,
         "fields": {
             "name": "CryptoHome",
             "xml_url": "https://cryptohome.me/request-exportxml.xml",
@@ -551,7 +551,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 16,
         "fields": {
             "name": "БухтаОбмена",
             "xml_url": "https://buhtaobmena.me/request-exportxml.xml",
@@ -560,7 +560,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 17,
         "fields": {
             "name": "Excoin",
             "xml_url": "https://excoin.in/request-exportxml.xml",
@@ -569,7 +569,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 18,
         "fields": {
             "name": "Adb",
             "xml_url": "https://adb.bz/request-exportxml.xml",
@@ -578,7 +578,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 19,
         "fields": {
             "name": "BitBong",
             "xml_url": "https://bitbong.pro/request-exportxml.xml",
@@ -587,7 +587,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 20,
         "fields": {
             "name": "SwiftChange",
             "xml_url": "https://swiftchange.net/request-exportxml.xml",
@@ -596,7 +596,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 21,
         "fields": {
             "name": "CryptoMax",
             "xml_url": "https://cryptomax.ru/request-exportxml.xml",
@@ -605,7 +605,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 22,
         "fields": {
             "name": "YaObmen",
             "xml_url": "https://yaobmen.cash/request-exportxml.xml",
@@ -614,7 +614,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 23,
         "fields": {
             "name": "Обменко",
             "xml_url": "https://obmenko.org/request-exportxml.xml",
@@ -623,7 +623,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 24,
         "fields": {
             "name": "WMSell",
             "xml_url": "https://wmsell.biz/request-exportxml.xml",
@@ -632,7 +632,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 25,
         "fields": {
             "name": "Bitcoin24Pro",
             "xml_url": "https://bitcoin-24.pro/request-exportxml.xml",
@@ -641,7 +641,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 26,
         "fields": {
             "name": "Crypto-Market24",
             "xml_url": "https://cryptomarket24.top/request-exportxml.xml",
@@ -650,7 +650,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 27,
         "fields": {
             "name": "TraiderIdeal",
             "xml_url": "https://traiderideal.ru/request-exportxml.xml",
@@ -659,7 +659,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 28,
         "fields": {
             "name": "VV-Obmen",
             "xml_url": "https://vv-obmen.net/request-exportxml.xml",
@@ -668,7 +668,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 29,
         "fields": {
             "name": "КриптоРай",
             "xml_url": "https://cryptor.ai/request-exportxml.xml",
@@ -677,7 +677,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 30,
         "fields": {
             "name": "CryptoShopping",
             "xml_url": "https://cryptoshopping.ru/request-exportxml.xml",
@@ -686,7 +686,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 31,
         "fields": {
             "name": "FehuPay",
             "xml_url": "https://fehupay.com/request-exportxml.xml",
@@ -695,7 +695,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 32,
         "fields": {
             "name": "N1ex",
             "xml_url": "https://n1ex.exchange.zone/request-exportxml.xml",
@@ -704,7 +704,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 33,
         "fields": {
             "name": "Об-мен",
             "xml_url": "https://ob-men.com/request-exportxml.xml",
@@ -713,7 +713,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 34,
         "fields": {
             "name": "ТочкаОбмена",
             "xml_url": "https://tochkaobmena.com/request-exportxml.xml",
@@ -722,7 +722,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 35,
         "fields": {
             "name": "Criptify",
             "xml_url": "https://criptify.com/request-exportxml.xml",
@@ -731,7 +731,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 36,
         "fields": {
             "name": "X-Obmen",
             "xml_url": "https://x-obmen.biz/request-exportxml.xml",
@@ -740,7 +740,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 37,
         "fields": {
             "name": "BTCSale",
             "xml_url": "https://btcsale.me/request-exportxml.xml",
@@ -749,7 +749,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 38,
         "fields": {
             "name": "Оборот",
             "xml_url": "https://oborot.net/request-exportxml.xml",
@@ -758,7 +758,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 39,
         "fields": {
             "name": "SpbWMCasher",
             "xml_url": "https://spbwmcasher.ru/request-exportxml.xml",
@@ -767,7 +767,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 40,
         "fields": {
             "name": "GlobalBits",
             "xml_url": "https://globalbits.org/request-exportxml.xml",
@@ -776,7 +776,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 41,
         "fields": {
             "name": "Apexchange",
             "xml_url": "https://apexchange.cc/request-exportxml.xml",
@@ -785,7 +785,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 42,
         "fields": {
             "name": "Perfect-Change",
             "xml_url": "https://perfect-change.com/request-exportxml.xml",
@@ -794,7 +794,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 43,
         "fields": {
             "name": "Coin-Bank",
             "xml_url": "https://coin-bank.co/request-exportxml.xml",
@@ -803,7 +803,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 44,
         "fields": {
             "name": "Top-Exchange",
             "xml_url": "https://top-exchange.com/request-exportxml.xml",
@@ -812,7 +812,7 @@
     },
     {
         "model": "no_cash.exchange",
-        "pk": 1,
+        "pk": 45,
         "fields": {
             "name": "FlashObmen",
             "xml_url": "https://flashobmen.com/request-exportxml.xml",
@@ -830,7 +830,7 @@
     },
     {
         "model": "cash.exchange",
-        "pk": 1,
+        "pk": 2,
         "fields": {
             "name": "Alfa-trades",
             "xml_url": "https://alfa-trades.com/request-exportxml.xml",
@@ -839,7 +839,7 @@
     },
     {
         "model": "cash.exchange",
-        "pk": 1,
+        "pk": 3,
         "fields": {
             "name": "Btchange",
             "xml_url": "https://btchange.ru/request-exportxml.xml",
@@ -848,7 +848,7 @@
     },
     {
         "model": "cash.exchange",
-        "pk": 1,
+        "pk": 4,
         "fields": {
             "name": "cripthub",
             "xml_url": "https://cripthub.ru/request-exportxml.xml",
@@ -857,7 +857,7 @@
     },
     {
         "model": "cash.exchange",
-        "pk": 1,
+        "pk": 5,
         "fields": {
             "name": "1-online",
             "xml_url": "https://1-online.ru/request-exportxml.xml",
@@ -866,7 +866,7 @@
     },
     {
         "model": "cash.exchange",
-        "pk": 1,
+        "pk": 6,
         "fields": {
             "name": "City-exchange",
             "xml_url": "https://city-exchange.io/request-exportxml.xml",
@@ -875,7 +875,7 @@
     },
     {
         "model": "cash.exchange",
-        "pk": 1,
+        "pk": 7,
         "fields": {
             "name": "Swiftchange",
             "xml_url": "https://swiftchange.net/request-exportxml.xml",
@@ -884,7 +884,7 @@
     },
     {
         "model": "cash.exchange",
-        "pk": 1,
+        "pk": 8,
         "fields": {
             "name": "Bitbong",
             "xml_url": "https://bitbong.pro/request-exportxml.xml",
@@ -893,7 +893,7 @@
     },
     {
         "model": "cash.exchange",
-        "pk": 1,
+        "pk": 9,
         "fields": {
             "name": "Obmenlite24",
             "xml_url": "https://obmenlite24.ru/request-exportxml.xml",
@@ -902,7 +902,7 @@
     },
     {
         "model": "cash.exchange",
-        "pk": 1,
+        "pk": 10,
         "fields": {
             "name": "Goldobmen",
             "xml_url": "https://goldobmen.com/request-exportxml.xml",
@@ -911,7 +911,7 @@
     },
     {
         "model": "cash.exchange",
-        "pk": 1,
+        "pk": 11,
         "fields": {
             "name": "Allmoney",
             "xml_url": "https://allmoney.market/request-exportxml.xml",
@@ -920,7 +920,7 @@
     },
     {
         "model": "cash.exchange",
-        "pk": 1,
+        "pk": 12,
         "fields": {
             "name": "24expay",
             "xml_url": "https://24expay.com/request-exportxml.xml",

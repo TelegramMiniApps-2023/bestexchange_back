@@ -7,14 +7,16 @@ from general_models.utils.periodic_tasks import get_or_create_schedule
 from .models import Exchange
 
 
-def manage_periodic_task_for_create(exchange_name: str, interval: int):
+def manage_periodic_task_for_create(exchange_id: int,
+                                    exchange_name: str,
+                                    interval: int):
     '''
     Создание, изменение, остановка периодической задачи
     для создания готовых направлений обменника
     '''
     
     try:
-        task = PeriodicTask.objects.get(name=f'{exchange_name} cash task creation')
+        task = PeriodicTask.objects.get(name=f'{exchange_id} cash task creation')
     except PeriodicTask.DoesNotExist:
         if interval == 0:
             print('PASS')
@@ -23,7 +25,7 @@ def manage_periodic_task_for_create(exchange_name: str, interval: int):
             schedule = get_or_create_schedule(interval, IntervalSchedule.SECONDS)
             PeriodicTask.objects.create(
                     interval=schedule,
-                    name=f'{exchange_name} cash task creation',
+                    name=f'{exchange_id} cash task creation',
                     task='create_cash_directions_for_exchange',
                     args=json.dumps([exchange_name,]),
                     )
@@ -37,14 +39,16 @@ def manage_periodic_task_for_create(exchange_name: str, interval: int):
         task.save()
 
 
-def manage_periodic_task_for_update(exchange_name: str, interval: int):
+def manage_periodic_task_for_update(exchange_id: int,
+                                    exchange_name: str,
+                                    interval: int):
     '''
     Создание, изменение, остановка периодической задачи
     для обновления готовых направлений обменника
     '''
 
     try:
-        task = PeriodicTask.objects.get(name=f'{exchange_name} cash task update')
+        task = PeriodicTask.objects.get(name=f'{exchange_id} cash task update')
     except PeriodicTask.DoesNotExist:
         if interval == 0:
             print('PASS')
@@ -53,7 +57,7 @@ def manage_periodic_task_for_update(exchange_name: str, interval: int):
             schedule = get_or_create_schedule(interval, IntervalSchedule.SECONDS)
             PeriodicTask.objects.create(
                     interval=schedule,
-                    name=f'{exchange_name} cash task update',
+                    name=f'{exchange_id} cash task update',
                     task='update_cash_directions_for_exchange',
                     args=json.dumps([exchange_name,]),
                     )
@@ -72,14 +76,16 @@ def manage_periodic_task_for_update(exchange_name: str, interval: int):
         task.save()
 
 
-def manage_periodic_task_for_parse_black_list(exchange_name: str, interval: int):
+def manage_periodic_task_for_parse_black_list(exchange_id: int,
+                                              exchange_name: str,
+                                              interval: int):
     '''
     Создание, изменение, остановка периодической задачи
     для парсинга чёрного списка обменника
     '''
 
     try:
-        task = PeriodicTask.objects.get(name=f'{exchange_name} cash task black list')
+        task = PeriodicTask.objects.get(name=f'{exchange_id} cash task black list')
     except PeriodicTask.DoesNotExist:
         if interval == 0:
             print('PASS')
@@ -88,7 +94,7 @@ def manage_periodic_task_for_parse_black_list(exchange_name: str, interval: int)
             schedule = get_or_create_schedule(interval, IntervalSchedule.HOURS)
             PeriodicTask.objects.create(
                     interval=schedule,
-                    name=f'{exchange_name} cash task black list',
+                    name=f'{exchange_id} cash task black list',
                     task='try_create_cash_directions_from_black_list',
                     args=json.dumps([exchange_name,]),
                     )

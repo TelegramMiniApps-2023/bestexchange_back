@@ -26,11 +26,14 @@ def delete_directions_from_exchanges(sender, instance, **kwargs):
 def create_tasks_for_exchange(sender, instance, created, **kwargs):
     if created:
         print('CASH PERIODIC TASKS CREATING...')
-        manage_periodic_task_for_create(instance.name,
+        manage_periodic_task_for_create(instance.pk,
+                                        instance.name,
                                         instance.period_for_create)
-        manage_periodic_task_for_update(instance.name,
+        manage_periodic_task_for_update(instance.pk,
+                                        instance.name,
                                         instance.period_for_update)
-        manage_periodic_task_for_parse_black_list(instance.name,
+        manage_periodic_task_for_parse_black_list(instance.pk,
+                                                  instance.name,
                                                   instance.period_for_parse_black_list)
 
 
@@ -38,7 +41,7 @@ def create_tasks_for_exchange(sender, instance, created, **kwargs):
 #при удалении обменника из БД
 @receiver(post_delete, sender=Exchange)
 def delete_task_for_exchange(sender, instance, **kwargs):
-    PeriodicTask.objects.filter(name__startswith=f'{instance.name} cash').delete()
+    PeriodicTask.objects.filter(name__startswith=f'{instance.pk} cash').delete()
 
 
 #Сигнал для автоматической установки времени

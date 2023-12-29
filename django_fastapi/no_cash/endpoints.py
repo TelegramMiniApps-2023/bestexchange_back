@@ -60,21 +60,11 @@ def no_cash_valutes(request: Request,
                                         exchange__is_active=True)
 
     if base == 'ALL':
-        # queries = ExchangeDirection.objects\
-        #                             .select_related('exchange')\
-        #                             .filter(is_active=True,
-        #                                     exchange__is_active=True)\
-        #                             .values_list('valute_from').all()
         queries = queries.values_list('valute_from').all()
     else:
-        # queries = ExchangeDirection.objects\
-        #                             .select_related('exchange')\
-        #                             .filter(is_active=True,
-        #                                     exchange__is_active=True,
-        #                                     valute_from=base)\
-        #                             .values_list('valute_to').all()
         queries = queries.filter(valute_from=base)\
                             .values_list('valute_to').all()
+        
     if not queries:
         http_exception_json(status_code=404, param=request.url)
 

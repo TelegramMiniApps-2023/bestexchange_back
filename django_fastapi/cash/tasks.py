@@ -88,7 +88,7 @@ def try_update_direction(dict_for_parse: dict,
 
     try:
         exchange_direction = ExchangeDirection.objects\
-                            .filter(exchange=dict_for_parse['name'],
+                            .filter(exchange=dict_for_parse['id'],
                                     city=dict_for_parse['city'],
                                     valute_from=dict_for_parse['valute_from_id'],
                                     valute_to=dict_for_parse['valute_to_id'],
@@ -140,7 +140,7 @@ def try_create_black_list_direction(dict_for_parse: dict,
         print('BLACK LIST PARSE FAILED', ex)
         pass
     else:
-        exchange = Exchange.objects.get(name=dict_for_parse['name'])
+        exchange = Exchange.objects.get(name=dict_for_parse['id'])
         dict_for_exchange_direction['exchange'] = exchange
         try:
             ExchangeDirection.objects.create(**dict_for_exchange_direction)

@@ -103,11 +103,17 @@ class ExchangeAdmin(BaseExchangeAdmin):
                 if value != form.initial[key]:
                     match key:
                         case 'period_for_create':
-                            manage_periodic_task_for_create(obj.name, value)
+                            manage_periodic_task_for_create(obj.pk,
+                                                            obj.name,
+                                                            value)
                         case 'period_for_update':
-                            manage_periodic_task_for_update(obj.name, value)
+                            manage_periodic_task_for_update(obj.pk,
+                                                            obj.name,
+                                                            value)
                         case 'period_for_parse_black_list':
-                            manage_periodic_task_for_parse_black_list(obj.name, value)
+                            manage_periodic_task_for_parse_black_list(obj.pk,
+                                                                      obj.name,
+                                                                      value)
                     update_fields.append(key)
 
             obj.save(update_fields=update_fields)

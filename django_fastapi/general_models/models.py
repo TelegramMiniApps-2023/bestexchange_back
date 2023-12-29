@@ -1,3 +1,4 @@
+from collections.abc import Iterable
 from django.db import models
 
 from .utils.model_validators import is_positive_validate
@@ -87,9 +88,10 @@ class BaseComment(BaseReviewComment):
 
 #Абстрактная модель обменника (для наследования)
 class BaseExchange(models.Model):
+    # id = models.IntegerField(blank=True, null=True, default=None)
     name = models.CharField('Название обменника',
                             max_length=20,
-                            primary_key=True)
+                            unique=True)
     xml_url = models.CharField('Ссылка на XML файл',
                                max_length=50)
     partner_link = models.CharField('Партнёрская ссылка',
@@ -122,6 +124,9 @@ class BaseExchange(models.Model):
         verbose_name = 'Обменник'
         verbose_name_plural = 'Обменники'
         ordering = ['name']
+        indexes = [
+            models.Index(fields=['name'])
+        ]
 
     def __str__(self):
         return self.name

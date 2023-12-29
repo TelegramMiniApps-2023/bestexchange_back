@@ -78,7 +78,7 @@ def try_update_direction(dict_for_parse: dict,
 
     try:
         exchange_direction = ExchangeDirection.objects\
-                            .filter(exchange=dict_for_parse['name'],
+                            .filter(exchange=dict_for_parse['id'],
                             valute_from=dict_for_parse['valute_from_id'],
                             valute_to=dict_for_parse['valute_to_id'],
                             )
