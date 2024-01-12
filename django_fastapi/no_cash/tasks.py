@@ -45,11 +45,13 @@ def create_direction(dict_for_parse: dict,
         print('PARSE FAILED', ex)
         pass
     else:
+        # print('ДОБАВЛЯЮ')
         exchange = Exchange.objects.get(name=dict_for_parse['name'])
         dict_for_create_exchange_direction['exchange'] = exchange
         try:
             ExchangeDirection.objects.create(**dict_for_create_exchange_direction)
-        except Exception:
+        except Exception as ex:
+            print(ex)
             pass
 
 

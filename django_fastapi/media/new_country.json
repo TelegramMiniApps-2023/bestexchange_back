@@ -1,0 +1,1019 @@
+[
+    {
+        "model": "cash.country",
+        "pk": 1,
+        "fields": {
+            "name": "Япония",
+            "en_name": "Japan",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 2,
+        "fields": {
+            "name": "Панама",
+            "en_name": "Panama",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 3,
+        "fields": {
+            "name": "Словакия",
+            "en_name": "Slovakia",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 4,
+        "fields": {
+            "name": "Конго",
+            "en_name": "Congo",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 5,
+        "fields": {
+            "name": "Люксембург",
+            "en_name": "Luxembourg",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 6,
+        "fields": {
+            "name": "Мексика",
+            "en_name": "Mexico",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 7,
+        "fields": {
+            "name": "Малайзия",
+            "en_name": "Malaysia",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 8,
+        "fields": {
+            "name": "Мадагаскар",
+            "en_name": "Madagascar",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 9,
+        "fields": {
+            "name": "Беларусь",
+            "en_name": "Belarus",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 10,
+        "fields": {
+            "name": "Италия",
+            "en_name": "Italy",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 11,
+        "fields": {
+            "name": "Таиланд",
+            "en_name": "Thailand",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 12,
+        "fields": {
+            "name": "Экваториальная Гвинея",
+            "en_name": "Equatorial Guinea",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 13,
+        "fields": {
+            "name": "Камерун",
+            "en_name": "Cameroon",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 14,
+        "fields": {
+            "name": "Бенин",
+            "en_name": "Benin",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 15,
+        "fields": {
+            "name": "Израиль",
+            "en_name": "Israel",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 16,
+        "fields": {
+            "name": "Румыния",
+            "en_name": "Romania",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 17,
+        "fields": {
+            "name": "Норвегия",
+            "en_name": "Norway",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 18,
+        "fields": {
+            "name": "Сенегал",
+            "en_name": "Senegal",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 19,
+        "fields": {
+            "name": "Грузия",
+            "en_name": "Georgia",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 20,
+        "fields": {
+            "name": "Турция",
+            "en_name": "Turkey",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 21,
+        "fields": {
+            "name": "Португалия",
+            "en_name": "Portugal",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 22,
+        "fields": {
+            "name": "Гвинея-Бисау",
+            "en_name": "Guinea-Bissau",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 23,
+        "fields": {
+            "name": "Ливан",
+            "en_name": "Lebanon",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 24,
+        "fields": {
+            "name": "Сингапур",
+            "en_name": "Singapore",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 25,
+        "fields": {
+            "name": "Украина",
+            "en_name": "Ukraine",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 26,
+        "fields": {
+            "name": "Зимбабве",
+            "en_name": "Zimbabwe",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 27,
+        "fields": {
+            "name": "Азербайджан",
+            "en_name": "Azerbaijan",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 28,
+        "fields": {
+            "name": "Сьерра-Леоне",
+            "en_name": "Sierra Leone",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 29,
+        "fields": {
+            "name": "Монако",
+            "en_name": "Monaco",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 30,
+        "fields": {
+            "name": "Намибия",
+            "en_name": "Namibia",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 31,
+        "fields": {
+            "name": "Кения",
+            "en_name": "Kenya",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 32,
+        "fields": {
+            "name": "Греция",
+            "en_name": "Greece",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 33,
+        "fields": {
+            "name": "Болгария",
+            "en_name": "Bulgaria",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 34,
+        "fields": {
+            "name": "Того",
+            "en_name": "Togo",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 35,
+        "fields": {
+            "name": "Германия",
+            "en_name": "Germany",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 36,
+        "fields": {
+            "name": "Эквадор",
+            "en_name": "Ecuador",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 37,
+        "fields": {
+            "name": "США",
+            "en_name": "United States",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 38,
+        "fields": {
+            "name": "Бахрейн",
+            "en_name": "Bahrain",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 39,
+        "fields": {
+            "name": "Либерия",
+            "en_name": "Liberia",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 40,
+        "fields": {
+            "name": "Судан",
+            "en_name": "Sudan",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 41,
+        "fields": {
+            "name": "Гвинея",
+            "en_name": "Guinea",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 42,
+        "fields": {
+            "name": "Македония",
+            "en_name": "Macedonia",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 43,
+        "fields": {
+            "name": "Латвия",
+            "en_name": "Latvia",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 44,
+        "fields": {
+            "name": "Сомали",
+            "en_name": "Somalia",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 45,
+        "fields": {
+            "name": "Габон",
+            "en_name": "Gabon",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 46,
+        "fields": {
+            "name": "Финляндия",
+            "en_name": "Finland",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 47,
+        "fields": {
+            "name": "Испания",
+            "en_name": "Spain",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 48,
+        "fields": {
+            "name": "Индонезия",
+            "en_name": "Indonesia",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 49,
+        "fields": {
+            "name": "Франция",
+            "en_name": "France",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 50,
+        "fields": {
+            "name": "Джибути",
+            "en_name": "Djibouti",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 51,
+        "fields": {
+            "name": "Танзания",
+            "en_name": "Tanzania",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 52,
+        "fields": {
+            "name": "Ангола",
+            "en_name": "Angola",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 53,
+        "fields": {
+            "name": "Алжир",
+            "en_name": "Algeria",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 54,
+        "fields": {
+            "name": "Объединенные Арабские Эмираты",
+            "en_name": "United Arab Emirates",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 55,
+        "fields": {
+            "name": "Руанда",
+            "en_name": "Rwanda",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 56,
+        "fields": {
+            "name": "Колумбия",
+            "en_name": "Colombia",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 57,
+        "fields": {
+            "name": "Казахстан",
+            "en_name": "Kazakhstan",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 58,
+        "fields": {
+            "name": "Сербия",
+            "en_name": "Serbia",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 59,
+        "fields": {
+            "name": "Ливия",
+            "en_name": "Libya",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 60,
+        "fields": {
+            "name": "Уганда",
+            "en_name": "Uganda",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 61,
+        "fields": {
+            "name": "Польша",
+            "en_name": "Poland",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 62,
+        "fields": {
+            "name": "Кот-д'Ивуар",
+            "en_name": "Cote D'Ivoire",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 63,
+        "fields": {
+            "name": "Китай",
+            "en_name": "China",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 64,
+        "fields": {
+            "name": "Нидерланды",
+            "en_name": "Netherlands",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 65,
+        "fields": {
+            "name": "Эфиопия",
+            "en_name": "Ethiopia",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 66,
+        "fields": {
+            "name": "Буркина Фасо",
+            "en_name": "Burkina Faso",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 67,
+        "fields": {
+            "name": "Южно-Африканская Республика",
+            "en_name": "South Africa",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 68,
+        "fields": {
+            "name": "Республика Корея",
+            "en_name": "Korea",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 69,
+        "fields": {
+            "name": "Швеция",
+            "en_name": "Sweden",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 70,
+        "fields": {
+            "name": "Австралия",
+            "en_name": "Australia",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 71,
+        "fields": {
+            "name": "Нигерия",
+            "en_name": "Nigeria",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 72,
+        "fields": {
+            "name": "Индия",
+            "en_name": "India",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 73,
+        "fields": {
+            "name": "Бельгия",
+            "en_name": "Belgium",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 74,
+        "fields": {
+            "name": "Саудовская Аравия",
+            "en_name": "Saudi Arabia",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 75,
+        "fields": {
+            "name": "Марокко",
+            "en_name": "Morocco",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 76,
+        "fields": {
+            "name": "Великобритания",
+            "en_name": "United Kingdom",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 77,
+        "fields": {
+            "name": "Перу",
+            "en_name": "Peru",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 78,
+        "fields": {
+            "name": "Албания",
+            "en_name": "Albania",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 79,
+        "fields": {
+            "name": "Таджикистан",
+            "en_name": "Tajikistan",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 80,
+        "fields": {
+            "name": "Мали",
+            "en_name": "Mali",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 81,
+        "fields": {
+            "name": "Швейцария",
+            "en_name": "Switzerland",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 82,
+        "fields": {
+            "name": "Гана",
+            "en_name": "Ghana",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 83,
+        "fields": {
+            "name": "Узбекистан",
+            "en_name": "Uzbekistan",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 84,
+        "fields": {
+            "name": "Литва",
+            "en_name": "Lithuania",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 85,
+        "fields": {
+            "name": "Нигер",
+            "en_name": "Niger",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 86,
+        "fields": {
+            "name": "Мальта",
+            "en_name": "Malta",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 87,
+        "fields": {
+            "name": "Дания",
+            "en_name": "Denmark",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 88,
+        "fields": {
+            "name": "Коста-Рика",
+            "en_name": "Costa Rica",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 89,
+        "fields": {
+            "name": "Бразилия",
+            "en_name": "Brazil",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 90,
+        "fields": {
+            "name": "Канада",
+            "en_name": "Canada",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 91,
+        "fields": {
+            "name": "Эритрея",
+            "en_name": "Eritrea",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 92,
+        "fields": {
+            "name": "Венгрия",
+            "en_name": "Hungary",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 93,
+        "fields": {
+            "name": "Эстония",
+            "en_name": "Estonia",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 94,
+        "fields": {
+            "name": "Гамбия",
+            "en_name": "Gambia",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 95,
+        "fields": {
+            "name": "Иран",
+            "en_name": "Iran",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 96,
+        "fields": {
+            "name": "Кыргызстан",
+            "en_name": "Kyrgyzstan",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 97,
+        "fields": {
+            "name": "Тунис",
+            "en_name": "Tunisia",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 98,
+        "fields": {
+            "name": "Словения",
+            "en_name": "Slovenia",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 99,
+        "fields": {
+            "name": "Армения",
+            "en_name": "Armenia",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 100,
+        "fields": {
+            "name": "Черногория",
+            "en_name": "Montenegro",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 101,
+        "fields": {
+            "name": "Мозамбик",
+            "en_name": "Mozambique",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 102,
+        "fields": {
+            "name": "Ирландия",
+            "en_name": "Ireland",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 103,
+        "fields": {
+            "name": "Аргентина",
+            "en_name": "Argentina",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 104,
+        "fields": {
+            "name": "Австрия",
+            "en_name": "Austria",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 105,
+        "fields": {
+            "name": "Египет",
+            "en_name": "Egypt",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 106,
+        "fields": {
+            "name": "Хорватия",
+            "en_name": "Croatia",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 107,
+        "fields": {
+            "name": "Катар",
+            "en_name": "Qatar",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 108,
+        "fields": {
+            "name": "Мавритания",
+            "en_name": "Mauritania",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 109,
+        "fields": {
+            "name": "Россия",
+            "en_name": "Russia",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 110,
+        "fields": {
+            "name": "Кипр",
+            "en_name": "Cyprus",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 111,
+        "fields": {
+            "name": "Молдова",
+            "en_name": "Moldova",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 112,
+        "fields": {
+            "name": "Чехия",
+            "en_name": "Czech Republic",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    },
+    {
+        "model": "cash.country",
+        "pk": 113,
+        "fields": {
+            "name": "Доминиканская республика",
+            "en_name": "Dominican Republic",
+            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+        }
+    }
+]

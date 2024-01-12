@@ -11,7 +11,10 @@ from general_models.models import (BaseExchangeDirection,
 
 #Модель страны
 class Country(models.Model):
-    name = models.CharField('Название страны', max_length=100, unique=True)
+    name = models.CharField('Название страны(ru)', max_length=100,
+                            unique=True)
+    en_name = models.CharField('Название страны(en)', max_length=100,
+                               unique=True)
     icon_url = models.FileField('Флаг страны',
                                 upload_to='icons/country/',
                                 blank=True,
@@ -21,6 +24,10 @@ class Country(models.Model):
         verbose_name = 'Страна'
         verbose_name_plural = 'Страны'
         ordering = ('name', )
+        indexes = [
+            models.Index(fields=['name']),
+            models.Index(fields=['en_name'])
+        ]
 
     def __str__(self):
         return self.name
@@ -28,8 +35,15 @@ class Country(models.Model):
 
 #Модель города
 class City(models.Model):
-    name = models.CharField('Название города', max_length=100, unique=True)
-    code_name = models.CharField('Кодовое имя', max_length=10, unique=True)
+    name = models.CharField('Название города(ru)',
+                            max_length=100,
+                            unique=True)
+    en_name = models.CharField('Название города(en)',
+                               max_length=100,
+                               unique=True)
+    code_name = models.CharField('Кодовое имя',
+                                 max_length=10,
+                                 unique=True)
     country = models.ForeignKey(Country,
                                 on_delete=models.CASCADE,
                                 verbose_name='Страна',

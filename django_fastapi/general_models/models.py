@@ -1,4 +1,3 @@
-from collections.abc import Iterable
 from django.db import models
 
 from .utils.model_validators import is_positive_validate
@@ -88,7 +87,6 @@ class BaseComment(BaseReviewComment):
 
 #Абстрактная модель обменника (для наследования)
 class BaseExchange(models.Model):
-    # id = models.IntegerField(blank=True, null=True, default=None)
     name = models.CharField('Название обменника',
                             max_length=20,
                             unique=True)
@@ -104,19 +102,19 @@ class BaseExchange(models.Model):
                                             blank=True,
                                             null=True,
                                             default=90,
-                                            help_text='Значение - положительное целое число.При установлении в 0, останавливает задачу переодических добавлений',
+                                            help_text='Значение - положительное целое число.При установлении в 0, останавливает задачу периодических добавлений',
                                             validators=[is_positive_validate])
     period_for_update = models.IntegerField('Частота обновлений в секундах',
                                             blank=True,
                                             null=True,
                                             default=60,
-                                            help_text='Значение - положительное целое число.При установлении в 0, останавливает задачу переодических обновлений',
+                                            help_text='Значение - положительное целое число.При установлении в 0, останавливает задачу периодических обновлений',
                                             validators=[is_positive_validate])
     period_for_parse_black_list = models.IntegerField('Частота парсинга чёрного списка в часах',
                                                       blank=True,
                                                       null=True,
                                                       default=24,
-                                                      help_text='Рекомендуемое значение - 24 часа.\nЗначение - положительное целое число.При установлении в 0, останавливает задачу переодического парсинга чёрного списка',
+                                                      help_text='Рекомендуемое значение - 24 часа.\nЗначение - положительное целое число.При установлении в 0, останавливает задачу периодического парсинга чёрного списка',
                                                       validators=[is_positive_validate])
 
     class Meta:
@@ -154,8 +152,14 @@ class BaseDirection(models.Model):
 class BaseExchangeDirection(models.Model):
     valute_from = models.CharField('Отдаём', max_length=10)
     valute_to = models.CharField('Получаем', max_length=10)
-    in_count = models.FloatField('Сколько отдаём')
-    out_count = models.FloatField('Сколько получаем')
+    # in_count = models.FloatField('Сколько отдаём')
+    # out_count = models.FloatField('Сколько получаем')
+    in_count = models.DecimalField('Сколько отдаём',
+                                   max_digits=20,
+                                   decimal_places=2)
+    out_count = models.DecimalField('Сколько получаем',
+                                    max_digits=20,
+                                    decimal_places=2)
     min_amount = models.CharField('Минимальное количество', max_length=50)
     max_amount = models.CharField('Максимальное количество', max_length=50)
     is_active = models.BooleanField('Активно?', default=True)

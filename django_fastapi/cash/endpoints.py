@@ -15,7 +15,12 @@ from .utils.query_models import (AvailableCitiesQuery,
                                  AvailableValutesQuery,
                                  SpecificDirectionsQuery)
 from .models import Country, City, ExchangeDirection
-from .schemas import CountryModel, CityModel, SpecialCashDirectionModel
+from .schemas import (CountryModel,
+                      CityModel,
+                      SpecialCashDirectionModel,
+                      MultipleName,
+                      RuEnCityModel,
+                      RuEnCountryModel)
 
 
 cash_router = APIRouter(prefix='/cash',
@@ -59,6 +64,37 @@ def get_available_coutries(request: Request):
                                     .filter(is_parse=True)\
                                     .order_by('name').all()
         country.country_flag = try_generate_icon_url(country)
+
+    return countries
+
+
+#Эндпоинт для получения доступных стран
+#и связанных городов (мультиязычность)
+@cash_router.get('/countries_multi',
+                 response_model=List[RuEnCountryModel],
+                 response_model_by_alias=False)
+def get_available_coutries(request: Request):
+    cities = City.objects.filter(is_parse=True)\
+                            .select_related('country').all()
+    
+    if not cities:
+        http_exception_json(status_code=404, param=request.url)
+
+    countries = sorted({city.country for city in cities},
+                       key=lambda country: country.name)
+
+    for country in countries:
+        country.city_list = country.cities\
+                                    .filter(is_parse=True)\
+                                    .order_by('name').all()
+        for city in country.city_list:
+            city.name = MultipleName(name=city.name,
+                                    en_name=city.en_name)
+        
+        country.country_flag = try_generate_icon_url(country)
+        ######
+        country.name = MultipleName(name=country.name,
+                                   en_name=country.en_name)
 
     return countries
 
