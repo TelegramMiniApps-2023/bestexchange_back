@@ -3,6 +3,16 @@ from django.db import models
 from .utils.model_validators import is_positive_validate
 
 
+en_type_valute_dict = {
+    'Криптовалюта': 'Cryptocurrency',
+    'Электронные деньги': 'Digital currencies',
+    'Балансы криптобирж': 'Crypto exchange balances',
+    'Интернет-банкинг': 'Online banking',
+    'Денежные переводы': 'Money transfers',
+    'Наличные': 'Cash',
+}
+
+
 #Модель валюты
 class Valute(models.Model):
     type_valute_list = [

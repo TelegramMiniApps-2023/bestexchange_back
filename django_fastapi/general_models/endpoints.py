@@ -2,9 +2,9 @@ from typing import List
 
 from fastapi import APIRouter, Request, Depends
 
-from no_cash.endpoints import no_cash_valutes, no_cash_exchange_directions
+from no_cash.endpoints import no_cash_valutes, no_cash_exchange_directions, new_no_cash_valutes
 
-from cash.endpoints import cash_valutes, cash_exchange_directions
+from cash.endpoints import cash_valutes, cash_exchange_directions, new_cash_valutes
 from cash.schemas import SpecialCashDirectionModel
 
 from .utils.query_models import AvailableValutesQuery, SpecificDirectionsQuery
@@ -25,6 +25,19 @@ def get_available_valutes(request: Request,
         json_dict = no_cash_valutes(request, params)
     else:
         json_dict = cash_valutes(request, params)
+    
+    return json_dict
+
+
+@common_router.get('/available_valutes_multi',
+                 response_model=dict[str, dict[str,List[ValuteModel]]])
+def get_available_valutes(request: Request,
+                          query: AvailableValutesQuery = Depends()):
+    params = query.params()
+    if not params['city']:
+        json_dict = new_no_cash_valutes(request, params)
+    else:
+        json_dict = new_cash_valutes(request, params)
     
     return json_dict
 

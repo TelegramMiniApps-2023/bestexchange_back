@@ -9,7 +9,8 @@ from general_models.schemas import ValuteModel
 from general_models.utils.http_exc import http_exception_json
 from general_models.utils.endpoints import (try_generate_icon_url,
                                             get_exchange_direction_list,
-                                            get_valute_json)
+                                            get_valute_json,
+                                            new_get_valute_json)
 
 from .utils.query_models import (AvailableCitiesQuery,
                                  AvailableValutesQuery,
@@ -178,6 +179,32 @@ def cash_valutes(request: Request,
         http_exception_json(status_code=404, param=request.url)
 
     return get_valute_json(queries)
+
+
+def new_cash_valutes(request: Request,
+                 params: dict):
+    for param in params:
+        if not params[param]:
+            http_exception_json(status_code=400, param=param)
+    
+    city, base = (params[key] for key in params)
+
+    queries = ExchangeDirection.objects\
+                                .select_related('exchange')\
+                                .filter(city=city,
+                                        is_active=True,
+                                        exchange__is_active=True)
+
+    if base == 'ALL':
+        queries = queries.values_list('valute_from').all()
+    else:
+        queries = queries.filter(valute_from=base)\
+                            .values_list('valute_to').all()
+        
+    if not queries:
+        http_exception_json(status_code=404, param=request.url)
+
+    return new_get_valute_json(queries)
 
 
 #Эндпоинт для получения доступных готовых направлений

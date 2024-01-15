@@ -11,3 +11,5 @@ DB_PORT = os.environ.get('DB_PORT')
 DB_NAME = os.environ.get('DB_NAME')
 
 CSRF_TOKEN = os.environ.get('CSRF_TOKEN')
+
+SELENIUM_DRIVER = os.environ.get('SELENIUM_DRIVER')

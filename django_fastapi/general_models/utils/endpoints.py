@@ -6,7 +6,7 @@ from django.conf import settings
 from cash.models import ExchangeDirection as CashExDir, City
 from no_cash.models import ExchangeDirection as NoCashExDir
 
-from general_models.models import Valute
+from general_models.models import Valute, en_type_valute_dict
 from general_models.schemas import ValuteModel
 
 
@@ -55,15 +55,61 @@ def get_valute_json(queries: List[NoCashExDir | CashExDir]):
     valute_name_list = set(map(lambda query: query[0], queries))
     valutes = Valute.objects.filter(code_name__in=valute_name_list).all()
     
+    # type_valutes = {valute.type_valute for valute in valutes}
+
     default_dict_keys = {valute.type_valute for valute in valutes}
-    
+    #####
+    # default_dict_keys = {'ru': dict(), 'en': dict()}
     json_dict = defaultdict(list)
+    # json_dict = defaultdict(dict)
+
     json_dict.fromkeys(default_dict_keys)
 
     for id, valute in enumerate(valutes, start=1):
         icon_url = try_generate_icon_url(valute)
         valute.icon_url = icon_url
         valute.id = id
+        #######
+        # dict_key = f'{valute.type_valute}|{en_type_valute_dict[valute.type_valute]}'
+        # json_dict[dict_key].append(ValuteModel(**valute.__dict__))
+
         json_dict[valute.type_valute].append(ValuteModel(**valute.__dict__))
+        # json_dict['ru'][valute.type_valute] = json_dict['ru']\
+        #                                         .get(valute.type_valute, []) + [ValuteModel(**valute.__dict__)]
+        # en_type_valute = en_type_valute_dict[valute.type_valute]
+        # json_dict['en'][en_type_valute] = json_dict['en']\
+        #                                         .get(en_type_valute, []) + [ValuteModel(**valute.__dict__)]
+
+    return json_dict
+
+
+def new_get_valute_json(queries: List[NoCashExDir | CashExDir]):
+    valute_name_list = set(map(lambda query: query[0], queries))
+    valutes = Valute.objects.filter(code_name__in=valute_name_list).all()
+    
+    type_valutes = {valute.type_valute for valute in valutes}
+
+    # default_dict_keys = {valute.type_valute for valute in valutes}
+    #####
+    default_dict_keys = {'ru': dict(), 'en': dict()}
+    # json_dict = defaultdict(list)
+    json_dict = defaultdict(dict)
+
+    json_dict.fromkeys(default_dict_keys)
+
+    for id, valute in enumerate(valutes, start=1):
+        icon_url = try_generate_icon_url(valute)
+        valute.icon_url = icon_url
+        valute.id = id
+        #######
+        # dict_key = f'{valute.type_valute}|{en_type_valute_dict[valute.type_valute]}'
+        # json_dict[dict_key].append(ValuteModel(**valute.__dict__))
+
+        # json_dict[valute.type_valute].append(ValuteModel(**valute.__dict__))
+        json_dict['ru'][valute.type_valute] = json_dict['ru']\
+                                                .get(valute.type_valute, []) + [ValuteModel(**valute.__dict__)]
+        en_type_valute = en_type_valute_dict[valute.type_valute]
+        json_dict['en'][en_type_valute] = json_dict['en']\
+                                                .get(en_type_valute, []) + [ValuteModel(**valute.__dict__)]
 
     return json_dict

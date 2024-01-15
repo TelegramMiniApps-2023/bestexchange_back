@@ -57,35 +57,51 @@ def collect_data(review, indicator: str):
     header = review.find_element(By.CLASS_NAME, f'{indicator}_header')\
                     .find_elements(By.TAG_NAME, 'td')
     if indicator == 'review':
-        _, name , _, _, date = tuple(map(lambda el: el.text, header))
+        # _, name , _, _, date = tuple(map(lambda el: el.text, header))
+        _, name , _, _, date = header
+        date = date.find_element(By.TAG_NAME, 'span')
+        # print(dir(date))
+        w = date.get_attribute('title')
+        print(w)
+
     else:
-        _, name, date = tuple(map(lambda el: el.text, header))
-    print(name)
-    print(date)
-    date = datetime.strptime(date, '%m/%d/%Y, %H:%M')
+        # _, name, date = tuple(map(lambda el: el.text, header))
+        _, name, date = header
+        date = date.find_element(By.TAG_NAME, 'span')
+        # print(dir(date))
+        w = date.get_attribute('title')
+        print(w)
+
+
+    print(name.text)
+    # print(date)
+    # w = w.replace(' UTC', '')
+    w = w[:20]
+    date = datetime.strptime(w, '%d.%m.%Y, %H:%M:%S')
     print(date)
     rate_text = review.find_element(By.CLASS_NAME, f'{indicator}_middle')\
                         .find_element(By.CLASS_NAME, f'{indicator}_text')
     print(rate_text.text)
 
     return {
-        'name': name,
+        'name': name.text,
         'date': date,
         'text': rate_text.text,
     }
 
 
-def parse_review(exchange_data: tuple[str, str],
+def parse_review(driver,
+                 exchange_data: tuple[str, str],
                  marker: str,
                  limit: int = 20):
     exchange_name, link = exchange_data
     try:
         # service = Service(port=4442)
         # options = Options()
-        # options.capabilities = DesiredCapabilities.FIREFOX
-        # driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub',
-        #                           desired_capabilities=DesiredCapabilities.FIREFOX)
-        driver = webdriver.Firefox()
+        # driver = webdriver.Remote('http://localhost:4444', options=options)
+        # driver = webdriver.Remote(f'http://{SELENUIM_DRIVER}:4444', options=options)
+
+        # driver = webdriver.Firefox()
         # driver.get(f'https://www.bestchange.ru/{exchange_name.lower()}-exchanger.html')
         driver.get(link)
 
@@ -97,7 +113,8 @@ def parse_review(exchange_data: tuple[str, str],
         for rate in rates[:limit]:
             try:
                 data = collect_data(rate, 'review')
-            except ValueError:
+            except ValueError as ex:
+                print(ex)
                 continue
             else:
                 review = add_review_to_db(exchange_name, data, marker)
@@ -116,7 +133,10 @@ def parse_review(exchange_data: tuple[str, str],
                         continue
                     else:
                         add_comment_to_db(review, data, marker)
-    except NoSuchElementException:
-        print('ERROR')
-    finally:
-        driver.quit()
+    except Exception as ex:
+        print(ex)
+        driver.close()
+    # except NoSuchElementException:
+    #     print('ERROR')
+    # finally:
+    #     driver.quit()
