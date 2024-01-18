@@ -4,7 +4,7 @@
         "pk": 1,
         "fields": {
             "name": "Руанда",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -12,7 +12,7 @@
         "pk": 2,
         "fields": {
             "name": "Словакия",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -20,7 +20,7 @@
         "pk": 3,
         "fields": {
             "name": "Хорватия",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -28,7 +28,7 @@
         "pk": 4,
         "fields": {
             "name": "Мали",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -36,7 +36,7 @@
         "pk": 5,
         "fields": {
             "name": "Греция",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -44,7 +44,7 @@
         "pk": 6,
         "fields": {
             "name": "Армения",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/armenia.svg"
         }
     },
     {
@@ -52,7 +52,7 @@
         "pk": 7,
         "fields": {
             "name": "Кипр",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -60,7 +60,7 @@
         "pk": 8,
         "fields": {
             "name": "Монако",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -68,7 +68,7 @@
         "pk": 9,
         "fields": {
             "name": "Ангола",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -76,7 +76,7 @@
         "pk": 10,
         "fields": {
             "name": "Перу",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -84,7 +84,7 @@
         "pk": 11,
         "fields": {
             "name": "Казахстан",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/kazakhstan.svg"
         }
     },
     {
@@ -92,7 +92,7 @@
         "pk": 12,
         "fields": {
             "name": "Италия",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -100,7 +100,7 @@
         "pk": 13,
         "fields": {
             "name": "Аргентина",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -108,7 +108,7 @@
         "pk": 14,
         "fields": {
             "name": "Ливия",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -116,7 +116,7 @@
         "pk": 15,
         "fields": {
             "name": "Япония",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -124,7 +124,7 @@
         "pk": 16,
         "fields": {
             "name": "Великобритания",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -132,7 +132,7 @@
         "pk": 17,
         "fields": {
             "name": "Бельгия",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -140,7 +140,7 @@
         "pk": 18,
         "fields": {
             "name": "Ливан",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -148,7 +148,7 @@
         "pk": 19,
         "fields": {
             "name": "Сингапур",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -156,7 +156,7 @@
         "pk": 20,
         "fields": {
             "name": "Танзания",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -164,7 +164,7 @@
         "pk": 21,
         "fields": {
             "name": "Либерия",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -172,7 +172,7 @@
         "pk": 22,
         "fields": {
             "name": "Канада",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -180,7 +180,7 @@
         "pk": 23,
         "fields": {
             "name": "Колумбия",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -188,7 +188,7 @@
         "pk": 24,
         "fields": {
             "name": "Германия",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -196,7 +196,7 @@
         "pk": 25,
         "fields": {
             "name": "Гвинея",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -204,7 +204,7 @@
         "pk": 26,
         "fields": {
             "name": "Гамбия",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -212,7 +212,7 @@
         "pk": 27,
         "fields": {
             "name": "Мексика",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -220,7 +220,7 @@
         "pk": 28,
         "fields": {
             "name": "Швеция",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -228,7 +228,7 @@
         "pk": 29,
         "fields": {
             "name": "Нигерия",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -236,7 +236,7 @@
         "pk": 30,
         "fields": {
             "name": "Сербия",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -244,7 +244,7 @@
         "pk": 31,
         "fields": {
             "name": "Сомали",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -252,7 +252,7 @@
         "pk": 32,
         "fields": {
             "name": "Эстония",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -260,7 +260,7 @@
         "pk": 33,
         "fields": {
             "name": "Панама",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -268,7 +268,7 @@
         "pk": 34,
         "fields": {
             "name": "Кыргызстан",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -276,7 +276,7 @@
         "pk": 35,
         "fields": {
             "name": "Австрия",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -284,7 +284,7 @@
         "pk": 36,
         "fields": {
             "name": "Республика Корея",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -292,7 +292,7 @@
         "pk": 37,
         "fields": {
             "name": "Таиланд",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/thailand.svg"
         }
     },
     {
@@ -300,7 +300,7 @@
         "pk": 38,
         "fields": {
             "name": "Дания",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -308,7 +308,7 @@
         "pk": 39,
         "fields": {
             "name": "Бенин",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -316,7 +316,7 @@
         "pk": 40,
         "fields": {
             "name": "Турция",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/turkey.svg"
         }
     },
     {
@@ -324,7 +324,7 @@
         "pk": 41,
         "fields": {
             "name": "Португалия",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -332,7 +332,7 @@
         "pk": 42,
         "fields": {
             "name": "Македония",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -340,7 +340,7 @@
         "pk": 43,
         "fields": {
             "name": "Южно-Африканская Республика",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -348,7 +348,7 @@
         "pk": 44,
         "fields": {
             "name": "Азербайджан",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -356,7 +356,7 @@
         "pk": 45,
         "fields": {
             "name": "Объединенные Арабские Эмираты",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/uae.svg"
         }
     },
     {
@@ -364,7 +364,7 @@
         "pk": 46,
         "fields": {
             "name": "Габон",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -372,7 +372,7 @@
         "pk": 47,
         "fields": {
             "name": "Ирландия",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -380,7 +380,7 @@
         "pk": 48,
         "fields": {
             "name": "Уганда",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -388,7 +388,7 @@
         "pk": 49,
         "fields": {
             "name": "Нидерланды",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -396,7 +396,7 @@
         "pk": 50,
         "fields": {
             "name": "Венгрия",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -404,7 +404,7 @@
         "pk": 51,
         "fields": {
             "name": "Норвегия",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -412,7 +412,7 @@
         "pk": 52,
         "fields": {
             "name": "Албания",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -420,7 +420,7 @@
         "pk": 53,
         "fields": {
             "name": "Чехия",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/czech.svg"
         }
     },
     {
@@ -428,7 +428,7 @@
         "pk": 54,
         "fields": {
             "name": "Литва",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -436,7 +436,7 @@
         "pk": 55,
         "fields": {
             "name": "Камерун",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -444,7 +444,7 @@
         "pk": 56,
         "fields": {
             "name": "Люксембург",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -452,7 +452,7 @@
         "pk": 57,
         "fields": {
             "name": "Джибути",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -460,7 +460,7 @@
         "pk": 58,
         "fields": {
             "name": "Доминиканская республика",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -468,7 +468,7 @@
         "pk": 59,
         "fields": {
             "name": "Сьерра-Леоне",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -476,7 +476,7 @@
         "pk": 60,
         "fields": {
             "name": "Узбекистан",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/uzbekistan.svg"
         }
     },
     {
@@ -484,7 +484,7 @@
         "pk": 61,
         "fields": {
             "name": "Болгария",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -492,7 +492,7 @@
         "pk": 62,
         "fields": {
             "name": "Индонезия",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -500,7 +500,7 @@
         "pk": 63,
         "fields": {
             "name": "Буркина Фасо",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -508,7 +508,7 @@
         "pk": 64,
         "fields": {
             "name": "Швейцария",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -516,7 +516,7 @@
         "pk": 65,
         "fields": {
             "name": "Бразилия",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -524,7 +524,7 @@
         "pk": 66,
         "fields": {
             "name": "Эквадор",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -532,7 +532,7 @@
         "pk": 67,
         "fields": {
             "name": "США",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/usa.svg"
         }
     },
     {
@@ -540,7 +540,7 @@
         "pk": 68,
         "fields": {
             "name": "Сенегал",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -548,7 +548,7 @@
         "pk": 69,
         "fields": {
             "name": "Румыния",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -556,7 +556,7 @@
         "pk": 70,
         "fields": {
             "name": "Нигер",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -564,7 +564,7 @@
         "pk": 71,
         "fields": {
             "name": "Польша",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/poland.svg"
         }
     },
     {
@@ -572,7 +572,7 @@
         "pk": 72,
         "fields": {
             "name": "Эфиопия",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -580,7 +580,7 @@
         "pk": 73,
         "fields": {
             "name": "Саудовская Аравия",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -588,7 +588,7 @@
         "pk": 74,
         "fields": {
             "name": "Словения",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -596,7 +596,7 @@
         "pk": 75,
         "fields": {
             "name": "Финляндия",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -604,7 +604,7 @@
         "pk": 76,
         "fields": {
             "name": "Таджикистан",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -612,7 +612,7 @@
         "pk": 77,
         "fields": {
             "name": "Испания",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -620,7 +620,7 @@
         "pk": 78,
         "fields": {
             "name": "Зимбабве",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -628,7 +628,7 @@
         "pk": 79,
         "fields": {
             "name": "Тунис",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -636,7 +636,7 @@
         "pk": 80,
         "fields": {
             "name": "Украина",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/ukraine.svg"
         }
     },
     {
@@ -644,7 +644,7 @@
         "pk": 81,
         "fields": {
             "name": "Австралия",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -652,7 +652,7 @@
         "pk": 82,
         "fields": {
             "name": "Конго",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -660,7 +660,7 @@
         "pk": 83,
         "fields": {
             "name": "Кот-д'Ивуар",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -668,7 +668,7 @@
         "pk": 84,
         "fields": {
             "name": "Грузия",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/georgia.svg"
         }
     },
     {
@@ -676,7 +676,7 @@
         "pk": 85,
         "fields": {
             "name": "Мальта",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -684,7 +684,7 @@
         "pk": 86,
         "fields": {
             "name": "Кения",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -692,7 +692,7 @@
         "pk": 87,
         "fields": {
             "name": "Израиль",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/israel.svg"
         }
     },
     {
@@ -700,7 +700,7 @@
         "pk": 88,
         "fields": {
             "name": "Катар",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -708,7 +708,7 @@
         "pk": 89,
         "fields": {
             "name": "Латвия",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -716,7 +716,7 @@
         "pk": 90,
         "fields": {
             "name": "Коста-Рика",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -724,7 +724,7 @@
         "pk": 91,
         "fields": {
             "name": "Иран",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -732,7 +732,7 @@
         "pk": 92,
         "fields": {
             "name": "Франция",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -740,7 +740,7 @@
         "pk": 93,
         "fields": {
             "name": "Беларусь",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -748,7 +748,7 @@
         "pk": 94,
         "fields": {
             "name": "Россия",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -756,7 +756,7 @@
         "pk": 95,
         "fields": {
             "name": "Китай",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -764,7 +764,7 @@
         "pk": 96,
         "fields": {
             "name": "Молдова",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/moldova.svg"
         }
     },
     {
@@ -772,7 +772,7 @@
         "pk": 97,
         "fields": {
             "name": "Бахрейн",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -780,7 +780,7 @@
         "pk": 98,
         "fields": {
             "name": "Малайзия",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -788,7 +788,7 @@
         "pk": 99,
         "fields": {
             "name": "Египет",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -796,7 +796,7 @@
         "pk": 100,
         "fields": {
             "name": "Черногория",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -804,7 +804,7 @@
         "pk": 101,
         "fields": {
             "name": "Того",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     },
     {
@@ -812,7 +812,7 @@
         "pk": 102,
         "fields": {
             "name": "Гана",
-            "icon_url": "./icons/country/Rossiyasvg-1.svg"
+            "icon_url": "./icons/country/russia.svg"
         }
     }
 ]

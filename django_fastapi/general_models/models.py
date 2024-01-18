@@ -23,9 +23,16 @@ class Valute(models.Model):
         ('Денежные переводы', 'Денежные переводы'),
         ('Наличные', 'Наличные'),
         ]
-    name = models.CharField('Название валюты',
+    name = models.CharField('Название валюты(ru)',
                             max_length=50,
                             primary_key=True)
+    ########
+    en_name = models.CharField('Название валюты(en)',
+                               max_length=50,
+                               unique=True,
+                               null=True,
+                               default=None)
+    #########
     code_name = models.CharField('Кодовое сокращение',
                                  max_length=10,
                                  unique=True)

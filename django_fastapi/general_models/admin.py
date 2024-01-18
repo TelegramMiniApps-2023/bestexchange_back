@@ -1,5 +1,6 @@
 from typing import Any
 
+from django.db.models import Count
 from django.contrib import admin
 from django.contrib.auth.models import User, Group
 from django.utils.safestring import mark_safe
@@ -32,9 +33,9 @@ admin.site.unregister(Group)
 @admin.register(Valute)
 class ValuteAdmin(admin.ModelAdmin):
     list_display = ('name', 'code_name', 'get_icon', 'type_valute')
-    fields = ('name', 'code_name', 'icon_url', 'get_icon', 'type_valute')
+    fields = ('name', 'en_name', 'code_name', 'icon_url', 'get_icon', 'type_valute')
     readonly_fields = ('get_icon', )
-    search_fields = ('name', )
+    search_fields = ('name', 'code_name', 'en_name')
 
     def get_icon(self, obj):
         if obj.icon_url:
@@ -46,12 +47,19 @@ class ValuteAdmin(admin.ModelAdmin):
 
 #Базовое отображение комментариев в админ панели
 class BaseCommentAdmin(ReviewAdminMixin, admin.ModelAdmin):
-    list_display = ("username", "time_create", "moderation")
+    list_display = ("username", "get_exchange", "time_create", "moderation")
     readonly_fields = ('moderation', 'review')
     ordering = ('-time_create', 'moderation')
 
+    def get_exchange(self, obj):
+        return obj.review.exchange
+
     def has_add_permission(self, request: HttpRequest) -> bool:
         return False
+    
+    def get_queryset(self, request):
+        return super().get_queryset(request)\
+                        .select_related('review', 'review__exchange')
     
 
 #Базовое отображение комментариев на странице связанного отзыва
@@ -60,17 +68,26 @@ class BaseCommentStacked(admin.StackedInline):
     readonly_fields = ('moderation', )
     ordering = ('-time_create', 'status')
 
+    def get_queryset(self, request):
+        return super().get_queryset(request)\
+                        .select_related('review', 'review__exchange')
+
 
 #Базовое отображение отзывов в админ панели
 class BaseReviewAdmin(ReviewAdminMixin, admin.ModelAdmin):
     list_display = ("username", "exchange", "time_create", "comment_count", "moderation")
     readonly_fields = ('moderation', )
-    ordering = ('-time_create', 'status')
+    ordering = ('exchange__name', '-time_create', 'status')
     
     def comment_count(self, obj):
-        return obj.comments.count()
+        return obj.comment_count
     
     comment_count.short_description = 'Число комментариев'
+
+    def get_queryset(self, request):
+        return super().get_queryset(request)\
+                        .select_related('exchange')\
+                        .annotate(comment_count=Count('comments'))
 
 
 #Базовое отображение отзывов на странице связанного обменника
@@ -89,6 +106,10 @@ class BaseExchangeDirectionAdmin(admin.ModelAdmin):
     
     def has_add_permission(self, request, obj = None):
         return False
+    
+    def get_queryset(self, request):
+        return super().get_queryset(request)\
+                        .select_related('exchange')
 
 
 #Базовое отображение готовых направлений на странице связанного обменника
@@ -130,6 +151,8 @@ class BaseDirectionAdmin(admin.ModelAdmin):
 
     def get_direction_name(self, obj):
         return f'{obj.valute_from} -> {obj.valute_to}'
+    
+    get_direction_name.short_description = 'Название направления'
     
     def has_change_permission(self, request, obj = None):
         return False

@@ -9,7 +9,7 @@ from cash.schemas import SpecialCashDirectionModel
 
 from .utils.query_models import AvailableValutesQuery, SpecificDirectionsQuery
 from .utils.http_exc import http_exception_json
-from .schemas import ValuteModel, SpecialDirectionModel
+from .schemas import ValuteModel, SpecialDirectionModel, EnValuteModel
 
 
 common_router = APIRouter(tags=['Общее'])
@@ -30,7 +30,7 @@ def get_available_valutes(request: Request,
 
 
 @common_router.get('/available_valutes_multi',
-                 response_model=dict[str, dict[str,List[ValuteModel]]])
+                 response_model=dict[str, dict[str, List[ValuteModel | EnValuteModel]]])
 def get_available_valutes(request: Request,
                           query: AvailableValutesQuery = Depends()):
     params = query.params()

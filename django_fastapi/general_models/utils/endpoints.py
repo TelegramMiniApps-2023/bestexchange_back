@@ -7,7 +7,7 @@ from cash.models import ExchangeDirection as CashExDir, City
 from no_cash.models import ExchangeDirection as NoCashExDir
 
 from general_models.models import Valute, en_type_valute_dict
-from general_models.schemas import ValuteModel
+from general_models.schemas import ValuteModel, EnValuteModel
 
 
 def try_generate_icon_url(obj: City | Valute) -> str | None:
@@ -110,6 +110,6 @@ def new_get_valute_json(queries: List[NoCashExDir | CashExDir]):
                                                 .get(valute.type_valute, []) + [ValuteModel(**valute.__dict__)]
         en_type_valute = en_type_valute_dict[valute.type_valute]
         json_dict['en'][en_type_valute] = json_dict['en']\
-                                                .get(en_type_valute, []) + [ValuteModel(**valute.__dict__)]
+                                                .get(en_type_valute, []) + [EnValuteModel(**valute.__dict__)]
 
     return json_dict

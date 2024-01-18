@@ -15,6 +15,7 @@ from general_models.admin import (BaseCommentAdmin,
                                   BaseExchangeDirectionAdmin,
                                   BaseExchangeDirectionStacked,
                                   BaseDirectionAdmin)
+from general_models.tasks import parse_reviews_for_exchange
 
 from .models import (Country,
                      City,
@@ -42,6 +43,7 @@ class CityStacked(admin.StackedInline):
     extra = 0
     fields = ('is_parse', )
     ordering = ('-is_parse', 'name')
+    show_change_link = True
 
 
 #Отображение стран в админ панели
@@ -119,7 +121,9 @@ class ExchangeAdmin(BaseExchangeAdmin):
             obj.save(update_fields=update_fields)
         else:
             print('NOT CHANGE!!!!')
-            return super().save_model(request, obj, form, change)
+            # return super().save_model(request, obj, form, change)
+            super().save_model(request, obj, form, change)
+            parse_reviews_for_exchange.delay(obj.name, 'cash')
     
 
 #Отображение направлений в админ панели

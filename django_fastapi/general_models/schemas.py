@@ -1,10 +1,18 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 #Схема валюты для отображения в json ответе
 class ValuteModel(BaseModel):
     id: int
     name: str
+    code_name: str
+    icon_url: str | None
+
+
+#Схема валюты для английской версии для отображения в json ответе
+class EnValuteModel(BaseModel):
+    id: int
+    name: str = Field(alias='en_name')
     code_name: str
     icon_url: str | None
 

@@ -1,46 +1,28 @@
 services:
 
-  # firefox:
-  #   image: selenium/standalone-chrome:4.16.1-20231219
-  #   # hostname: firefox
-  #   # container_name: firefox
-  #   # privileged: true
-  #   shm_size: 2g
-  #   ports:
-  #     - "4444:4444"
-  #     - "7900:7900"
-  #   environment:
-  #     - SE_SESSION_REQUEST_TIMEOUT=3600
-  #     - SE_NODE_SESSION_TIMEOUT=3600
-  #     - SE_VNC_PASSWORD=1234
-  #   deploy:
-  #     resources:
-  #       limits:
-  #         cpus: '0.4'
-
-  # firefox:
-  #   image: selenium/node-firefox:beta
-  #   shm_size: 2gb
-  #   depends_on:
-  #     - selenium-hub
-  #   environment:
-  #     - SE_EVENT_BUS_HOST=selenium-hub
-  #     - SE_EVENT_BUS_PUBLISH_PORT=4442
-  #     - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-
-  # selenium-hub:
-  #   image: selenium/hub:latest
-  #   container_name: selenium-hub
-  #   ports:
-  #     - "4442:4442"
-  #     - "4443:4443"
-  #     - "4444:4444"
+  firefox:
+    image: selenium/standalone-firefox:4.16.1-20231219
+    container_name: firefox
+    shm_size: 2g
+    ports:
+      - "4444:4444"
+      - "7900:7900"
+    environment:
+      - SE_SESSION_REQUEST_TIMEOUT=3600
+      - SE_NODE_SESSION_TIMEOUT=3600
+      - SE_VNC_PASSWORD=1234
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true 
+      - SE_NODE_MAX_SESSIONS=5
+    deploy:
+      resources:
+        limits:
+          cpus: '0.4'
 
   django_fastapi:
     build: .
     environment:
       - POSTGRES_HOST=psql_db
-      # - SELENIUM_DRIVER=firefox
+      - SELENIUM_DRIVER=firefox
     env_file:
       - ./.env
     container_name: django_fastapi
@@ -50,25 +32,24 @@ services:
       - psql_db
       - rabbitmq3
       - celery_worker
-      # - firefox
+      - firefox
     logging:
       driver: "json-file"
       options:
           max-size: "20m"
-
     volumes:
       - static:/app/staticfiles
       - media:/app/media
     command: sh -c "python manage.py makemigrations &&
                     python manage.py migrate &&
+                    python manage.py collectstatic --no-input &&
+                    python manage.py loaddata media/base_db.json &&
+                    python manage.py loaddata media/new_country.json &&
+                    python manage.py create_periodic_task_for_delete_reviews &&
+                    python manage.py create_cities &&
+                    python manage.py createsuperuser --no-input &&
+                    python manage.py parse_reviews_selenium &&
                     uvicorn project.asgi:app --host 0.0.0.0"
-                    # python manage.py collectstatic --no-input &&
-                    # python manage.py loaddata media/base_db.json &&
-                    # python manage.py loaddata media/new_country.json &&
-                    # python manage.py create_periodic_task_for_delete_reviews &&
-                    # python manage.py create_cities &&
-                    # python manage.py createsuperuser --no-input &&
-                    # python manage.py parse_reviews &&
 
   nginx:
     build: ./nginx
@@ -85,7 +66,6 @@ services:
       options:
           max-size: "20m"
     
-
   rabbitmq3:
     image: rabbitmq:3.6.9
     ports:
@@ -94,13 +74,12 @@ services:
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
 
-
   celery_worker:
     build: .
     command: sh -c 'celery -A project worker -l info -c 20 -Ofair'
     environment:
       - POSTGRES_HOST=psql_db
-      # - SELENUIM_DRIVER=firefox
+      - SELENIUM_DRIVER=firefox
     env_file:
       - ./.env
     depends_on:
