@@ -17,16 +17,18 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         try:
-            cash_exchange_list = cash_models.Exchange.objects.values('name').all()
-            no_cash_exchange_list = no_cash_models.Exchange.objects.values('name').all()
-            exchange_list = cash_exchange_list.union(no_cash_exchange_list)
-            exchange_name_set = {exchange['name'].lower() for exchange in exchange_list}
-            # print(exchange_name_set)
-            # print(len(exchange_name_set))
+            # cash_exchange_list = cash_models.Exchange.objects.values('name').all()
+            # no_cash_exchange_list = no_cash_models.Exchange.objects.values('name').all()
+            # exchange_list = cash_exchange_list.union(no_cash_exchange_list)
+            # exchange_name_set = {exchange['name'].lower() for exchange in exchange_list}
+            # # print(exchange_name_set)
+            # # print(len(exchange_name_set))
 
-            data_for_selenium = get_exchange_list(exchange_name_set)
+            # data_for_selenium = get_exchange_list(exchange_name_set)
 
-            parse_reviews_with_start_service.delay(data_for_selenium)
+            # parse_reviews_with_start_service.delay(data_for_selenium)
+            parse_reviews_with_start_service.delay()
+
             
         except Exception as ex:
             print(ex)

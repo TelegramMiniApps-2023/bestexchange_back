@@ -20,6 +20,14 @@ def delete_directions_from_exchanges(sender, instance, **kwargs):
     direction_list.delete()
 
 
+#Сигнал для добавления поля en_name обменника
+#перед созданием в БД
+@receiver(pre_save, sender=Exchange)
+def add_en_name_for_exchange(sender, instance, **kwargs):
+    if instance.en_name is None:
+        instance.en_name = instance.name
+
+
 #Сигнал для создания периодических задач
 #при создании обменника в БД
 @receiver(post_save, sender=Exchange)

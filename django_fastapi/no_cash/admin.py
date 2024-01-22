@@ -81,9 +81,8 @@ class ExchangeAdmin(BaseExchangeAdmin):
             obj.save(update_fields=update_fields)
         else:
             print('NOT CHANGE!!!!')
-            # return super().save_model(request, obj, form, change)
             super().save_model(request, obj, form, change)
-            parse_reviews_for_exchange.delay(obj.name, 'no_cash')
+            parse_reviews_for_exchange.delay(obj.en_name, 'no_cash')
 
 
 

@@ -4,6 +4,7 @@ from fastapi import APIRouter, Depends, Request
 from general_models.schemas import ValuteModel, SpecialDirectionModel
 from general_models.utils.http_exc import http_exception_json
 from general_models.utils.endpoints import (get_exchange_direction_list,
+                                            new_get_exchange_direction_list,
                                             get_valute_json,
                                             new_get_valute_json)
 
@@ -138,7 +139,8 @@ def no_cash_exchange_directions(request: Request,
                                 .filter(valute_from=valute_from,
                                         valute_to=valute_to,
                                         is_active=True,
-                                        exchange__is_active=True).all()
+                                        exchange__is_active=True)\
+                                .order_by('-out_count').all()
     
     if not queries:
         http_exception_json(status_code=404, param=request.url)
@@ -146,3 +148,29 @@ def no_cash_exchange_directions(request: Request,
     return get_exchange_direction_list(queries,
                                        valute_from,
                                        valute_to)
+
+
+###
+def new_no_cash_exchange_directions(request: Request,
+                                    params: dict):
+    params.pop('city')
+    for param in params:
+        if not params[param]:
+            http_exception_json(status_code=400, param=param)
+    
+    valute_from, valute_to = (params[key] for key in params)
+
+    queries = ExchangeDirection.objects\
+                                .select_related('exchange')\
+                                .filter(valute_from=valute_from,
+                                        valute_to=valute_to,
+                                        is_active=True,
+                                        exchange__is_active=True)\
+                                .order_by('-out_count').all()
+    
+    if not queries:
+        http_exception_json(status_code=404, param=request.url)
+    
+    return new_get_exchange_direction_list(queries,
+                                           valute_from,
+                                           valute_to)

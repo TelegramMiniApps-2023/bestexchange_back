@@ -25,7 +25,7 @@ admin.site.unregister(ClockedSchedule)
 admin.site.unregister(CrontabSchedule)
 
 #DONT SHOW USER AND GROUP IN ADMIN PANEL
-admin.site.unregister(User)
+# admin.site.unregister(User)
 admin.site.unregister(Group)
 
 
@@ -67,6 +67,7 @@ class BaseCommentStacked(admin.StackedInline):
     extra = 0
     readonly_fields = ('moderation', )
     ordering = ('-time_create', 'status')
+    classes = ['collapse']
 
     def get_queryset(self, request):
         return super().get_queryset(request)\
@@ -95,6 +96,7 @@ class BaseReviewStacked(admin.StackedInline):
     extra = 0
     readonly_fields = ('moderation', )
     show_change_link = True
+    classes = ['collapse']
 
 
 #Базовое отображение готовых направлений в админ панели
@@ -114,6 +116,7 @@ class BaseExchangeDirectionAdmin(admin.ModelAdmin):
 
 #Базовое отображение готовых направлений на странице связанного обменника
 class BaseExchangeDirectionStacked(admin.StackedInline):
+    classes = ['collapse']
     
     def has_change_permission(self, request: HttpRequest, obj: Any | None = ...) -> bool:
         return False
@@ -130,7 +133,7 @@ class BaseExchangeAdmin(ReviewAdminMixin, admin.ModelAdmin):
         (
             None,
             {
-                "fields": ["name", "xml_url", "partner_link", "is_active", ("period_for_create", "period_for_update", "period_for_parse_black_list")],
+                "fields": [("name", "en_name"), "xml_url", "partner_link", "is_active", ("period_for_create", "period_for_update", "period_for_parse_black_list")],
             },
         ),
         (

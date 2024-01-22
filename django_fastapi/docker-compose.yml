@@ -26,8 +26,6 @@ services:
     env_file:
       - ./.env
     container_name: django_fastapi
-    # ports:
-    #   - '8000:8000'
     depends_on:
       - psql_db
       - rabbitmq3
@@ -85,7 +83,6 @@ services:
     depends_on:
       - rabbitmq3
       - psql_db
-      # - django_fastapi
     logging:
       driver: "json-file"
       options:
@@ -103,7 +100,6 @@ services:
       - rabbitmq3
       - psql_db
       - celery_worker
-      # - django_fastapi
     logging:
       driver: "json-file"
       options:

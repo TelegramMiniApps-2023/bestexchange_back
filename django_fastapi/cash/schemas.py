@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 
-from general_models.schemas import SpecialDirectionModel
+from general_models.schemas import SpecialDirectionModel, SpecialDirectionMultiModel
 
 
 class MultipleName(BaseModel):
@@ -93,5 +93,10 @@ class RuEnCountryModel(BaseModel):
     
 
 class SpecialCashDirectionModel(SpecialDirectionModel):
+    params: str
+    fromfee: float | None
+
+
+class SpecialCashDirectionMultiModel(SpecialDirectionMultiModel):
     params: str
     fromfee: float | None

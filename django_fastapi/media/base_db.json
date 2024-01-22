@@ -165,7 +165,7 @@
         "fields": {
             "name": "WebMoney",
             "code_name": "WMZ",
-            "type_valute": "Электронные деньги",
+            "type_valute": "Эл. деньги",
             "icon_url": "./icons/valute/btc.svg"
                 }
     },
@@ -175,7 +175,7 @@
         "fields": {
             "name": "Perfect Money USD",
             "code_name": "PMUSD",
-            "type_valute": "Электронные деньги",
+            "type_valute": "Эл. деньги",
             "icon_url": "./icons/valute/btc.svg"
                 }
     },
@@ -186,7 +186,7 @@
             "name": "ЮMoney RUB",
             "en_name": "YooMoney RUB",
             "code_name": "YAMRUB",
-            "type_valute": "Электронные деньги",
+            "type_valute": "Эл. деньги",
             "icon_url": "./icons/valute/yam.svg"
                 }
     },
@@ -196,7 +196,7 @@
         "fields": {
             "name": "QIWI RUB",
             "code_name": "QWRUB",
-            "type_valute": "Электронные деньги",
+            "type_valute": "Эл. деньги",
             "icon_url": "./icons/valute/btc.svg"
                 }
     },
@@ -206,7 +206,7 @@
         "fields": {
             "name": "PayPal USD",
             "code_name": "PPUSD",
-            "type_valute": "Электронные деньги",
+            "type_valute": "Эл. деньги",
             "icon_url": "./icons/valute/btc.svg"
                 }
     },
@@ -216,7 +216,7 @@
         "fields": {
             "name": "Advanced Cash USD",
             "code_name": "ADVCUSD",
-            "type_valute": "Электронные деньги",
+            "type_valute": "Эл. деньги",
             "icon_url": "./icons/valute/btc.svg"
                 }
     },
@@ -226,7 +226,7 @@
         "fields": {
             "name": "Advanced Cash RUB",
             "code_name": "ADVCRUB",
-            "type_valute": "Электронные деньги",
+            "type_valute": "Эл. деньги",
             "icon_url": "./icons/valute/btc.svg"
                 }
     },
@@ -236,7 +236,7 @@
         "fields": {
             "name": "Payeer USD",
             "code_name": "PRUSD",
-            "type_valute": "Электронные деньги",
+            "type_valute": "Эл. деньги",
             "icon_url": "./icons/valute/btc.svg"
                 }
     },
@@ -246,7 +246,7 @@
         "fields": {
             "name": "Payeer RUB",
             "code_name": "PRRUB",
-            "type_valute": "Электронные деньги",
+            "type_valute": "Эл. деньги",
             "icon_url": "./icons/valute/btc.svg"
                 }
     },
@@ -256,7 +256,7 @@
         "fields": {
             "name": "Skrill USD",
             "code_name": "SKLUSD",
-            "type_valute": "Электронные деньги",
+            "type_valute": "Эл. деньги",
             "icon_url": "./icons/valute/btc.svg"
                 }
     },
@@ -287,7 +287,7 @@
             "name": "Сбербанк RUB",
             "en_name": "SBERBANK RUB",
             "code_name": "SBERRUB",
-            "type_valute": "Интернет-банкинг",
+            "type_valute": "Банкинг",
             "icon_url": "./icons/valute/sber.svg"
                 }
     },
@@ -298,7 +298,7 @@
             "name": "Альфа-Банк RUB",
             "en_name": "Alfa-Bank RUB",
             "code_name": "ACRUB",
-            "type_valute": "Интернет-банкинг",
+            "type_valute": "Банкинг",
             "icon_url": "./icons/valute/btc.svg"
                 }
     },
@@ -309,7 +309,7 @@
             "name": "Тинькофф RUB",
             "en_name": "Tinkoff RUB",
             "code_name": "TCSBRUB",
-            "type_valute": "Интернет-банкинг",
+            "type_valute": "Банкинг",
             "icon_url": "./icons/valute/tcsb.svg"
                 }
     },
@@ -320,7 +320,7 @@
             "name": "ВТБ RUB",
             "en_name": "VTB RUB",
             "code_name": "TBRUB",
-            "type_valute": "Интернет-банкинг",
+            "type_valute": "Банкинг",
             "icon_url": "./icons/valute/btc.svg"
                 }
     },
@@ -331,7 +331,7 @@
             "name": "Приват 24 UAH",
             "en_name": "Privat 24 UAH",
             "code_name": "P24UAH",
-            "type_valute": "Интернет-банкинг",
+            "type_valute": "Банкинг",
             "icon_url": "./icons/valute/p24.svg"
                 }
     },
@@ -341,7 +341,7 @@
         "fields": {
             "name": "Kaspi Bank KZT",
             "code_name": "KSPBKZT",
-            "type_valute": "Интернет-банкинг",
+            "type_valute": "Банкинг",
             "icon_url": "./icons/valute/btc.svg"
                 }
     },
@@ -351,7 +351,7 @@
         "fields": {
             "name": "Visa/MasterCard USD",
             "code_name": "CARDUSD",
-            "type_valute": "Интернет-банкинг",
+            "type_valute": "Банкинг",
             "icon_url": "./icons/valute/visamc.svg"
                 }
     },
@@ -361,7 +361,7 @@
         "fields": {
             "name": "Visa/MasterCard RUB",
             "code_name": "CARDRUB",
-            "type_valute": "Интернет-банкинг",
+            "type_valute": "Банкинг",
             "icon_url": "./icons/valute/visamc.svg"
                 }
     },
@@ -371,7 +371,7 @@
         "fields": {
             "name": "Visa/MasterCard UAH",
             "code_name": "CARDUAH",
-            "type_valute": "Интернет-банкинг",
+            "type_valute": "Банкинг",
             "icon_url": "./icons/valute/visamc.svg"
                 }
     },
@@ -381,7 +381,7 @@
         "fields": {
             "name": "Visa/MasterCard BYN",
             "code_name": "CARDBYN",
-            "type_valute": "Интернет-банкинг",
+            "type_valute": "Банкинг",
             "icon_url": "./icons/valute/visamc.svg"
                 }
     },
@@ -391,7 +391,7 @@
         "fields": {
             "name": "Visa/MasterCard KZT",
             "code_name": "CARDKZT",
-            "type_valute": "Интернет-банкинг",
+            "type_valute": "Банкинг",
             "icon_url": "./icons/valute/visamc.svg"
                 }
     },
@@ -402,7 +402,7 @@
             "name": "Карта Мир RUB",
             "en_name": "MIR CARD RUB",
             "code_name": "MIRCRUB",
-            "type_valute": "Интернет-банкинг",
+            "type_valute": "Банкинг",
             "icon_url": "./icons/valute/mir.svg"
                 }
     },
@@ -412,7 +412,7 @@
         "fields": {
             "name": "WU USD",
             "code_name": "WUUSD",
-            "type_valute": "Интернет-банкинг",
+            "type_valute": "Банкинг",
             "icon_url": "./icons/valute/btc.svg"
                 }
     },
@@ -489,6 +489,7 @@
         "pk": 8,
         "fields": {
             "name": "КриптоКасса",
+            "en_name": "CryptoKacca",
             "xml_url": "https://cryptokacca.pro/request-exportxml.xml",
             "partner_link": "https://cryptokacca.pro?"
         }
@@ -507,6 +508,7 @@
         "pk": 10,
         "fields": {
             "name": "Пандпэй",
+            "en_name": "Pandpay",
             "xml_url": "https://pandpay.net/request-exportxml.xml",
             "partner_link": "https://pandpay.net?"
         }
@@ -516,6 +518,7 @@
         "pk": 11,
         "fields": {
             "name": "ГоугоуБит",
+            "en_name": "GogoBit",
             "xml_url": "https://gogobit.cc/request-exportxml.xml",
             "partner_link": "https://gogobit.cc?"
         }
@@ -543,6 +546,7 @@
         "pk": 14,
         "fields": {
             "name": "КупиБит",
+            "en_name": "KupiBit",
             "xml_url": "https://kupibit.me/request-exportxml.xml",
             "partner_link": "https://kupibit.me?"
         }
@@ -561,6 +565,7 @@
         "pk": 16,
         "fields": {
             "name": "БухтаОбмена",
+            "en_name": "BuhtaObmena",
             "xml_url": "https://buhtaobmena.me/request-exportxml.xml",
             "partner_link": "https://buhtaobmena.me?"
         }
@@ -624,6 +629,7 @@
         "pk": 23,
         "fields": {
             "name": "Обменко",
+            "en_name": "Obmenko",
             "xml_url": "https://obmenko.org/request-exportxml.xml",
             "partner_link": "https://obmenko.org?"
         }
@@ -678,6 +684,7 @@
         "pk": 29,
         "fields": {
             "name": "КриптоРай",
+            "en_name": "CryptoRai",
             "xml_url": "https://cryptor.ai/request-exportxml.xml",
             "partner_link": "https://cryptor.ai?"
         }
@@ -714,6 +721,7 @@
         "pk": 33,
         "fields": {
             "name": "Об-мен",
+            "en_name": "Ob-men",
             "xml_url": "https://ob-men.com/request-exportxml.xml",
             "partner_link": "https://ob-men.com?"
         }
@@ -723,6 +731,7 @@
         "pk": 34,
         "fields": {
             "name": "ТочкаОбмена",
+            "en_name": "TochkaObmena",
             "xml_url": "https://tochkaobmena.com/request-exportxml.xml",
             "partner_link": "https://tochkaobmena.com?"
         }
@@ -759,6 +768,7 @@
         "pk": 38,
         "fields": {
             "name": "Оборот",
+            "en_name": "Oborot",
             "xml_url": "https://oborot.net/request-exportxml.xml",
             "partner_link": "https://oborot.net?"
         }

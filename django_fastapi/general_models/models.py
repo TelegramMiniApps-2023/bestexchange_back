@@ -5,9 +5,9 @@ from .utils.model_validators import is_positive_validate
 
 en_type_valute_dict = {
     'Криптовалюта': 'Cryptocurrency',
-    'Электронные деньги': 'Digital currencies',
+    'Эл. деньги': 'Digital currencies',
     'Балансы криптобирж': 'Crypto exchange balances',
-    'Интернет-банкинг': 'Online banking',
+    'Банкинг': 'Online banking',
     'Денежные переводы': 'Money transfers',
     'Наличные': 'Cash',
 }
@@ -17,9 +17,9 @@ en_type_valute_dict = {
 class Valute(models.Model):
     type_valute_list = [
         ('Криптовалюта', 'Криптовалюта'),
-        ('Электронные деньги', 'Электронные деньги'),
+        ('Эл. деньги', 'Эл. деньги'),
         ('Балансы криптобирж', 'Балансы криптобирж'),
-        ('Интернет-банкинг', 'Интернет-банкинг'),
+        ('Банкинг', 'Банкинг'),
         ('Денежные переводы', 'Денежные переводы'),
         ('Наличные', 'Наличные'),
         ]
@@ -104,9 +104,15 @@ class BaseComment(BaseReviewComment):
 
 #Абстрактная модель обменника (для наследования)
 class BaseExchange(models.Model):
-    name = models.CharField('Название обменника',
+    name = models.CharField('Название обменника(ru)',
                             max_length=20,
                             unique=True)
+    en_name = models.CharField('Название обменника(en)',
+                               max_length=20,
+                               unique=True,
+                               blank=True,
+                               null=True,
+                               default=None)
     xml_url = models.CharField('Ссылка на XML файл',
                                max_length=50)
     partner_link = models.CharField('Партнёрская ссылка',
@@ -140,7 +146,8 @@ class BaseExchange(models.Model):
         verbose_name_plural = 'Обменники'
         ordering = ['name']
         indexes = [
-            models.Index(fields=['name'])
+            models.Index(fields=['name']),
+            models.Index(fields=['en_name']),
         ]
 
     def __str__(self):

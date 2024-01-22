@@ -7,7 +7,7 @@ from cash.models import ExchangeDirection as CashExDir, City
 from no_cash.models import ExchangeDirection as NoCashExDir
 
 from general_models.models import Valute, en_type_valute_dict
-from general_models.schemas import ValuteModel, EnValuteModel
+from general_models.schemas import ValuteModel, EnValuteModel, MultipleName
 
 
 def try_generate_icon_url(obj: City | Valute) -> str | None:
@@ -51,17 +51,43 @@ def get_exchange_direction_list(queries: List[NoCashExDir | CashExDir],
     return direction_list
 
 
+def new_get_exchange_direction_list(queries: List[NoCashExDir | CashExDir],
+                                valute_from: str,
+                                valute_to: str,
+                                city: str = None):
+    valute_from_obj = Valute.objects.get(code_name=valute_from)
+    icon_url_valute_from = try_generate_icon_url(valute_from_obj)
+
+    valute_to_obj = Valute.objects.get(code_name=valute_to)
+    icon_url_valute_to = try_generate_icon_url(valute_to_obj)
+
+    direction_list = []
+
+    partner_link_pattern = f'&cur_from={valute_from}&cur_to={valute_to}'
+    if city:
+        partner_link_pattern += f'&city={city}'
+
+    for _id, query in enumerate(queries, start=1):
+        if query.exchange.__dict__.get('partner_link'):
+            query.exchange.__dict__['partner_link'] += partner_link_pattern
+        exchange_direction = query.__dict__ | query.exchange.__dict__
+        exchange_direction['id'] = _id
+        exchange_direction['name'] = MultipleName(name=exchange_direction['name'],
+                                                  en_name=exchange_direction['en_name'])
+        exchange_direction['icon_valute_from'] = icon_url_valute_from
+        exchange_direction['icon_valute_to'] = icon_url_valute_to
+        direction_list.append(exchange_direction)
+
+    return direction_list
+
+
 def get_valute_json(queries: List[NoCashExDir | CashExDir]):
     valute_name_list = set(map(lambda query: query[0], queries))
     valutes = Valute.objects.filter(code_name__in=valute_name_list).all()
-    
-    # type_valutes = {valute.type_valute for valute in valutes}
 
     default_dict_keys = {valute.type_valute for valute in valutes}
-    #####
-    # default_dict_keys = {'ru': dict(), 'en': dict()}
+
     json_dict = defaultdict(list)
-    # json_dict = defaultdict(dict)
 
     json_dict.fromkeys(default_dict_keys)
 
@@ -69,16 +95,7 @@ def get_valute_json(queries: List[NoCashExDir | CashExDir]):
         icon_url = try_generate_icon_url(valute)
         valute.icon_url = icon_url
         valute.id = id
-        #######
-        # dict_key = f'{valute.type_valute}|{en_type_valute_dict[valute.type_valute]}'
-        # json_dict[dict_key].append(ValuteModel(**valute.__dict__))
-
         json_dict[valute.type_valute].append(ValuteModel(**valute.__dict__))
-        # json_dict['ru'][valute.type_valute] = json_dict['ru']\
-        #                                         .get(valute.type_valute, []) + [ValuteModel(**valute.__dict__)]
-        # en_type_valute = en_type_valute_dict[valute.type_valute]
-        # json_dict['en'][en_type_valute] = json_dict['en']\
-        #                                         .get(en_type_valute, []) + [ValuteModel(**valute.__dict__)]
 
     return json_dict
 
@@ -87,12 +104,7 @@ def new_get_valute_json(queries: List[NoCashExDir | CashExDir]):
     valute_name_list = set(map(lambda query: query[0], queries))
     valutes = Valute.objects.filter(code_name__in=valute_name_list).all()
     
-    type_valutes = {valute.type_valute for valute in valutes}
-
-    # default_dict_keys = {valute.type_valute for valute in valutes}
-    #####
     default_dict_keys = {'ru': dict(), 'en': dict()}
-    # json_dict = defaultdict(list)
     json_dict = defaultdict(dict)
 
     json_dict.fromkeys(default_dict_keys)
@@ -101,15 +113,12 @@ def new_get_valute_json(queries: List[NoCashExDir | CashExDir]):
         icon_url = try_generate_icon_url(valute)
         valute.icon_url = icon_url
         valute.id = id
-        #######
-        # dict_key = f'{valute.type_valute}|{en_type_valute_dict[valute.type_valute]}'
-        # json_dict[dict_key].append(ValuteModel(**valute.__dict__))
 
-        # json_dict[valute.type_valute].append(ValuteModel(**valute.__dict__))
-        json_dict['ru'][valute.type_valute] = json_dict['ru']\
-                                                .get(valute.type_valute, []) + [ValuteModel(**valute.__dict__)]
+        json_dict['ru'][valute.type_valute] = json_dict['ru'].get(valute.type_valute, [])\
+                                                 + [ValuteModel(**valute.__dict__)]
+        
         en_type_valute = en_type_valute_dict[valute.type_valute]
-        json_dict['en'][en_type_valute] = json_dict['en']\
-                                                .get(en_type_valute, []) + [EnValuteModel(**valute.__dict__)]
+        json_dict['en'][en_type_valute] = json_dict['en'].get(en_type_valute, [])\
+                                                 + [EnValuteModel(**valute.__dict__)]
 
     return json_dict

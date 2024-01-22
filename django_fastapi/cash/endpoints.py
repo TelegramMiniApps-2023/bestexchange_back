@@ -9,6 +9,7 @@ from general_models.schemas import ValuteModel
 from general_models.utils.http_exc import http_exception_json
 from general_models.utils.endpoints import (try_generate_icon_url,
                                             get_exchange_direction_list,
+                                            new_get_exchange_direction_list,
                                             get_valute_json,
                                             new_get_valute_json)
 
@@ -90,10 +91,10 @@ def get_available_coutries(request: Request):
                                     .order_by('name').all()
         for city in country.city_list:
             city.name = MultipleName(name=city.name,
-                                    en_name=city.en_name)
+                                     en_name=city.en_name)
         
         country.country_flag = try_generate_icon_url(country)
-        ######
+
         country.name = MultipleName(name=country.name,
                                    en_name=country.en_name)
 
@@ -225,7 +226,8 @@ def get_current_exchange_directions(request: Request,
                                         valute_from=valute_from,
                                         valute_to=valute_to,
                                         is_active=True,
-                                        exchange__is_active=True).all()
+                                        exchange__is_active=True)\
+                                .order_by('-out_count').all()
     
     if not queries:
         http_exception_json(status_code=404, param=request.url)
@@ -252,7 +254,8 @@ def cash_exchange_directions(request: Request,
                                         valute_from=valute_from,
                                         valute_to=valute_to,
                                         is_active=True,
-                                        exchange__is_active=True).all()
+                                        exchange__is_active=True)\
+                                .order_by('-out_count').all()
     
     if not queries:
         http_exception_json(status_code=404, param=request.url)
@@ -261,3 +264,30 @@ def cash_exchange_directions(request: Request,
                                        valute_from,
                                        valute_to,
                                        city=city)
+
+
+
+def new_cash_exchange_directions(request: Request,
+                                 params: dict):
+    for param in params:
+        if not params[param]:
+            http_exception_json(status_code=400, param=param)
+
+    city, valute_from, valute_to = (params[key] for key in params)
+
+    queries = ExchangeDirection.objects\
+                                .select_related('exchange')\
+                                .filter(city=city,
+                                        valute_from=valute_from,
+                                        valute_to=valute_to,
+                                        is_active=True,
+                                        exchange__is_active=True)\
+                                .order_by('-out_count').all()
+    
+    if not queries:
+        http_exception_json(status_code=404, param=request.url)
+
+    return new_get_exchange_direction_list(queries,
+                                           valute_from,
+                                           valute_to,
+                                           city=city)

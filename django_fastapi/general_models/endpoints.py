@@ -2,14 +2,17 @@ from typing import List
 
 from fastapi import APIRouter, Request, Depends
 
-from no_cash.endpoints import no_cash_valutes, no_cash_exchange_directions, new_no_cash_valutes
+from no_cash.endpoints import (no_cash_valutes,
+                               no_cash_exchange_directions,
+                               new_no_cash_exchange_directions,
+                               new_no_cash_valutes)
 
-from cash.endpoints import cash_valutes, cash_exchange_directions, new_cash_valutes
-from cash.schemas import SpecialCashDirectionModel
+from cash.endpoints import cash_valutes, cash_exchange_directions, new_cash_valutes, new_cash_exchange_directions
+from cash.schemas import SpecialCashDirectionModel, SpecialCashDirectionMultiModel
 
 from .utils.query_models import AvailableValutesQuery, SpecificDirectionsQuery
 from .utils.http_exc import http_exception_json
-from .schemas import ValuteModel, SpecialDirectionModel, EnValuteModel
+from .schemas import ValuteModel, SpecialDirectionModel, EnValuteModel, SpecialDirectionMultiModel
 
 
 common_router = APIRouter(tags=['Общее'])
@@ -53,5 +56,19 @@ def get_current_exchange_directions(request: Request,
         json_dict = no_cash_exchange_directions(request, params)
     else:
         json_dict = cash_exchange_directions(request, params)
+    
+    return json_dict
+
+
+@common_router.get('/directions_multi',
+                 response_model=List[SpecialCashDirectionMultiModel | SpecialDirectionMultiModel],
+                 response_model_by_alias=False)
+def get_current_exchange_directions(request: Request,
+                                    query: SpecificDirectionsQuery = Depends()):
+    params = query.params()
+    if not params['city']:
+        json_dict = new_no_cash_exchange_directions(request, params)
+    else:
+        json_dict = new_cash_exchange_directions(request, params)
     
     return json_dict

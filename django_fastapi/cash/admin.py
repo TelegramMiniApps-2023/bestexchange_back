@@ -1,4 +1,8 @@
+from typing import Any
+
 from django.contrib import admin
+from django.db.models.query import QuerySet
+from django.http.request import HttpRequest
 from django.utils.safestring import mark_safe
 
 from general_models.utils.endpoints import try_generate_icon_url
@@ -23,7 +27,13 @@ from .models import (Country,
                      Direction,
                      ExchangeDirection,
                      Review,
-                     Comment)
+                     Comment,
+                     CustomUser)
+
+
+@admin.register(CustomUser)
+class UserAdmin(admin.ModelAdmin):
+    list_display = ('user', 'exchange')
 
 
 #Отображение городов в админ панели
@@ -65,12 +75,24 @@ class CountryAdmin(admin.ModelAdmin):
 #Отображение комментариев в админ панели
 @admin.register(Comment)
 class CommentAdmin(BaseCommentAdmin):
-    pass
+    
+    def get_queryset(self, request):
+        if not request.user.is_superuser:
+                account = CustomUser.objects.get(user=request.user)
+                if not account.exchange:
+                    return super().get_queryset(request).filter(status='На ожидании')
+                return super().get_queryset(request)\
+                                .select_related('review')\
+                                .filter(review__in=account.exchange.reviews.all())
+        return super().get_queryset(request)
 
 
 #Отображение комментариев на странице связанного отзыва
 class CommentStacked(BaseCommentStacked):
     model = Comment
+
+    def get_queryset(self, request: HttpRequest) -> QuerySet[Any]:
+        return super().get_queryset(request).select_related('review')
 
 
 #Отображение отзывов в админ панели
@@ -78,21 +100,57 @@ class CommentStacked(BaseCommentStacked):
 class ReviewAdmin(BaseReviewAdmin):
     inlines = [CommentStacked]
 
+    def has_add_permission(self, request: HttpRequest) -> bool:
+        if not request.user.is_superuser:
+                return False
+        return super().has_add_permission(request)
+
+    def get_queryset(self, request):
+        if not request.user.is_superuser:
+                account = CustomUser.objects.get(user=request.user)
+                if not account.exchange:
+                    return super().get_queryset(request).filter(status='На ожидании')
+                return super().get_queryset(request)\
+                                .select_related('exchange')\
+                                .filter(exchange=account.exchange)  
+        return super().get_queryset(request)
+
 
 #Отображение отзывов на странице связанного обменника
 class ReviewStacked(BaseReviewStacked):
     model = Review
+
+    def get_queryset(self, request: HttpRequest) -> QuerySet[Any]:
+        return super().get_queryset(request).select_related('exchange')
 
 
 #Отображение готовых направлений на странице связанного обменника
 class ExchangeDirectionStacked(BaseExchangeDirectionStacked):
     model = ExchangeDirection
 
+    def get_queryset(self, request: HttpRequest) -> QuerySet[Any]:
+        return super().get_queryset(request).select_related('exchange')
+
 
 #Отображение обменников в админ панели
 @admin.register(Exchange)
 class ExchangeAdmin(BaseExchangeAdmin):
     inlines = [ExchangeDirectionStacked, ReviewStacked]
+
+    def get_queryset(self, request: HttpRequest) -> QuerySet[Any]:
+        if not request.user.is_superuser:
+                account = CustomUser.objects.get(user=request.user)
+                if not account.exchange:
+                    return super().get_queryset(request).filter(name='22')
+                return super().get_queryset(request).filter(name=account.exchange.name)
+        return super().get_queryset(request)
+    
+    def has_add_permission(self, request: HttpRequest) -> bool:
+        if not request.user.is_superuser:
+            account = CustomUser.objects.get(user=request.user)
+            if account.exchange:
+                return False
+        return super().has_add_permission(request)
 
     def save_model(self, request, obj, form, change):
         update_fields = []
@@ -121,9 +179,8 @@ class ExchangeAdmin(BaseExchangeAdmin):
             obj.save(update_fields=update_fields)
         else:
             print('NOT CHANGE!!!!')
-            # return super().save_model(request, obj, form, change)
             super().save_model(request, obj, form, change)
-            parse_reviews_for_exchange.delay(obj.name, 'cash')
+            parse_reviews_for_exchange.delay(obj.en_name, 'cash')
     
 
 #Отображение направлений в админ панели
@@ -139,4 +196,11 @@ class ExchangeDirectionAdmin(BaseExchangeDirectionAdmin):
         return f'{obj.exchange} ({obj.city}: {obj.valute_from} -> {obj.valute_to})'
     
     def get_queryset(self, request):
+        if not request.user.is_superuser:
+                account = CustomUser.objects.get(user=request.user)
+                if not account.exchange:
+                    return super().get_queryset(request).filter(params='22')
+                return super().get_queryset(request)\
+                                .select_related('exchange')\
+                                .filter(exchange=account.exchange)
         return super().get_queryset(request).select_related('exchange')
