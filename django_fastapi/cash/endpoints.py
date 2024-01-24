@@ -282,7 +282,7 @@ def new_cash_exchange_directions(request: Request,
                                         valute_to=valute_to,
                                         is_active=True,
                                         exchange__is_active=True)\
-                                .order_by('-out_count').all()
+                                .order_by('-out_count', 'in_count').all()
     
     if not queries:
         http_exception_json(status_code=404, param=request.url)

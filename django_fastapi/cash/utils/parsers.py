@@ -2,6 +2,7 @@ from xml.etree import ElementTree as ET
 from xml.etree.ElementTree import Element
 
 from general_models.utils.exc import NoFoundXmlElement
+from general_models.utils.tasks import make_valid_values_for_dict
 
 
 def cash_parse_xml(dict_for_parse: dict,
@@ -70,5 +71,6 @@ def generate_exchange_direction_dict(element: Element,
         'fromfee': fromfee,
         'params': params,
     }
+    make_valid_values_for_dict(dict_for_exchange_direction)
 
     return dict_for_exchange_direction

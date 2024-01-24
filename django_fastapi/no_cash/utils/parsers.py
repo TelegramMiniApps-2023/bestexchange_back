@@ -1,6 +1,7 @@
 from xml.etree import ElementTree as ET
 
 from general_models.utils.exc import NoFoundXmlElement
+from general_models.utils.tasks import make_valid_values_for_dict
 
 
 def no_cash_parse_xml(dict_for_parser: dict,
@@ -23,6 +24,7 @@ def no_cash_parse_xml(dict_for_parser: dict,
                 'min_amount': element.find('minamount').text,
                 'max_amount': element.find('maxamount').text
                 }
+            make_valid_values_for_dict(dict_for_exchange_direction)
             return dict_for_exchange_direction
         else:
             raise NoFoundXmlElement(f'Xml элемент не найден, {xml_url}')

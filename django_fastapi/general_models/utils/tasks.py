@@ -16,3 +16,15 @@ def get_exchange_list(marker: str = None):
             exchange_list = cash_exchange_list.union(no_cash_exchange_list)
 
     return exchange_list
+
+
+def make_valid_values_for_dict(dict_for_exchange_direction: dict):
+    in_count = float(dict_for_exchange_direction['in_count'])
+    out_count = float(dict_for_exchange_direction['out_count'])
+
+    if out_count < 1:
+        k = 1 / out_count
+        out_count = 1
+        in_count *= k
+        dict_for_exchange_direction['in_count'] = in_count
+        dict_for_exchange_direction['out_count'] = out_count
