@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from general_models.models import (BaseExchangeDirection,
                                    Valute,
                                    BaseExchange,
+                                   ParseExchange,
                                    BaseDirection,
                                    BaseReview,
                                    BaseComment)
@@ -64,7 +65,7 @@ class City(models.Model):
 
 
 #Модель обменника    
-class Exchange(BaseExchange):
+class Exchange(ParseExchange):
     direction_black_list = models.ManyToManyField('BlackListElement',
                                                   verbose_name='Чёрный список')
     

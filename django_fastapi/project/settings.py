@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     "general_models",
     "no_cash",
     "cash",
+    # "parnters",
 ]
 
 MIDDLEWARE = [
@@ -125,7 +126,7 @@ SITE_DOMAIN = 'wttonline.ru'
 # ALLOWED_HOSTS = [SITE_DOMAIN]
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = [f'https://{SITE_DOMAIN}']
+CSRF_TRUSTED_ORIGINS = [f'http://{SITE_DOMAIN}']
 
 CELERY_BROKER_URL = 'amqp://guest:guest@rabbitmq3:5672/'
 

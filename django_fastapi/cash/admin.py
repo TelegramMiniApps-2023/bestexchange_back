@@ -31,9 +31,9 @@ from .models import (Country,
                      CustomUser)
 
 
-@admin.register(CustomUser)
-class UserAdmin(admin.ModelAdmin):
-    list_display = ('user', 'exchange')
+# @admin.register(CustomUser)
+# class UserAdmin(admin.ModelAdmin):
+#     list_display = ('user', 'exchange')
 
 
 #Отображение городов в админ панели

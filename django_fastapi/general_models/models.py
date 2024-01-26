@@ -113,14 +113,50 @@ class BaseExchange(models.Model):
                                blank=True,
                                null=True,
                                default=None)
-    xml_url = models.CharField('Ссылка на XML файл',
-                               max_length=50)
+    # xml_url = models.CharField('Ссылка на XML файл',
+    #                            max_length=50)
     partner_link = models.CharField('Партнёрская ссылка',
                                     max_length=50,
                                     blank=True,
                                     null=True,
                                     default=None)
     is_active = models.BooleanField('Статус обменника', default=True)
+    # period_for_create = models.IntegerField('Частота добавления в секундах',
+    #                                         blank=True,
+    #                                         null=True,
+    #                                         default=90,
+    #                                         help_text='Значение - положительное целое число.При установлении в 0, останавливает задачу периодических добавлений',
+    #                                         validators=[is_positive_validate])
+    # period_for_update = models.IntegerField('Частота обновлений в секундах',
+    #                                         blank=True,
+    #                                         null=True,
+    #                                         default=60,
+    #                                         help_text='Значение - положительное целое число.При установлении в 0, останавливает задачу периодических обновлений',
+    #                                         validators=[is_positive_validate])
+    # period_for_parse_black_list = models.IntegerField('Частота парсинга чёрного списка в часах',
+    #                                                   blank=True,
+    #                                                   null=True,
+    #                                                   default=24,
+    #                                                   help_text='Рекомендуемое значение - 24 часа.\nЗначение - положительное целое число.При установлении в 0, останавливает задачу периодического парсинга чёрного списка',
+    #                                                   validators=[is_positive_validate])
+
+    class Meta:
+        abstract = True
+        # verbose_name = 'Обменник'
+        # verbose_name_plural = 'Обменники'
+        # ordering = ['name']
+        # indexes = [
+        #     models.Index(fields=['name']),
+        #     models.Index(fields=['en_name']),
+        # ]
+
+    def __str__(self):
+        return self.name
+    
+
+class ParseExchange(BaseExchange):
+    xml_url = models.CharField('Ссылка на XML файл',
+                               max_length=50)
     period_for_create = models.IntegerField('Частота добавления в секундах',
                                             blank=True,
                                             null=True,
@@ -139,7 +175,7 @@ class BaseExchange(models.Model):
                                                       default=24,
                                                       help_text='Рекомендуемое значение - 24 часа.\nЗначение - положительное целое число.При установлении в 0, останавливает задачу периодического парсинга чёрного списка',
                                                       validators=[is_positive_validate])
-
+    
     class Meta:
         abstract = True
         verbose_name = 'Обменник'
@@ -149,10 +185,6 @@ class BaseExchange(models.Model):
             models.Index(fields=['name']),
             models.Index(fields=['en_name']),
         ]
-
-    def __str__(self):
-        return self.name
-    
 
 #Абстрактная модель направления (для наследования)
 class BaseDirection(models.Model):
