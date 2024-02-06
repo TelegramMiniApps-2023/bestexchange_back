@@ -45,6 +45,8 @@ services:
                     python manage.py loaddata media/new_country.json &&
                     python manage.py create_periodic_task_for_delete_reviews &&
                     python manage.py create_cities &&
+                    python manage.py create_moderator_group &&
+                    python manage.py periodic_task_for_parse_cash_courses &&
                     python manage.py createsuperuser --no-input &&
                     python manage.py parse_reviews_selenium &&
                     uvicorn project.asgi:app --host 0.0.0.0"

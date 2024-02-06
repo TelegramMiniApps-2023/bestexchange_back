@@ -1,68 +1,155 @@
 from typing import Any
+
 from django.contrib import admin
 from django.db.models.query import QuerySet
 from django.http import HttpRequest
-from cash.models import CustomUser
-
-# from django_dynamic_admin_forms.admin import DynamicModelAdminMixin
 
 from general_models.admin import BaseCommentAdmin, BaseCommentStacked, BaseReviewAdmin, BaseReviewStacked
 
-from .models import Exchange, Direction, Review, Comment
+from parnters.utils.endpoints import get_in_count, get_out_count
+
+from .models import Exchange, Direction, Review, Comment, CustomUser
+
+
+@admin.register(CustomUser)
+class UserAdmin(admin.ModelAdmin):
+    list_display = ('user', 'exchange')
+
+    def get_queryset(self, request: HttpRequest) -> QuerySet[Any]:
+         return super().get_queryset(request).select_related('exchange', 'user')
+
 
 class DirectionStacked(admin.StackedInline):
     model = Direction
     extra = 0
-    fields = ('direction', 'cities', 'course', 'percent', 'fix_amount')
-    # dynamic_fields = ('fix_amount',)
-    readonly_fields = ('course', )
-    # ordering = ('-is_parse', 'name')
+    classes = ['collapse']
+    
+    fields = ('get_direction_name', 'cities', 'percent', 'fix_amount', 'in_count_field', 'out_count_field')
+    readonly_fields = ('get_direction_name', 'percent', 'fix_amount', 'in_count_field', 'out_count_field')
     show_change_link = True
     list_select_related = ['cities', 'direction']
     filter_horizontal = ('cities', )
-    # prepopulated_fields = {'fix_amount' : ('percent',)}
 
-    # def get_dinamic_percent_field(self, data):
-    #      print('hi')
-    #      return data.get('fix_amount')
+    def get_queryset(self, request: HttpRequest) -> QuerySet[Any]:
+         return super().get_queryset(request).select_related('exchange', 'direction')
 
-    def course(self, obj=None):
-        return 94.35
+    def has_add_permission(self, request, obj=None):
+        return False
 
-    # def final_amount(self, obj):
-    #     return self.course(obj) + obj.percent * self.course(obj)
+    def get_direction_name(self, obj):
+         return obj.direction.display_name
+    
+    get_direction_name.short_description = 'Название направления'
+
+    def in_count_field(self, obj):
+        # actual_course = obj.direction.actual_course
+        # if actual_course < 1:
+        #     a_c = 1 / actual_course
+        #     res = a_c + (a_c * obj.percent / 100) + obj.fix_amount
+        # else:
+        #     res = 1
+        # return res
+        return get_in_count(obj)
+    
+    in_count_field.short_description = 'Сколько отдаём'
+
+    def out_count_field(self, obj):
+        # actual_course = obj.direction.actual_course
+        # if actual_course < 1:
+        #     res = 1
+        # else:
+        #     res = actual_course + (actual_course * obj.percent / 100) + obj.fix_amount
+        # return res
+        return get_out_count(obj)
+    
+    out_count_field.short_description = 'Сколько получаем'
+
 
 @admin.register(Direction)
 class DirectionAdmin(admin.ModelAdmin):
     list_display = ('exchange', 'direction')
     filter_horizontal = ('cities', )
-    fields = ('exchange', 'direction', 'cities', 'course', 'percent', 'fix_amount')
-    readonly_fields = ('course', )
-    # dynamic_fields = ('exchange',)
+    fields = (
+        'direction',
+        'cities',
+        'course',
+        # 'final_amount',
+        'percent',
+        'fix_amount',
+        'in_count_field',
+        'out_count_field',
+        )
+    # readonly_fields = ('course', 'in_count_field', 'out_count_field')
+    readonly_fields = ('course', 'in_count_field', 'out_count_field')
 
-    def course(self, obj=None):
-        return None
-    
     class Media:
          js = ('parnters/js/test.js', )
-    
-    # def get_dynamic_exchange_field(self, data):
-    #      print('hi')
-    #     #  data['22'] = 22
-    #      queryset = Exchange.objects.all()
-    #      if self.course() == 94.35:     
-    #         queryset = Exchange.objects.filter(name__icontains='test')
-    #      value = data.get('exchange')
-    #      hidden = False
-    #      return queryset, value, hidden
 
+    def course(self, obj=None):
+        return 0
+    
+    course.short_description = 'Курс обмена'
+
+    def in_count_field(self, obj=None):
+        return 0
+    
+    in_count_field.short_description = 'Сколько отдаём'
+    
+    def out_count_field(self, obj=None):
+        return 0
+    
+    out_count_field.short_description = 'Сколько получаем'
+
+    def has_add_permission(self, request: HttpRequest) -> bool:
+        if not request.user.is_superuser:
+            account = CustomUser.objects\
+                                .select_related('exchange', 'user')\
+                                .filter(user=request.user).get()
+            #   account = CustomUser.objects.get(user=request.user)
+            if not account.exchange:
+                return False
+            return super().has_add_permission(request)
+        return False
+
+    def get_queryset(self, request: HttpRequest) -> QuerySet[Any]:
+         if not request.user.is_superuser:
+            account = CustomUser.objects\
+                                .select_related('exchange', 'user')\
+                                .filter(user=request.user).get()
+            # account = CustomUser.objects.get(user=request.user)
+            return super().get_queryset(request)\
+                            .select_related('exchange', 'direction', 'exchange__account__user')\
+                            .filter(exchange=account.exchange)
+         return super().get_queryset(request).select_related('exchange__account__user')
+
+    def save_model(self, request: Any, obj: Any, form: Any, change: Any) -> None:
+        if not request.user.is_superuser:
+            account = CustomUser.objects.get(user=request.user)
+            # partner_exchange = account.exchange
+            obj.exchange = account.exchange
+            # selected_exchange = form.cleaned_data['exchange']
+            # print(selected_exchange)
+            # if not partner_exchange == selected_exchange:
+                # pass
+            # else:
+            #     obj.exchange = account.exchange
+
+                # raise ValidationError('qwerty')
+            # obj.full_clean()
+            super().save_model(request, obj, form, change)
+                # obj.save()
+        else:
+            return super().save_model(request, obj, form, change)
 
 @admin.register(Comment)
 class CommentAdmin(BaseCommentAdmin):
     
     def get_queryset(self, request):
         if not request.user.is_superuser:
-                account = CustomUser.objects.get(user=request.user)
+                # account = CustomUser.objects.get(user=request.user)
+                account = CustomUser.objects\
+                                    .select_related('exchange', 'user')\
+                                    .filter(user=request.user).get()
                 if not account.exchange:
                     return super().get_queryset(request).filter(status='На ожидании')
                 return super().get_queryset(request)\
@@ -91,7 +178,10 @@ class ReviewAdmin(BaseReviewAdmin):
 
     def get_queryset(self, request):
         if not request.user.is_superuser:
-                account = CustomUser.objects.get(user=request.user)
+                account = CustomUser.objects\
+                                    .select_related('exchange', 'user')\
+                                    .filter(user=request.user).get()
+                # account = CustomUser.objects.get(user=request.user)
                 if not account.exchange:
                     return super().get_queryset(request).filter(status='На ожидании')
                 return super().get_queryset(request)\
@@ -105,12 +195,49 @@ class ReviewStacked(BaseReviewStacked):
     model = Review
 
     def get_queryset(self, request: HttpRequest) -> QuerySet[Any]:
-        return super().get_queryset(request).select_related('exchange')
+        return super().get_queryset(request).select_related('exchange', 'exchange__account')
 
 
 @admin.register(Exchange)
 class ExchangeAdmin(admin.ModelAdmin):
-    list_display = ('name', 'en_name')
+    list_display = ('name', 'en_name', 'account')
     readonly_fields = ('is_active', )
     filter_horizontal = ()
     inlines = [DirectionStacked, ReviewStacked]
+
+    def get_queryset(self, request: HttpRequest) -> QuerySet[Any]:
+        if not request.user.is_superuser:
+                # account = CustomUser.objects.get(user=request.user)
+                account = CustomUser.objects\
+                                    .select_related('exchange', 'user')\
+                                    .filter(user=request.user).get()
+                exchange = account.exchange
+                if not exchange:
+                    # вернуть пустой queryset
+                    return super().get_queryset(request).filter(name='Не выбрано!!!')
+                return super().get_queryset(request)\
+                                .select_related('account', 'account__user', 'account__exchange')\
+                                .filter(name=exchange.name)
+        return super().get_queryset(request).select_related('account', 'account__user')
+    
+    def has_add_permission(self, request: HttpRequest) -> bool:
+        if not request.user.is_superuser:
+            account = CustomUser.objects\
+                                .select_related('exchange', 'user')\
+                                .filter(user=request.user).get()
+            # account = CustomUser.objects.get(user=request.user)
+            if account.exchange:
+                return False
+        return super().has_add_permission(request)
+    
+    def save_model(self, request: Any, obj: Any, form: Any, change: Any) -> None:
+        if not request.user.is_superuser and not change:
+            account = CustomUser.objects\
+                    .select_related('exchange', 'user')\
+                    .filter(user=request.user).get()
+            # account = CustomUser.objects.get(user=request.user)
+            account.exchange = obj
+            super().save_model(request, obj, form, change)
+            account.save()
+        else:
+            return super().save_model(request, obj, form, change)

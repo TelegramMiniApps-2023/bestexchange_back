@@ -26,7 +26,7 @@ admin.site.unregister(CrontabSchedule)
 
 #DONT SHOW USER AND GROUP IN ADMIN PANEL
 # admin.site.unregister(User)
-admin.site.unregister(Group)
+# admin.site.unregister(Group)
 
 
 #Отображение валют в админ панели

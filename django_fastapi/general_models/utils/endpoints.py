@@ -10,6 +10,36 @@ from general_models.models import Valute, en_type_valute_dict
 from general_models.schemas import ValuteModel, EnValuteModel, MultipleName
 
 
+#############
+round_valute_dict = {
+    'BTC': 5,
+    'ETH': 3,
+    'Криптовалюта': 2,
+}
+
+
+def round_valute_values(exchange_direction_dict: dict):
+    try:
+        valute_from = exchange_direction_dict['valute_from']
+        type_valute_from = exchange_direction_dict['type_valute_from']
+        min_amount = float(exchange_direction_dict['min_amount'].split()[0])
+        max_amount = float(exchange_direction_dict['max_amount'].split()[0])
+
+        if valute_from in round_valute_dict:
+            min_amount = round(min_amount, round_valute_dict[valute_from])
+            max_amount = round(max_amount, round_valute_dict[valute_from])
+        elif type_valute_from in round_valute_dict:
+            min_amount = round(min_amount, round_valute_dict[type_valute_from])
+            max_amount = round(max_amount, round_valute_dict[type_valute_from])
+        else:
+            min_amount = int(min_amount)
+            max_amount = int(max_amount)
+        
+        exchange_direction_dict['min_amount'] = f'{min_amount} {valute_from}'
+        exchange_direction_dict['max_amount'] = f'{max_amount} {valute_from}'
+    except Exception:
+        pass
+
 def try_generate_icon_url(obj: City | Valute) -> str | None:
     '''
     Генерирует путь до иконки переданного объекта.
@@ -29,9 +59,13 @@ def get_exchange_direction_list(queries: List[NoCashExDir | CashExDir],
                                 city: str = None):
     valute_from_obj = Valute.objects.get(code_name=valute_from)
     icon_url_valute_from = try_generate_icon_url(valute_from_obj)
+    #
+    type_valute_from = valute_from_obj.type_valute
 
     valute_to_obj = Valute.objects.get(code_name=valute_to)
     icon_url_valute_to = try_generate_icon_url(valute_to_obj)
+    #
+    type_valute_to = valute_to_obj.type_valute
 
     direction_list = []
 
@@ -45,7 +79,13 @@ def get_exchange_direction_list(queries: List[NoCashExDir | CashExDir],
         exchange_direction = query.__dict__ | query.exchange.__dict__
         exchange_direction['id'] = _id
         exchange_direction['icon_valute_from'] = icon_url_valute_from
+        #
+        exchange_direction['type_valute_from'] = type_valute_from
+
         exchange_direction['icon_valute_to'] = icon_url_valute_to
+        #
+        exchange_direction['type_valute_to'] = type_valute_to
+
         direction_list.append(exchange_direction)
 
     return direction_list
@@ -57,9 +97,11 @@ def new_get_exchange_direction_list(queries: List[NoCashExDir | CashExDir],
                                 city: str = None):
     valute_from_obj = Valute.objects.get(code_name=valute_from)
     icon_url_valute_from = try_generate_icon_url(valute_from_obj)
+    type_valute_from = valute_from_obj.type_valute
 
     valute_to_obj = Valute.objects.get(code_name=valute_to)
     icon_url_valute_to = try_generate_icon_url(valute_to_obj)
+    type_valute_to = valute_to_obj.type_valute
 
     direction_list = []
 
@@ -68,14 +110,19 @@ def new_get_exchange_direction_list(queries: List[NoCashExDir | CashExDir],
         partner_link_pattern += f'&city={city}'
 
     for _id, query in enumerate(queries, start=1):
-        if query.exchange.__dict__.get('partner_link'):
+        # if query.exchange.__dict__.get('partner_link'):
+        if query.exchange.__dict__.get('partner_link') and not query.__dict__.get('direction_id'):
             query.exchange.__dict__['partner_link'] += partner_link_pattern
         exchange_direction = query.__dict__ | query.exchange.__dict__
         exchange_direction['id'] = _id
         exchange_direction['name'] = MultipleName(name=exchange_direction['name'],
                                                   en_name=exchange_direction['en_name'])
         exchange_direction['icon_valute_from'] = icon_url_valute_from
+        exchange_direction['type_valute_from'] = type_valute_from
+
         exchange_direction['icon_valute_to'] = icon_url_valute_to
+        exchange_direction['type_valute_to'] = type_valute_to
+        round_valute_values(exchange_direction)
         direction_list.append(exchange_direction)
 
     return direction_list

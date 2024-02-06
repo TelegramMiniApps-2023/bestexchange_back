@@ -27,13 +27,7 @@ from .models import (Country,
                      Direction,
                      ExchangeDirection,
                      Review,
-                     Comment,
-                     CustomUser)
-
-
-# @admin.register(CustomUser)
-# class UserAdmin(admin.ModelAdmin):
-#     list_display = ('user', 'exchange')
+                     Comment)
 
 
 #Отображение городов в админ панели
@@ -77,13 +71,6 @@ class CountryAdmin(admin.ModelAdmin):
 class CommentAdmin(BaseCommentAdmin):
     
     def get_queryset(self, request):
-        if not request.user.is_superuser:
-                account = CustomUser.objects.get(user=request.user)
-                if not account.exchange:
-                    return super().get_queryset(request).filter(status='На ожидании')
-                return super().get_queryset(request)\
-                                .select_related('review')\
-                                .filter(review__in=account.exchange.reviews.all())
         return super().get_queryset(request)
 
 
@@ -105,14 +92,7 @@ class ReviewAdmin(BaseReviewAdmin):
                 return False
         return super().has_add_permission(request)
 
-    def get_queryset(self, request):
-        if not request.user.is_superuser:
-                account = CustomUser.objects.get(user=request.user)
-                if not account.exchange:
-                    return super().get_queryset(request).filter(status='На ожидании')
-                return super().get_queryset(request)\
-                                .select_related('exchange')\
-                                .filter(exchange=account.exchange)  
+    def get_queryset(self, request): 
         return super().get_queryset(request)
 
 
@@ -138,18 +118,9 @@ class ExchangeAdmin(BaseExchangeAdmin):
     inlines = [ExchangeDirectionStacked, ReviewStacked]
 
     def get_queryset(self, request: HttpRequest) -> QuerySet[Any]:
-        if not request.user.is_superuser:
-                account = CustomUser.objects.get(user=request.user)
-                if not account.exchange:
-                    return super().get_queryset(request).filter(name='22')
-                return super().get_queryset(request).filter(name=account.exchange.name)
         return super().get_queryset(request)
     
     def has_add_permission(self, request: HttpRequest) -> bool:
-        if not request.user.is_superuser:
-            account = CustomUser.objects.get(user=request.user)
-            if account.exchange:
-                return False
         return super().has_add_permission(request)
 
     def save_model(self, request, obj, form, change):
@@ -186,7 +157,10 @@ class ExchangeAdmin(BaseExchangeAdmin):
 #Отображение направлений в админ панели
 @admin.register(Direction)
 class DirectionAdmin(BaseDirectionAdmin):
-    pass
+    readonly_fields = ('display_name', 'actual_course')
+
+    def get_queryset(self, request: HttpRequest) -> QuerySet[Any]:
+        return super().get_queryset(request).select_related('valute_from', 'valute_to')
     
 
 #Отображение готовых направлений в админ панели
@@ -196,11 +170,4 @@ class ExchangeDirectionAdmin(BaseExchangeDirectionAdmin):
         return f'{obj.exchange} ({obj.city}: {obj.valute_from} -> {obj.valute_to})'
     
     def get_queryset(self, request):
-        if not request.user.is_superuser:
-                account = CustomUser.objects.get(user=request.user)
-                if not account.exchange:
-                    return super().get_queryset(request).filter(params='22')
-                return super().get_queryset(request)\
-                                .select_related('exchange')\
-                                .filter(exchange=account.exchange)
         return super().get_queryset(request).select_related('exchange')

@@ -11,6 +11,12 @@ from .periodic_tasks import (manage_periodic_task_for_create,
                              manage_periodic_task_for_parse_black_list)
 
 
+######
+@receiver(pre_save, sender=Direction)
+def add_display_name_for_direction(sender, instance, **kwargs):
+    instance.display_name = instance.valute_from.code_name + ' -> ' + instance.valute_to.code_name
+
+
 #Сигнал для удаления всех связанных готовых направлений
 #при удалении направления из БД
 @receiver(post_delete, sender=Direction)

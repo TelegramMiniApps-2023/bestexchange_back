@@ -6,7 +6,7 @@
             "name": "Bitcoin",
             "code_name": "BTC",
             "type_valute": "Криптовалюта",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bitcoin.svg"
                 }
     },
     {
@@ -16,7 +16,7 @@
             "name": "Bitcoin Cash",
             "code_name": "BCH",
             "type_valute": "Криптовалюта",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bitcoin.svg"
                 }
     },
     {
@@ -26,7 +26,7 @@
             "name": "Ethereum",
             "code_name": "ETH",
             "type_valute": "Криптовалюта",
-            "icon_url": "./icons/valute/eth.svg"
+            "icon_url": "./icons/valute/etherium.svg"
                 }
     },
     {
@@ -36,7 +36,7 @@
             "name": "Ethereum Classic",
             "code_name": "ETC",
             "type_valute": "Криптовалюта",
-            "icon_url": "./icons/valute/eth.svg"
+            "icon_url": "./icons/valute/etherium.svg"
                 }
     },
     {
@@ -46,7 +46,7 @@
             "name": "Litecoin",
             "code_name": "LTC",
             "type_valute": "Криптовалюта",
-            "icon_url": "./icons/valute/ltc.svg"
+            "icon_url": "./icons/valute/litecoin.svg"
                 }
     },
     {
@@ -56,7 +56,7 @@
             "name": "Ripple",
             "code_name": "XRP",
             "type_valute": "Криптовалюта",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bitcoin.svg"
                 }
     },
     {
@@ -66,7 +66,7 @@
             "name": "Monero",
             "code_name": "XMR",
             "type_valute": "Криптовалюта",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bitcoin.svg"
                 }
     },
     {
@@ -76,7 +76,7 @@
             "name": "Dogecoin",
             "code_name": "DOGE",
             "type_valute": "Криптовалюта",
-            "icon_url": "./icons/valute/doge.svg"
+            "icon_url": "./icons/valute/dogecoin.svg"
                 }
     },
     {
@@ -86,7 +86,7 @@
             "name": "Dash",
             "code_name": "DASH",
             "type_valute": "Криптовалюта",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bitcoin.svg"
                 }
     },
     {
@@ -96,7 +96,7 @@
             "name": "Tether ERC20 USDT",
             "code_name": "USDTERC20",
             "type_valute": "Криптовалюта",
-            "icon_url": "./icons/valute/trc.svg"
+            "icon_url": "./icons/valute/tether.svg"
                 }
     },
     {
@@ -106,7 +106,7 @@
             "name": "Tether TRC20 USDT",
             "code_name": "USDTTRC20",
             "type_valute": "Криптовалюта",
-            "icon_url": "./icons/valute/trc.svg"
+            "icon_url": "./icons/valute/tether.svg"
                 }
     },
     {
@@ -116,7 +116,7 @@
             "name": "Tether BEP20 USDT",
             "code_name": "USDTBEP20",
             "type_valute": "Криптовалюта",
-            "icon_url": "./icons/valute/trc.svg"
+            "icon_url": "./icons/valute/tether.svg"
                 }
     },
     {
@@ -126,7 +126,7 @@
             "name": "TRON",
             "code_name": "TRX",
             "type_valute": "Криптовалюта",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bitcoin.svg"
                 }
     },
     {
@@ -136,7 +136,7 @@
             "name": "BinanceCoin BEP20 BNB",
             "code_name": "BNBBEP20",
             "type_valute": "Криптовалюта",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bitcoin.svg"
                 }
     },
     {
@@ -146,7 +146,7 @@
             "name": "Solana",
             "code_name": "SOL",
             "type_valute": "Криптовалюта",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bitcoin.svg"
                 }
     },
     {
@@ -156,7 +156,7 @@
             "name": "Toncoin",
             "code_name": "TON",
             "type_valute": "Криптовалюта",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bitcoin.svg"
                 }
     },
     {
@@ -166,7 +166,7 @@
             "name": "WebMoney",
             "code_name": "WMZ",
             "type_valute": "Эл. деньги",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bitcoin.svg"
                 }
     },
     {
@@ -176,7 +176,7 @@
             "name": "Perfect Money USD",
             "code_name": "PMUSD",
             "type_valute": "Эл. деньги",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bitcoin.svg"
                 }
     },
     {
@@ -187,7 +187,7 @@
             "en_name": "YooMoney RUB",
             "code_name": "YAMRUB",
             "type_valute": "Эл. деньги",
-            "icon_url": "./icons/valute/yam.svg"
+            "icon_url": "./icons/valute/umoney.svg"
                 }
     },
     {
@@ -197,7 +197,7 @@
             "name": "QIWI RUB",
             "code_name": "QWRUB",
             "type_valute": "Эл. деньги",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bitcoin.svg"
                 }
     },
     {
@@ -207,7 +207,7 @@
             "name": "PayPal USD",
             "code_name": "PPUSD",
             "type_valute": "Эл. деньги",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bitcoin.svg"
                 }
     },
     {
@@ -217,7 +217,7 @@
             "name": "Advanced Cash USD",
             "code_name": "ADVCUSD",
             "type_valute": "Эл. деньги",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bitcoin.svg"
                 }
     },
     {
@@ -227,7 +227,7 @@
             "name": "Advanced Cash RUB",
             "code_name": "ADVCRUB",
             "type_valute": "Эл. деньги",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bitcoin.svg"
                 }
     },
     {
@@ -237,7 +237,7 @@
             "name": "Payeer USD",
             "code_name": "PRUSD",
             "type_valute": "Эл. деньги",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bitcoin.svg"
                 }
     },
     {
@@ -247,7 +247,7 @@
             "name": "Payeer RUB",
             "code_name": "PRRUB",
             "type_valute": "Эл. деньги",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bitcoin.svg"
                 }
     },
     {
@@ -257,7 +257,7 @@
             "name": "Skrill USD",
             "code_name": "SKLUSD",
             "type_valute": "Эл. деньги",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bitcoin.svg"
                 }
     },
     {
@@ -267,7 +267,7 @@
             "name": "Exmo USD",
             "code_name": "EXMUSD",
             "type_valute": "Балансы криптобирж",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bitcoin.svg"
                 }
     },
     {
@@ -277,7 +277,7 @@
             "name": "Binance RUB",
             "code_name": "BNACRUB",
             "type_valute": "Балансы криптобирж",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bitcoin.svg"
                 }
     },
     {
@@ -299,7 +299,7 @@
             "en_name": "Alfa-Bank RUB",
             "code_name": "ACRUB",
             "type_valute": "Банкинг",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bitcoin.svg"
                 }
     },
     {
@@ -310,7 +310,7 @@
             "en_name": "Tinkoff RUB",
             "code_name": "TCSBRUB",
             "type_valute": "Банкинг",
-            "icon_url": "./icons/valute/tcsb.svg"
+            "icon_url": "./icons/valute/tinkoff.svg"
                 }
     },
     {
@@ -321,7 +321,7 @@
             "en_name": "VTB RUB",
             "code_name": "TBRUB",
             "type_valute": "Банкинг",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bitcoin.svg"
                 }
     },
     {
@@ -332,7 +332,7 @@
             "en_name": "Privat 24 UAH",
             "code_name": "P24UAH",
             "type_valute": "Банкинг",
-            "icon_url": "./icons/valute/p24.svg"
+            "icon_url": "./icons/valute/24.svg"
                 }
     },
     {
@@ -342,7 +342,7 @@
             "name": "Kaspi Bank KZT",
             "code_name": "KSPBKZT",
             "type_valute": "Банкинг",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bitcoin.svg"
                 }
     },
     {
@@ -352,7 +352,7 @@
             "name": "Visa/MasterCard USD",
             "code_name": "CARDUSD",
             "type_valute": "Банкинг",
-            "icon_url": "./icons/valute/visamc.svg"
+            "icon_url": "./icons/valute/visa mc.svg"
                 }
     },
     {
@@ -362,7 +362,7 @@
             "name": "Visa/MasterCard RUB",
             "code_name": "CARDRUB",
             "type_valute": "Банкинг",
-            "icon_url": "./icons/valute/visamc.svg"
+            "icon_url": "./icons/valute/visa mc.svg"
                 }
     },
     {
@@ -372,7 +372,7 @@
             "name": "Visa/MasterCard UAH",
             "code_name": "CARDUAH",
             "type_valute": "Банкинг",
-            "icon_url": "./icons/valute/visamc.svg"
+            "icon_url": "./icons/valute/visa mc.svg"
                 }
     },
     {
@@ -382,7 +382,7 @@
             "name": "Visa/MasterCard BYN",
             "code_name": "CARDBYN",
             "type_valute": "Банкинг",
-            "icon_url": "./icons/valute/visamc.svg"
+            "icon_url": "./icons/valute/visa mc.svg"
                 }
     },
     {
@@ -392,7 +392,7 @@
             "name": "Visa/MasterCard KZT",
             "code_name": "CARDKZT",
             "type_valute": "Банкинг",
-            "icon_url": "./icons/valute/visamc.svg"
+            "icon_url": "./icons/valute/visa mc.svg"
                 }
     },
     {
@@ -413,7 +413,7 @@
             "name": "WU USD",
             "code_name": "WUUSD",
             "type_valute": "Банкинг",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bitcoin.svg"
                 }
     },
 
@@ -956,7 +956,7 @@
             "en_name": "Dollars",
             "code_name": "CASHUSD",
             "type_valute": "Наличные",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bucks.svg"
                 }
     },
     {
@@ -967,7 +967,7 @@
             "en_name": "Rubles",
             "code_name": "CASHRUB",
             "type_valute": "Наличные",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/rub.svg"
                 }
     },
     {
@@ -978,7 +978,7 @@
             "en_name": "Euro",
             "code_name": "CASHEUR",
             "type_valute": "Наличные",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/euro.svg"
                 }
     },
     {
@@ -989,7 +989,7 @@
             "en_name": "Dirhams",
             "code_name": "CASHAED",
             "type_valute": "Наличные",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bitcoin.svg"
                 }
     },
     {
@@ -1000,7 +1000,7 @@
             "en_name": "Tenge KZT",
             "code_name": "CASHKZT",
             "type_valute": "Наличные",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bitcoin.svg"
                 }
     },
     {
@@ -1011,7 +1011,7 @@
             "en_name": "Polish Zloty",
             "code_name": "CASHPLN",
             "type_valute": "Наличные",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/bitcoin.svg"
                 }
     },
     {
@@ -1022,7 +1022,7 @@
             "en_name": "Thai Baht",
             "code_name": "CASHTHB",
             "type_valute": "Наличные",
-            "icon_url": "./icons/valute/btc.svg"
+            "icon_url": "./icons/valute/baht.svg"
                 }
     }
 

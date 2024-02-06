@@ -70,24 +70,24 @@ class Exchange(ParseExchange):
                                                   verbose_name='Чёрный список')
     
 
-class CustomUser(models.Model):
-    user = models.OneToOneField(User,
-                                verbose_name='Пользователь',
-                                on_delete=models.CASCADE)
-    exchange = models.OneToOneField(Exchange,
-                                    verbose_name='Наличный обменник',
-                                    unique=True,
-                                    blank=True,
-                                    null=True,
-                                    default=None,
-                                    on_delete=models.SET_DEFAULT)
+# class CustomUser(models.Model):
+#     user = models.OneToOneField(User,
+#                                 verbose_name='Пользователь',
+#                                 on_delete=models.CASCADE)
+#     exchange = models.OneToOneField(Exchange,
+#                                     verbose_name='Наличный обменник',
+#                                     unique=True,
+#                                     blank=True,
+#                                     null=True,
+#                                     default=None,
+#                                     on_delete=models.SET_DEFAULT)
     
-    class Meta:
-        verbose_name = 'Администратор обменника'
-        verbose_name_plural = 'Администраторы обменников'
+#     class Meta:
+#         verbose_name = 'Администратор обменника'
+#         verbose_name_plural = 'Администраторы обменников'
 
-    def __str__(self):
-        return f'Пользователь: {self.user}, Обменник: {self.exchange}'
+#     def __str__(self):
+#         return f'Пользователь: {self.user}, Обменник: {self.exchange}'
     
 
 #Модель отзыва
@@ -134,6 +134,19 @@ class Direction(BaseDirection):
                                   on_delete=models.CASCADE,
                                   verbose_name='Получаем',
                                   related_name='cash_valutes_to')
+    
+    display_name = models.CharField('Отображение в админ панели',
+                                    max_length=40,
+                                    blank=True,
+                                    null=True,
+                                    default=None)
+    actual_course = models.FloatField('Актуальный курс обмена',
+                                      blank=True,
+                                      null=True,
+                                      default=None)
+    
+    def __str__(self):
+        return self.display_name
     
     def clean(self) -> None:
         if self.valute_from.type_valute == self.valute_to.type_valute:

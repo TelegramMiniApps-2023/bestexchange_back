@@ -1,9 +1,9 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.db.models.signals import post_save, post_delete, pre_save
 from django.dispatch import receiver
 
 from .models import Valute
-from cash.models import CustomUser
+from parnters.models import CustomUser
 
 
 #Сигнал для автоматической установки английского названия
@@ -24,8 +24,11 @@ def add_fields_for_user(sender, instance, **kwargs):
 
 #Сигнал для создания связующей модели (пользователь + наличный обменник)
 #при создании модели пользователя админ панели
+#и ограничения прав доступа созданного пользователя
 @receiver(post_save, sender=User)
 def create_custom_user_for_user(sender, instance, created, **kwargs):
     if created:
         if not instance.is_superuser:
+            moderator_group = Group.objects.get(name='Партнёры')
+            instance.groups.add(moderator_group)
             CustomUser.objects.create(user=instance)
