@@ -28,10 +28,13 @@ def parse_cash_courses():
         except Exception:
             continue
         else:
-            json_resp = resp.json()
-            actual_course = json_resp['data']['amount']
-            print(valid_direction_name, actual_course)
-            direction.actual_course = actual_course
-            direction.save()
-        sleep(0.1)
+            try:
+                json_resp = resp.json()
+                actual_course = json_resp['data']['amount']
+                print(valid_direction_name, actual_course)
+                direction.actual_course = actual_course
+                direction.save()
+            except Exception:
+                pass
+        sleep(0.3)
 
