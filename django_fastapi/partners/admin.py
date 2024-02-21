@@ -11,7 +11,7 @@ from general_models.admin import (BaseCommentAdmin,
                                   BaseReviewStacked)
 from general_models.utils.admin import ReviewAdminMixin
 
-from partners.utils.endpoints import get_in_count, get_out_count
+from partners.utils.endpoints import get_in_count, get_out_count, get_course_count
 
 from .models import Exchange, Direction, Review, Comment, CustomUser, PartnerCity
 from .utils.admin import (get_or_set_user_account_cache,
@@ -78,13 +78,7 @@ class DirectionStacked(admin.StackedInline):
 
 @admin.register(Direction)
 class DirectionAdmin(admin.ModelAdmin):
-    # list_display = ('exchange', 'direction', 'cities')
     list_display = ('direction', 'city', 'exchange_name')
-
-    # filter_horizontal = ('cities', )
-    # filter_vertical = ('cities', )
-    # search_fields = ('cities', )
-    # autocomplete_fields = ('cities', )
     readonly_fields = (
         'course',
         'in_count_field',
@@ -93,7 +87,6 @@ class DirectionAdmin(admin.ModelAdmin):
     fields = (
         'city',
         'direction',
-        # 'cities',
         'course',
         'percent',
         'fix_amount',
@@ -106,27 +99,31 @@ class DirectionAdmin(admin.ModelAdmin):
     
     def formfield_for_foreignkey(self, db_field, request=None, **kwargs):
         field = super().formfield_for_foreignkey(db_field, request, **kwargs)
-        if db_field.name == 'city':
-            account = get_or_set_user_account_cache(request.user)
-            field.queryset = field.queryset.filter(exchange=account.exchange)
+        if not request.user.is_superuser:
+            if db_field.name == 'city':
+                account = get_or_set_user_account_cache(request.user)
+                field.queryset = field.queryset.filter(exchange=account.exchange)
         return field
 
     def exchange_name(self, obj=None):
         return obj.city.exchange
 
     def course(self, obj=None):
-        return 0
+        # return 0
+        return get_course_count(obj)
     
     course.short_description = 'Курс обмена'
 
     def in_count_field(self, obj=None):
-        return 0
+        # return 0
+        return get_in_count(obj)
     
     in_count_field.short_description = 'Сколько отдаём'
     
     def out_count_field(self, obj=None):
-        return 0
-    
+        # return 0
+        return get_out_count(obj)
+        
     out_count_field.short_description = 'Сколько получаем'
 
     def has_add_permission(self, request: HttpRequest) -> bool:
@@ -137,6 +134,11 @@ class DirectionAdmin(admin.ModelAdmin):
                 return super().has_add_permission(request)
         
         return False
+    
+    def has_change_permission(self, request: HttpRequest, obj: Any | None = ...) -> bool:
+        if request.user.is_superuser:
+            return False
+        return super().has_change_permission(request, obj)
 
     def get_queryset(self, request: HttpRequest) -> QuerySet[Any]:
         queryset = super().get_queryset(request)

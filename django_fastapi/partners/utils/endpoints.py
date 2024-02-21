@@ -4,6 +4,8 @@ from partners.models import Direction
 
 
 def get_in_count(direction):
+        if direction is None:
+            return 0
         actual_course = direction.direction.actual_course
         if actual_course < 1:
             convert_course = 1 / actual_course
@@ -14,12 +16,21 @@ def get_in_count(direction):
 
 
 def get_out_count(direction):
+        if direction is None:
+            return 0
         actual_course = direction.direction.actual_course
         if actual_course < 1:
             res = 1
         else:
             res = actual_course - (actual_course * direction.percent / 100) - direction.fix_amount
         return round(res, 2)
+
+
+def get_course_count(direction):
+        if direction is None:
+            return 0
+        actual_course = direction.direction.actual_course
+        return actual_course if actual_course is not None else 0
 
 
 def get_partner_directions(city: str,
