@@ -11,6 +11,7 @@ from .utils.parse_reviews.bs4 import get_exchange_list
 
 from cash import models as cash_models
 from no_cash import models as no_cash_models
+from partners import models as partner_models
 
 from config import SELENIUM_DRIVER
 
@@ -21,9 +22,13 @@ from config import SELENIUM_DRIVER
 def delete_cancel_reviews():
     cash_models.Review.objects.filter(status='Отклонён').delete()
     no_cash_models.Review.objects.filter(status='Отклонён').delete()
+    partner_models.Review.objects.filter(status='Отклонён').delete()
 
     cash_models.Comment.objects.filter(status='Отклонён').delete()
     no_cash_models.Comment.objects.filter(status='Отклонён').delete()
+    partner_models.Comment.objects.filter(status='Отклонён').delete()
+
+
 
 
 #WITH SELENIUM
@@ -74,7 +79,6 @@ def parse_reviews_with_start_service():
                               marker)
     except Exception as ex:
         print(ex)
-        driver.quit()
     finally:
         driver.quit()
 

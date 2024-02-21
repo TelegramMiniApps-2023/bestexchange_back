@@ -1,6 +1,26 @@
 import os
 
-from config import DB_USER, DB_PASS, DB_HOST, DB_NAME, DB_PORT, CSRF_TOKEN
+import sentry_sdk
+
+from config import (DB_USER,
+                    DB_PASS,
+                    DB_HOST,
+                    DB_NAME,
+                    DB_PORT,
+                    CSRF_TOKEN,
+                    REDIS_HOST)
+
+
+sentry_sdk.init(
+    dsn="https://092663a7578a856b241d61d8c326be00@o4506694926336000.ingest.sentry.io/4506739040190464",
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    traces_sample_rate=1.0,
+    # Set profiles_sample_rate to 1.0 to profile 100%
+    # of sampled transactions.
+    # We recommend adjusting this value in production.
+    profiles_sample_rate=1.0,
+)
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,12 +40,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     
     'debug_toolbar',
-
     "django_celery_beat",
+
     "general_models",
     "no_cash",
     "cash",
-    "parnters",
+    "partners",
 ]
 
 MIDDLEWARE = [
@@ -74,10 +94,17 @@ DATABASES = {
     }
 }
 
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+#         'LOCATION': os.path.join(BASE_DIR, 'cache_holder'),
+#     }
+# }
+
 CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': os.path.join(BASE_DIR, 'cache_holder'),
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": f"redis://{REDIS_HOST}:6379",
     }
 }
 
@@ -117,8 +144,8 @@ DJANGO_PREFIX = "/django"
 
 ####SWITCH FOR DEV/PROD####
 
-# DEBUG = True
-DEBUG = False
+DEBUG = True
+# DEBUG = False
 
 SITE_DOMAIN = 'wttonline.ru'
 # SITE_DOMAIN = '127.0.0.1:81'
@@ -126,8 +153,12 @@ SITE_DOMAIN = 'wttonline.ru'
 # ALLOWED_HOSTS = [SITE_DOMAIN]
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = [f'https://{SITE_DOMAIN}']
-
-CELERY_BROKER_URL = 'amqp://guest:guest@rabbitmq3:5672/'
-
 PROTOCOL = 'https://'
+
+CSRF_TRUSTED_ORIGINS = [f'{PROTOCOL}{SITE_DOMAIN}']
+
+#RabbitMQ  PROD
+# CELERY_BROKER_URL = 'amqp://guest:guest@rabbitmq3:5672/'
+
+#Redis
+CELERY_BROKER_URL = f"redis://{REDIS_HOST}:6379"

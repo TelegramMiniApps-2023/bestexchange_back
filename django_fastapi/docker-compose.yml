@@ -23,12 +23,13 @@ services:
     environment:
       - POSTGRES_HOST=psql_db
       - SELENIUM_DRIVER=firefox
+      - REDIS_HOST=redis_db
     env_file:
       - ./.env
     container_name: django_fastapi
     depends_on:
       - psql_db
-      - rabbitmq3
+      - redis_db
       - celery_worker
       - firefox
     logging:
@@ -66,13 +67,20 @@ services:
       options:
           max-size: "20m"
     
-  rabbitmq3:
-    image: rabbitmq:3.6.9
+  # rabbitmq3:
+  #   image: rabbitmq:3.6.9
+  #   ports:
+  #   - "5672:5672"
+  #   - "15672:15672"
+  #   volumes:
+  #     - rabbitmq_data:/var/lib/rabbitmq
+
+  redis_db:
+    image: redis:latest
     ports:
-    - "5672:5672"
-    - "15672:15672"
+      - 6379:6379
     volumes:
-      - rabbitmq_data:/var/lib/rabbitmq
+      - redis_data:/var/lib/redis
 
   celery_worker:
     build: .
@@ -80,10 +88,11 @@ services:
     environment:
       - POSTGRES_HOST=psql_db
       - SELENIUM_DRIVER=firefox
+      - REDIS_HOST=redis_db
     env_file:
       - ./.env
     depends_on:
-      - rabbitmq3
+      - redis_db
       - psql_db
     logging:
       driver: "json-file"
@@ -96,10 +105,11 @@ services:
     command: sh -c 'celery -A project beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler'
     environment:
       - POSTGRES_HOST=psql_db
+      - REDIS_HOST=redis_db
     env_file:
       - ./.env
     depends_on:
-      - rabbitmq3
+      - redis_db
       - psql_db
       - celery_worker
     logging:
@@ -120,6 +130,7 @@ services:
 
 volumes:
   postgres-data:
-  rabbitmq_data:
+  # rabbitmq_data:
+  redis_data:
   static:
   media:

@@ -1,37 +1,33 @@
 import datetime
 
-from django.contrib.auth.models import User, Group
 from django.db.models.signals import post_save, post_delete, pre_save
 from django.dispatch import receiver
-from django.core.exceptions import ValidationError
 
 from .models import Direction, Exchange, Review, Comment
 
 
+#Сигнал для добавления поля en_name обменника
+#перед созданием в БД
+@receiver(pre_save, sender=Exchange)
+def add_en_name_for_exchange(sender, instance, **kwargs):
+    if not instance.en_name:
+        instance.en_name = instance.name
+
+
 #Сигнал для удаления дубликатов созданного направления
 #(если такие есть)
-@receiver(pre_save, sender=Direction)
-def check_direction_on_unique(sender, instance, **kwargs):
-    exchange_id = instance.exchange_id
-    direction_id = instance.direction_id
-    # final_amount = instance.final_amount
+# @receiver(pre_save, sender=Direction)
+# def check_direction_on_unique(sender, instance, **kwargs):
+#     exchange_id = instance.exchange_id
+#     direction_id = instance.direction_id
+#     cities_id = instance.cities_id
 
-    # if final_amount < 1:
-    #     k = 1 / final_amount
-    #     in_count = k
-    #     out_count = 1
-    # else:
-    #     in_count = 1
-    #     out_count = final_amount
+#     dublucate_direction = Exchange.objects.get(id=exchange_id)\
+#                                     .directions.filter(direction_id=direction_id,
+#                                                        cities_id=cities_id).all()
 
-    # instance.in_count = in_count
-    # instance.out_count = out_count
-
-    dublucate_direction = Exchange.objects.get(id=exchange_id)\
-                                    .directions.filter(direction_id=direction_id).all()
-
-    if dublucate_direction:
-        dublucate_direction.delete()
+#     if dublucate_direction:
+#         dublucate_direction.delete()
 
 
 #Сигнал для автоматической установки времени

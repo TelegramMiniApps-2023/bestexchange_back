@@ -44,6 +44,7 @@ class SpecialDirectionMultiModel(BaseModel):
     # name: str
     name: MultipleName
     partner_link: str | None
+    review_count: int
     valute_from: str
     icon_valute_from: str | None
     valute_to: str

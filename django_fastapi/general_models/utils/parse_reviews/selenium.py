@@ -34,48 +34,6 @@ def collect_data(review, indicator: str):
     }
 
 
-# def parse_reviews(driver: WebDriver,
-#                   exchange_data: tuple[str, str],
-#                   marker: str,
-#                   limit: int = 20):
-#     exchange_name, link = exchange_data
-#     try:
-#         driver.get(link)
-
-#         rows = driver.find_element(By.ID, 'content_reviews')\
-#                         .find_element(By.CLASS_NAME, 'inner')\
-#                         .find_elements(By.XPATH, '//div[starts-with(@class, "review_block")]')          
-#         print(len(rows))
-
-#         for row in rows[:limit]:
-#             try:
-#                 data = collect_data(row, 'review')
-#             except ValueError as ex:
-#                 print(ex)
-#                 continue
-#             else:
-#                 review = add_review_to_db(exchange_name, data, marker)
-# ##
-#                 comments = row.find_element(By.CLASS_NAME, 'review_comment_expand')
-
-#                 print(comments.is_displayed())
-
-#                 if comments.is_displayed():
-#                     comments.click()
-#                     comments = row.find_elements(By.CLASS_NAME, 'review_comment')
-#                     for comment in comments:
-#                         try:
-#                             data = collect_data(comment, 'comment')
-#                         except ValueError:
-#                             continue
-#                         else:
-#                             add_comment_to_db(review, data, marker)
-#     except Exception as ex:
-#         print(ex)
-#         driver.close()
-
-
-
 def parse_reviews(driver: WebDriver,
                   exchange_name: str,
                   marker: str,
@@ -114,4 +72,3 @@ def parse_reviews(driver: WebDriver,
                             add_comment_to_db(review, data, marker)
     except Exception as ex:
         print(ex)
-        driver.close()

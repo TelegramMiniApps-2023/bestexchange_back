@@ -1,10 +1,10 @@
 from django.apps import AppConfig
 
 
-class ParntersConfig(AppConfig):
+class PartnersConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'parnters'
+    name = 'partners'
     verbose_name = 'Партнёры'
 
     def ready(self) -> None:
-        import parnters.signals
+        import partners.signals

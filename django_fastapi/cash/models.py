@@ -55,7 +55,9 @@ class City(models.Model):
     class Meta:
         verbose_name = 'Город'
         verbose_name_plural = 'Города'
-        ordering = ['is_parse', 'name']
+        # ordering = ['is_parse', 'name']
+        ordering = ['name']
+
         indexes = [
             models.Index(fields=['code_name', ])
         ]

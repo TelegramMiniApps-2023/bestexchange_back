@@ -53,6 +53,8 @@ class BaseCommentAdmin(ReviewAdminMixin, admin.ModelAdmin):
 
     def get_exchange(self, obj):
         return obj.review.exchange
+    
+    get_exchange.short_description = 'Обменник'
 
     def has_add_permission(self, request: HttpRequest) -> bool:
         return False

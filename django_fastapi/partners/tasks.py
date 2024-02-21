@@ -23,8 +23,10 @@ def parse_cash_courses():
         valid_direction_name = direction.display_name.replace('CASH','')
         valute_from, valute_to = valid_direction_name.split(' -> ')
         try:
-            resp = requests.get(f'https://api.coinbase.com/v2/prices/{valute_from}-{valute_to}/spot',
-                                timeout=5)
+            resp = requests.get(
+                f'https://api.coinbase.com/v2/prices/{valute_from}-{valute_to}/spot',
+                timeout=5,
+                )
         except Exception:
             continue
         else:

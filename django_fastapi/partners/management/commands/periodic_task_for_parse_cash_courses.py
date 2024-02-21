@@ -1,11 +1,8 @@
 from django.core.management.base import BaseCommand, CommandError
-from django.db.models import Q
 
 from django_celery_beat.models import IntervalSchedule, PeriodicTask
 
 from general_models.utils.periodic_tasks import get_or_create_schedule
-
-
 
 
 #Скрипт для создания периодической задачи для парсинга

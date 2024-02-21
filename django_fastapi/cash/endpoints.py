@@ -1,6 +1,8 @@
 from typing import List
 from collections import defaultdict
 
+from django.db.models import Count, Q
+
 from fastapi import APIRouter, Depends, Request
 
 from django.conf import settings
@@ -13,7 +15,7 @@ from general_models.utils.endpoints import (try_generate_icon_url,
                                             get_valute_json,
                                             new_get_valute_json)
 
-from parnters.utils.endpoints import get_partner_directions
+from partners.utils.endpoints import get_partner_directions
 
 from .utils.query_models import (AvailableCitiesQuery,
                                  AvailableValutesQuery,
@@ -305,8 +307,19 @@ def new_cash_exchange_directions(request: Request,
 
     city, valute_from, valute_to = (params[key] for key in params)
 
+    # queries = ExchangeDirection.objects\
+    #                             .select_related('exchange')\
+    #                             .filter(city=city,
+    #                                     valute_from=valute_from,
+    #                                     valute_to=valute_to,
+    #                                     is_active=True,
+    #                                     exchange__is_active=True)\
+    #                             .order_by('-out_count', 'in_count').all()
+    review_count_filter = Count('exchange__reviews',
+                                filter=Q(exchange__reviews__moderation=True))
     queries = ExchangeDirection.objects\
                                 .select_related('exchange')\
+                                .annotate(review_count=review_count_filter)\
                                 .filter(city=city,
                                         valute_from=valute_from,
                                         valute_to=valute_to,
@@ -318,7 +331,8 @@ def new_cash_exchange_directions(request: Request,
                                                 valute_from,
                                                 valute_to)
     
-    queries = sorted(list(queries) + list(partner_directions), key=lambda query: (-query.out_count, query.in_count))
+    queries = sorted(list(queries) + list(partner_directions),
+                     key=lambda query: (-query.out_count, query.in_count))
     
     if not queries:
         http_exception_json(status_code=404, param=request.url)

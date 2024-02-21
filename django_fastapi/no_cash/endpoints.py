@@ -1,6 +1,8 @@
 from typing import List
 from fastapi import APIRouter, Depends, Request
 
+from django.db.models import Count, Q
+
 from general_models.schemas import ValuteModel, SpecialDirectionModel
 from general_models.utils.http_exc import http_exception_json
 from general_models.utils.endpoints import (get_exchange_direction_list,
@@ -160,8 +162,18 @@ def new_no_cash_exchange_directions(request: Request,
     
     valute_from, valute_to = (params[key] for key in params)
 
+    # queries = ExchangeDirection.objects\
+    #                             .select_related('exchange')\
+    #                             .filter(valute_from=valute_from,
+    #                                     valute_to=valute_to,
+    #                                     is_active=True,
+    #                                     exchange__is_active=True)\
+    #                             .order_by('-out_count', 'in_count').all()
+    review_count_filter = Count('exchange__reviews',
+                                filter=Q(exchange__reviews__moderation=True))
     queries = ExchangeDirection.objects\
                                 .select_related('exchange')\
+                                .annotate(review_count=review_count_filter)\
                                 .filter(valute_from=valute_from,
                                         valute_to=valute_to,
                                         is_active=True,
