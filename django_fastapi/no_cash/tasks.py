@@ -1,12 +1,13 @@
 from celery import shared_task
 
-
 from general_models.utils.exc import NoFoundXmlElement
 from general_models.utils.periodic_tasks import try_get_xml_file
+
 from .utils.periodic_tasks import run_no_cash_background_tasks
 from .utils.parsers import no_cash_parse_xml
-from .utils.tasks import (get_or_set_no_cash_directions_cache,
-                          get_no_cash_direction_set_for_creating)
+from .utils.tasks import get_no_cash_direction_set_for_creating
+from .utils.cache import get_or_set_no_cash_directions_cache
+
 from .models import Exchange, ExchangeDirection, Direction
 
 
@@ -45,7 +46,6 @@ def create_direction(dict_for_parse: dict,
         print('PARSE FAILED', ex)
         pass
     else:
-        # print('ДОБАВЛЯЮ')
         exchange = Exchange.objects.get(name=dict_for_parse['name'])
         dict_for_create_exchange_direction['exchange'] = exchange
         try:

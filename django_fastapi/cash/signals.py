@@ -1,9 +1,9 @@
-import datetime
-
 from django.db.models.signals import post_save, post_delete, pre_save
 from django.dispatch import receiver
 
 from django_celery_beat.models import PeriodicTask
+
+from general_models.utils.base import get_actual_datetime
 
 from .models import Exchange, Direction, ExchangeDirection, Review, Comment
 from .periodic_tasks import (manage_periodic_task_for_create,
@@ -11,7 +11,8 @@ from .periodic_tasks import (manage_periodic_task_for_create,
                              manage_periodic_task_for_parse_black_list)
 
 
-######
+#Сигнал для добавления поля "display_name" в экземпляр Direction
+#перед созданием записи в БД
 @receiver(pre_save, sender=Direction)
 def add_display_name_for_direction(sender, instance, **kwargs):
     instance.display_name = instance.valute_from.code_name + ' -> ' + instance.valute_to.code_name
@@ -63,7 +64,7 @@ def delete_task_for_exchange(sender, instance, **kwargs):
 @receiver(pre_save, sender=Review)
 def change_time_create_for_review(sender, instance, **kwargs):
     if instance.time_create is None:
-        instance.time_create = datetime.datetime.now() + datetime.timedelta(hours=9)
+        instance.time_create = get_actual_datetime()
 
 
 #Сигнал для автоматической установки времени
@@ -71,4 +72,4 @@ def change_time_create_for_review(sender, instance, **kwargs):
 @receiver(pre_save, sender=Comment)
 def change_time_create_for_comment(sender, instance, **kwargs):
     if instance.time_create is None:
-        instance.time_create = datetime.datetime.now() + datetime.timedelta(hours=9)
+        instance.time_create = get_actual_datetime()

@@ -3,7 +3,7 @@ from datetime import datetime
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.webdriver import WebDriver
 
-from .base import add_review_to_db, add_comment_to_db, new_add_review_to_db
+from .base import add_comment_to_db, new_add_review_to_db
 
 
 def collect_data(review, indicator: str):

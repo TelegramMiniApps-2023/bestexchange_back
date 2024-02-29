@@ -9,7 +9,6 @@ from cash.models import Country, City
 # python manage.py create_cities в docker-compose файле
 
 
-
 parse_cities = {
     'Киев',
     'Чернигов',
@@ -57,20 +56,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         try:
-            # for city in open('cities.txt'):
-            #     city = tuple(map(lambda el: el.strip(), city.split(',')))
-            #     code_name, name, country_name = city
-            #     country = Country.objects.get(name=country_name)
-
-            #     is_parse = False
-            #     if name in parse_cities:
-            #         is_parse = True
-                    
-            #     City.objects.create(name=name,
-            #                         code_name=code_name,
-            #                         country=country,
-            #                         is_parse=is_parse)
-                ######
                 with open('ru_en_countries.json') as f:
                     json_data = json.load(f)
 
@@ -89,7 +74,6 @@ class Command(BaseCommand):
                                         code_name=code_name,
                                         country=country,
                                         is_parse=is_parse)
-                ######
         except Exception as ex:
             print(ex)
             raise CommandError('Initalization failed.')

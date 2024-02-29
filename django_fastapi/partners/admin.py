@@ -1,7 +1,9 @@
+from collections import OrderedDict
 from collections.abc import Callable, Sequence
+from datetime import timedelta, datetime
 from typing import Any
 
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.db.models.query import QuerySet
 from django.http import HttpRequest
 
@@ -14,9 +16,8 @@ from general_models.utils.admin import ReviewAdminMixin
 from partners.utils.endpoints import get_in_count, get_out_count, get_course_count
 
 from .models import Exchange, Direction, Review, Comment, CustomUser, PartnerCity
-from .utils.admin import (get_or_set_user_account_cache,
-                          set_user_account_cache,
-                          make_city_active)
+from .utils.admin import make_city_active, update_field_time_update
+from .utils.cache import get_or_set_user_account_cache, set_user_account_cache
 
 
 @admin.register(CustomUser)
@@ -35,11 +36,12 @@ class DirectionStacked(admin.StackedInline):
     
     fields = (
         'get_direction_name',
-        # 'city',
         'percent',
         'fix_amount',
         'in_count_field',
         'out_count_field',
+        'is_active',
+        'time_update',
         )
     readonly_fields = (
         'get_direction_name',
@@ -47,15 +49,16 @@ class DirectionStacked(admin.StackedInline):
         'fix_amount',
         'in_count_field',
         'out_count_field',
+        'is_active',
+        'time_update',
         )
-    # list_select_related = ('city', 'direction')
     list_select_related = ('direction', )
-
-    # filter_horizontal = ('cities', )
 
     def get_queryset(self, request: HttpRequest) -> QuerySet[Any]:
          return super().get_queryset(request)\
-                        .select_related('direction')
+                        .select_related('city',
+                                        'direction',
+                                        'city__city')
 
     def has_add_permission(self, request, obj=None):
         return False
@@ -78,11 +81,14 @@ class DirectionStacked(admin.StackedInline):
 
 @admin.register(Direction)
 class DirectionAdmin(admin.ModelAdmin):
-    list_display = ('direction', 'city', 'exchange_name')
+    actions = ('get_directions_active', )
+    list_display = ('direction', 'city', 'exchange_name', 'is_active')
     readonly_fields = (
         'course',
         'in_count_field',
         'out_count_field',
+        'is_active',
+        'time_update',
         )
     fields = (
         'city',
@@ -92,36 +98,55 @@ class DirectionAdmin(admin.ModelAdmin):
         'fix_amount',
         'in_count_field',
         'out_count_field',
+        'is_active',
+        'time_update',
         )
     
     class Media:
          js = ('parnters/js/test.js', )
+
+    def save_model(self, request: Any, obj: Any, form: Any, change: Any) -> None:
+        if change:
+            update_fields = set()
+            for key, value in form.cleaned_data.items():
+                if value != form.initial[key]:
+                    # match key:
+                    #     case 'percent':
+                    #         update_field_time_update(obj, update_fields)
+                    #     case 'fix_amount':
+                    #         update_field_time_update(obj, update_fields)
+                    update_field_time_update(obj, update_fields)
+
+                    update_fields.add(key)
+            obj.save(update_fields=update_fields)
+        else:
+            return super().save_model(request, obj, form, change)
     
     def formfield_for_foreignkey(self, db_field, request=None, **kwargs):
         field = super().formfield_for_foreignkey(db_field, request, **kwargs)
         if not request.user.is_superuser:
             if db_field.name == 'city':
                 account = get_or_set_user_account_cache(request.user)
-                field.queryset = field.queryset.filter(exchange=account.exchange)
+                field.queryset = field.queryset.filter(exchange=account.exchange)\
+                                                .select_related('city')
         return field
 
     def exchange_name(self, obj=None):
         return obj.city.exchange
+    
+    exchange_name.short_description = 'Партнёрский обменник'
 
     def course(self, obj=None):
-        # return 0
         return get_course_count(obj)
     
     course.short_description = 'Курс обмена'
 
     def in_count_field(self, obj=None):
-        # return 0
         return get_in_count(obj)
     
     in_count_field.short_description = 'Сколько отдаём'
     
     def out_count_field(self, obj=None):
-        # return 0
         return get_out_count(obj)
         
     out_count_field.short_description = 'Сколько получаем'
@@ -145,10 +170,27 @@ class DirectionAdmin(admin.ModelAdmin):
 
         if not request.user.is_superuser:
             account = get_or_set_user_account_cache(request.user)
-            queryset = queryset.select_related('city', 'direction')\
+            queryset = queryset.select_related('city',
+                                               'direction',
+                                               'city__city',
+                                               'city__exchange')\
                                 .filter(city__exchange=account.exchange)
         return queryset
     
+    @admin.action(description='Обновить активность выбранных Направлений')
+    def get_directions_active(modeladmin, request, queryset):
+        time_update = datetime.now() + timedelta(hours=9)
+        queryset.update(is_active=True,
+                        time_update=time_update)
+        messages.success(request,
+                         f'Выбранные направления успешно обновлены!({len(queryset)} шт)')
+        
+    def get_actions(self, request: HttpRequest) -> OrderedDict[Any, Any]:
+        actions = super().get_actions(request)
+        if request.user.is_superuser:
+            del actions['get_directions_active']
+        return actions
+
 
 class PartnerCityStacked(admin.StackedInline):
     model = PartnerCity
@@ -158,23 +200,16 @@ class PartnerCityStacked(admin.StackedInline):
     
     fields = (
         'get_city_name',
-        # 'city',
         'has_office',
         'has_delivery',
-        # 'in_count_field',
-        # 'out_count_field',
         )
     readonly_fields = (
         'get_city_name',
-        # 'percent',
-        # 'fix_amount',
-        # 'in_count_field',
-        # 'out_count_field',
         )
-    # list_select_related = ('city', 'direction')
     list_select_related = ('direction', )
 
-    # filter_horizontal = ('cities', )
+    def has_add_permission(self, request: HttpRequest, *args) -> bool:
+        return False
 
     def get_queryset(self, request: HttpRequest) -> QuerySet[Any]:
          return super().get_queryset(request)\
@@ -204,9 +239,7 @@ class PartnerCityAdmin(admin.ModelAdmin):
                 partner_cities = account.exchange.partner_cities\
                                                     .filter(city=obj.city)\
                                                     .all()
-                ###
                 make_city_active(obj.city)
-                ###
 
                 if partner_cities:
                     has_office = obj.has_office
@@ -225,6 +258,14 @@ class PartnerCityAdmin(admin.ModelAdmin):
             if account.exchange:
                 return super().has_add_permission(request)
         return False
+    
+    def formfield_for_foreignkey(self, db_field, request=None, **kwargs):
+        field = super().formfield_for_foreignkey(db_field, request, **kwargs)
+        
+        if db_field.name == 'city':
+            field.queryset = field.queryset.order_by('name')
+
+        return field
     
     def get_queryset(self, request: HttpRequest) -> QuerySet[Any]:
         queryset = super().get_queryset(request)\
@@ -260,146 +301,6 @@ class PartnerCityAdmin(admin.ModelAdmin):
                 ('has_office', 'has_delivery')
             )
         return fields
-    
-
-# class DirectionStacked(admin.StackedInline):
-#     model = Direction
-#     extra = 0
-#     show_change_link = True
-#     classes = ['collapse']
-    
-#     fields = (
-#         'get_direction_name',
-#         # 'city',
-#         'percent',
-#         'fix_amount',
-#         'in_count_field',
-#         'out_count_field',
-#         )
-#     readonly_fields = (
-#         'get_direction_name',
-#         'percent',
-#         'fix_amount',
-#         'in_count_field',
-#         'out_count_field',
-#         )
-#     # list_select_related = ('city', 'direction')
-#     list_select_related = ('direction', )
-
-#     # filter_horizontal = ('cities', )
-
-#     def get_queryset(self, request: HttpRequest) -> QuerySet[Any]:
-#          return super().get_queryset(request)\
-#                         .select_related('direction')
-
-#     def has_add_permission(self, request, obj=None):
-#         return False
-
-#     def get_direction_name(self, obj):
-#          return obj.direction.display_name
-    
-#     get_direction_name.short_description = 'Название направления'
-
-#     def in_count_field(self, obj):
-#         return get_in_count(obj)
-    
-#     in_count_field.short_description = 'Сколько отдаём'
-
-#     def out_count_field(self, obj):
-#         return get_out_count(obj)
-    
-#     out_count_field.short_description = 'Сколько получаем'
-
-
-# @admin.register(Direction)
-# class DirectionAdmin(admin.ModelAdmin):
-#     # list_display = ('exchange', 'direction', 'cities')
-#     list_display = ('direction', 'city', 'exchange_name')
-
-#     # filter_horizontal = ('cities', )
-#     # filter_vertical = ('cities', )
-#     # search_fields = ('cities', )
-#     # autocomplete_fields = ('cities', )
-#     readonly_fields = (
-#         'course',
-#         'in_count_field',
-#         'out_count_field',
-#         )
-#     fields = (
-#         'city',
-#         'direction',
-#         # 'cities',
-#         'course',
-#         'percent',
-#         'fix_amount',
-#         'in_count_field',
-#         'out_count_field',
-#         )
-    
-#     class Media:
-#          js = ('parnters/js/test.js', )
-    
-#     def formfield_for_foreignkey(self, db_field, request=None, **kwargs):
-#         field = super().formfield_for_foreignkey(db_field, request, **kwargs)
-#         if db_field.name == 'city':
-#             account = get_or_set_user_account_cache(request.user)
-#             field.queryset = field.queryset.filter(exchange=account.exchange)
-#         return field
-
-#     def exchange_name(self, obj=None):
-#         return obj.city.exchange
-
-#     def course(self, obj=None):
-#         return 0
-    
-#     course.short_description = 'Курс обмена'
-
-#     def in_count_field(self, obj=None):
-#         return 0
-    
-#     in_count_field.short_description = 'Сколько отдаём'
-    
-#     def out_count_field(self, obj=None):
-#         return 0
-    
-#     out_count_field.short_description = 'Сколько получаем'
-
-#     def has_add_permission(self, request: HttpRequest) -> bool:
-#         if not request.user.is_superuser:
-#             account = get_or_set_user_account_cache(request.user)
-
-#             if account.exchange:
-#                 return super().has_add_permission(request)
-        
-#         return False
-
-#     def get_queryset(self, request: HttpRequest) -> QuerySet[Any]:
-#         queryset = super().get_queryset(request)
-
-#         if not request.user.is_superuser:
-#             account = get_or_set_user_account_cache(request.user)
-#             queryset = queryset.select_related('city', 'direction')\
-#                                 .filter(city__exchange=account.exchange)
-#         return queryset
-        
-        # if not request.user.is_superuser:
-        #     account = get_or_set_user_account_cache(request.user)
-        #     # queryset = queryset.select_related('exchange',
-        #     #                                     'direction')\
-        #     #                     .filter(exchange=account.exchange)
-        #     queryset = queryset.select_related('direction')\
-        #                         # .filter(exchange=account.exchange)
-
-        # return queryset
-
-    # def save_model(self, request: Any, obj: Any, form: Any, change: Any) -> None:
-    #     if not request.user.is_superuser:
-    #         account = get_or_set_user_account_cache(request.user)
-    #         obj.exchange = account.exchange
-    #         # super().save_model(request, obj, form, change)
-    #     # else:
-    #     #     return super().save_model(request, obj, form, change)
-    #     return super().save_model(request, obj, form, change)
 
 
 @admin.register(Comment)
@@ -462,19 +363,22 @@ class ReviewStacked(BaseReviewStacked):
 
 @admin.register(Exchange)
 class ExchangeAdmin(ReviewAdminMixin, admin.ModelAdmin):
-    list_display = ('name', 'en_name', 'account')
+    list_display = ('name', 'en_name', 'account', 'has_partner_link')
     readonly_fields = ('is_active', )
     filter_horizontal = ()
-    # inlines = [DirectionStacked, ReviewStacked]
     inlines = [PartnerCityStacked, ReviewStacked]
 
+    def has_partner_link(self, obj=None):
+        return bool(obj.partner_link)
+    
+    has_partner_link.boolean = True
+    has_partner_link.short_description = 'Партнёрская ссылка'
 
     def get_readonly_fields(self, request, obj=None):
         readonly_fields = super().get_readonly_fields(request, obj)
         if not request.user.is_superuser:
             readonly_fields = ('partner_link', ) + readonly_fields
         return readonly_fields
-
 
     def get_queryset(self, request: HttpRequest) -> QuerySet[Any]:
         if not request.user.is_superuser:

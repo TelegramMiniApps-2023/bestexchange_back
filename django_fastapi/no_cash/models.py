@@ -3,7 +3,6 @@ from django.db.models import Q
 from django.core.exceptions import ValidationError
 
 from general_models.models import (Valute,
-                                   BaseExchange,
                                    ParseExchange,
                                    BaseDirection,
                                    BaseExchangeDirection,

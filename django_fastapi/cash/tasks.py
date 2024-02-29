@@ -2,11 +2,12 @@ from celery import shared_task
 
 from general_models.utils.exc import NoFoundXmlElement
 from general_models.utils.periodic_tasks import try_get_xml_file
+
 from .utils.parsers import cash_parse_xml
 from .utils.periodic_tasks import run_cash_background_tasks, run_update_tasks
-from .utils.tasks import (get_or_set_cash_directions_cache,
-                          get_cash_direction_set_for_creating,
+from .utils.tasks import (get_cash_direction_set_for_creating,
                           generate_direction_dict)
+from .utils.cache import get_or_set_cash_directions_cache
 
 from .models import Exchange, ExchangeDirection, BlackListElement
 

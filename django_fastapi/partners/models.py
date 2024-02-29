@@ -69,13 +69,6 @@ class PartnerCity(models.Model):
 class Direction(models.Model):
     limit_direction = get_limit_direction()
 
-    # exchange = models.ForeignKey(Exchange,
-    #                              verbose_name='Обменник',
-    #                              on_delete=models.CASCADE,
-    #                              related_name='directions',
-    #                              blank=True,
-    #                              null=True,
-    #                              default=None)
     city = models.ForeignKey(PartnerCity,
                              on_delete=models.CASCADE,
                              verbose_name='Город',
@@ -85,20 +78,17 @@ class Direction(models.Model):
                                   on_delete=models.CASCADE,
                                   limit_choices_to=limit_direction,
                                   related_name='partner_directions')
-    # cities = models.ForeignKey(City,
-    #                            verbose_name='Город',
-    #                            on_delete=models.CASCADE,
-    #                            related_name='partner_directions')
+
     percent = models.FloatField('Процент',
-                                # blank=True,
-                                # null=True,
                                 default=0,
                                 validators=[is_positive_validator])
     fix_amount = models.FloatField('Фиксированная ставка',
-                                #    blank=True,
-                                #    null=True,
                                    default=0,
                                    validators=[is_positive_validator])
+    time_update = models.DateTimeField('Последнее обновление',
+                                       default=None,
+                                       help_text='Время указано по московскому часовому поясу. При не обновлении процентов или фикс. ставки в течении 3 дней, направление становится неактивным.')
+    is_active = models.BooleanField('Активно?', default=True)
 
     class Meta:
         verbose_name = 'Направление'

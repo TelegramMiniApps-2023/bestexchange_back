@@ -1,3 +1,4 @@
+from typing import Iterable
 from django.db import models
 
 from .utils.model_validators import is_positive_validate
@@ -26,13 +27,11 @@ class Valute(models.Model):
     name = models.CharField('Название валюты(ru)',
                             max_length=50,
                             primary_key=True)
-    ########
     en_name = models.CharField('Название валюты(en)',
                                max_length=50,
                                unique=True,
                                null=True,
                                default=None)
-    #########
     code_name = models.CharField('Кодовое сокращение',
                                  max_length=10,
                                  unique=True)
@@ -54,6 +53,31 @@ class Valute(models.Model):
 
     def __str__(self):
         return self.code_name
+
+
+# Модель для времени проверки партнёрских
+# готовых направлений на активность
+class PartnerTimeUpdate(models.Model):
+    unit_time_choices = [
+        ('SECOND', 'Секунды'),
+        ('MINUTE', 'Минуты'),
+        ('HOUR', 'Часы'),
+        ('DAY', 'Дни'),
+    ]
+    name = models.CharField('Название',
+                            max_length=100,
+                            unique=True)
+    amount = models.IntegerField('Количество')
+    unit_time = models.CharField('Единица измерения',
+                                 max_length=100,
+                                 choices=unit_time_choices)
+    
+    class Meta:
+        verbose_name = 'Управление временем партнёрских направлений'
+        verbose_name_plural = 'Управление временем партнёрских направлений'
+
+    def __str__(self):
+        return self.name
 
 
 #Абстрактная модель отзыва/комментария (для наследования)
@@ -113,42 +137,15 @@ class BaseExchange(models.Model):
                                blank=True,
                                null=True,
                                default=None)
-    # xml_url = models.CharField('Ссылка на XML файл',
-    #                            max_length=50)
     partner_link = models.CharField('Партнёрская ссылка',
                                     max_length=50,
                                     blank=True,
                                     null=True,
                                     default=None)
     is_active = models.BooleanField('Статус обменника', default=True)
-    # period_for_create = models.IntegerField('Частота добавления в секундах',
-    #                                         blank=True,
-    #                                         null=True,
-    #                                         default=90,
-    #                                         help_text='Значение - положительное целое число.При установлении в 0, останавливает задачу периодических добавлений',
-    #                                         validators=[is_positive_validate])
-    # period_for_update = models.IntegerField('Частота обновлений в секундах',
-    #                                         blank=True,
-    #                                         null=True,
-    #                                         default=60,
-    #                                         help_text='Значение - положительное целое число.При установлении в 0, останавливает задачу периодических обновлений',
-    #                                         validators=[is_positive_validate])
-    # period_for_parse_black_list = models.IntegerField('Частота парсинга чёрного списка в часах',
-    #                                                   blank=True,
-    #                                                   null=True,
-    #                                                   default=24,
-    #                                                   help_text='Рекомендуемое значение - 24 часа.\nЗначение - положительное целое число.При установлении в 0, останавливает задачу периодического парсинга чёрного списка',
-    #                                                   validators=[is_positive_validate])
 
     class Meta:
         abstract = True
-        # verbose_name = 'Обменник'
-        # verbose_name_plural = 'Обменники'
-        # ordering = ['name']
-        # indexes = [
-        #     models.Index(fields=['name']),
-        #     models.Index(fields=['en_name']),
-        # ]
 
     def __str__(self):
         return self.name
@@ -208,8 +205,6 @@ class BaseDirection(models.Model):
 class BaseExchangeDirection(models.Model):
     valute_from = models.CharField('Отдаём', max_length=10)
     valute_to = models.CharField('Получаем', max_length=10)
-    # in_count = models.FloatField('Сколько отдаём')
-    # out_count = models.FloatField('Сколько получаем')
     in_count = models.DecimalField('Сколько отдаём',
                                    max_digits=20,
                                    decimal_places=2)

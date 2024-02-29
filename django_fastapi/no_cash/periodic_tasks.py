@@ -32,6 +32,7 @@ def manage_periodic_task_for_create(exchange_pk: int,
                     )
     else:
         if interval == 0:
+            #остановить задачу периодических созданий готовых направлений в БД
             task.enabled = False
         else:
             task.enabled = True
@@ -104,6 +105,7 @@ def manage_periodic_task_for_parse_black_list(exchange_pk: int,
                     )
     else:
         if interval == 0:
+            #остановить задачу периодического парсинга чёрного списка
             task.enabled = False
         else:
             task.enabled = True

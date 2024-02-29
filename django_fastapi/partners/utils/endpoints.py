@@ -40,10 +40,15 @@ def get_partner_directions(city: str,
     review_count_filter = Count('city__exchange__reviews',
                                 filter=Q(city__exchange__reviews__moderation=True))
     directions = Direction.objects\
-                            .select_related('direction', 'city', 'city__city')\
+                            .select_related('direction',
+                                            'city',
+                                            'city__city',
+                                            'city__exchange')\
                             .annotate(review_count=review_count_filter)\
                             .filter(direction__display_name=direction_name,
-                                    city__city__code_name=city)
+                                    city__city__code_name=city,
+                                    is_active=True,
+                                    city__exchange__partner_link__isnull=False)
 
     for direction in directions:
         direction.exchange = direction.city.exchange

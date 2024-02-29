@@ -10,7 +10,6 @@ class MultipleName(BaseModel):
 
 class CityModel(BaseModel):
     id: int = Field(alias='pk')
-    # id: int
     name: str
     code_name: str
 
@@ -31,7 +30,6 @@ class CityModel(BaseModel):
 
 class RuEnCityModel(BaseModel):
     id: int = Field(alias='pk')
-    # id: int
     name: MultipleName
     code_name: str
 
@@ -51,45 +49,19 @@ class RuEnCityModel(BaseModel):
 
 
 class CountryModel(BaseModel):
-    # id: int = Field(alias='country__pk', json_schema_extra={'id', 1})
-    # name: str = Field(alias='country__name')
     id: int = Field(alias='pk', json_schema_extra={'id', 1})
-    # name: str
     name: str
 
     icon_url: str | None = Field(alias='country_flag')
     cities: list[CityModel] = Field(alias='city_list')
 
-    # class Config:
-    #     json_schema_extra = {
-    #         'examples': [
-    #             {
-    #                 'id': 0,
-    #                 'name': 'string',
-    #             }
-    #         ]
-    #     }
-
 
 class RuEnCountryModel(BaseModel):
-    # id: int = Field(alias='country__pk', json_schema_extra={'id', 1})
-    # name: str = Field(alias='country__name')
     id: int = Field(alias='pk', json_schema_extra={'id', 1})
-    # name: str
     name: MultipleName
 
     icon_url: str | None = Field(alias='country_flag')
     cities: list[RuEnCityModel] = Field(alias='city_list')
-
-    # class Config:
-    #     json_schema_extra = {
-    #         'examples': [
-    #             {
-    #                 'id': 0,
-    #                 'name': 'string',
-    #             }
-    #         ]
-    #     }
     
 
 class SpecialCashDirectionModel(SpecialDirectionModel):

@@ -8,7 +8,7 @@ from config import (DB_USER,
                     DB_NAME,
                     DB_PORT,
                     CSRF_TOKEN,
-                    REDIS_HOST)
+                    REDIS_URL)
 
 
 sentry_sdk.init(
@@ -94,17 +94,11 @@ DATABASES = {
     }
 }
 
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-#         'LOCATION': os.path.join(BASE_DIR, 'cache_holder'),
-#     }
-# }
 
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": f"redis://{REDIS_HOST}:6379",
+        "LOCATION": REDIS_URL,
     }
 }
 
@@ -160,5 +154,4 @@ CSRF_TRUSTED_ORIGINS = [f'{PROTOCOL}{SITE_DOMAIN}']
 #RabbitMQ  PROD
 # CELERY_BROKER_URL = 'amqp://guest:guest@rabbitmq3:5672/'
 
-#Redis
-CELERY_BROKER_URL = f"redis://{REDIS_HOST}:6379"
+CELERY_BROKER_URL = REDIS_URL

@@ -10,7 +10,6 @@ from general_models.models import Valute, en_type_valute_dict
 from general_models.schemas import ValuteModel, EnValuteModel, MultipleName
 
 
-#############
 round_valute_dict = {
     'BTC': 5,
     'ETH': 3,
@@ -19,6 +18,11 @@ round_valute_dict = {
 
 
 def round_valute_values(exchange_direction_dict: dict):
+
+    '''
+    Округляет значения "min_amount" и "max_amount"
+    '''
+
     try:
         valute_from = exchange_direction_dict['valute_from']
         type_valute_from = exchange_direction_dict['type_valute_from']
@@ -40,6 +44,7 @@ def round_valute_values(exchange_direction_dict: dict):
     except Exception:
         pass
 
+
 def try_generate_icon_url(obj: City | Valute) -> str | None:
     '''
     Генерирует путь до иконки переданного объекта.
@@ -57,44 +62,10 @@ def get_exchange_direction_list(queries: List[NoCashExDir | CashExDir],
                                 valute_from: str,
                                 valute_to: str,
                                 city: str = None):
-    valute_from_obj = Valute.objects.get(code_name=valute_from)
-    icon_url_valute_from = try_generate_icon_url(valute_from_obj)
-    #
-    type_valute_from = valute_from_obj.type_valute
+    '''
+    Возвращает список готовых направлений с необходимыми данными
+    '''
 
-    valute_to_obj = Valute.objects.get(code_name=valute_to)
-    icon_url_valute_to = try_generate_icon_url(valute_to_obj)
-    #
-    type_valute_to = valute_to_obj.type_valute
-
-    direction_list = []
-
-    partner_link_pattern = f'&cur_from={valute_from}&cur_to={valute_to}'
-    if city:
-        partner_link_pattern += f'&city={city}'
-
-    for _id, query in enumerate(queries, start=1):
-        if query.exchange.__dict__.get('partner_link'):
-            query.exchange.__dict__['partner_link'] += partner_link_pattern
-        exchange_direction = query.__dict__ | query.exchange.__dict__
-        exchange_direction['id'] = _id
-        exchange_direction['icon_valute_from'] = icon_url_valute_from
-        #
-        exchange_direction['type_valute_from'] = type_valute_from
-
-        exchange_direction['icon_valute_to'] = icon_url_valute_to
-        #
-        exchange_direction['type_valute_to'] = type_valute_to
-
-        direction_list.append(exchange_direction)
-
-    return direction_list
-
-
-def new_get_exchange_direction_list(queries: List[NoCashExDir | CashExDir],
-                                valute_from: str,
-                                valute_to: str,
-                                city: str = None):
     valute_from_obj = Valute.objects.get(code_name=valute_from)
     icon_url_valute_from = try_generate_icon_url(valute_from_obj)
     type_valute_from = valute_from_obj.type_valute
@@ -110,7 +81,6 @@ def new_get_exchange_direction_list(queries: List[NoCashExDir | CashExDir],
         partner_link_pattern += f'&city={city}'
 
     for _id, query in enumerate(queries, start=1):
-        # if query.exchange.__dict__.get('partner_link'):
         if query.exchange.__dict__.get('partner_link') and not query.__dict__.get('direction_id'):
             query.exchange.__dict__['partner_link'] += partner_link_pattern
         exchange_direction = query.__dict__ | query.exchange.__dict__
@@ -129,25 +99,11 @@ def new_get_exchange_direction_list(queries: List[NoCashExDir | CashExDir],
 
 
 def get_valute_json(queries: List[NoCashExDir | CashExDir]):
-    valute_name_list = set(map(lambda query: query[0], queries))
-    valutes = Valute.objects.filter(code_name__in=valute_name_list).all()
+    
+    '''
+    Возвращает словарь валют с необходимыми данными 
+    '''
 
-    default_dict_keys = {valute.type_valute for valute in valutes}
-
-    json_dict = defaultdict(list)
-
-    json_dict.fromkeys(default_dict_keys)
-
-    for id, valute in enumerate(valutes, start=1):
-        icon_url = try_generate_icon_url(valute)
-        valute.icon_url = icon_url
-        valute.id = id
-        json_dict[valute.type_valute].append(ValuteModel(**valute.__dict__))
-
-    return json_dict
-
-
-def new_get_valute_json(queries: List[NoCashExDir | CashExDir]):
     valute_name_list = set(map(lambda query: query[0], queries))
     valutes = Valute.objects.filter(code_name__in=valute_name_list).all()
     

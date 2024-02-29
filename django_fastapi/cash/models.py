@@ -1,10 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
 from general_models.models import (BaseExchangeDirection,
                                    Valute,
-                                   BaseExchange,
                                    ParseExchange,
                                    BaseDirection,
                                    BaseReview,
@@ -55,7 +53,6 @@ class City(models.Model):
     class Meta:
         verbose_name = 'Город'
         verbose_name_plural = 'Города'
-        # ordering = ['is_parse', 'name']
         ordering = ['name']
 
         indexes = [
@@ -70,26 +67,6 @@ class City(models.Model):
 class Exchange(ParseExchange):
     direction_black_list = models.ManyToManyField('BlackListElement',
                                                   verbose_name='Чёрный список')
-    
-
-# class CustomUser(models.Model):
-#     user = models.OneToOneField(User,
-#                                 verbose_name='Пользователь',
-#                                 on_delete=models.CASCADE)
-#     exchange = models.OneToOneField(Exchange,
-#                                     verbose_name='Наличный обменник',
-#                                     unique=True,
-#                                     blank=True,
-#                                     null=True,
-#                                     default=None,
-#                                     on_delete=models.SET_DEFAULT)
-    
-#     class Meta:
-#         verbose_name = 'Администратор обменника'
-#         verbose_name_plural = 'Администраторы обменников'
-
-#     def __str__(self):
-#         return f'Пользователь: {self.user}, Обменник: {self.exchange}'
     
 
 #Модель отзыва

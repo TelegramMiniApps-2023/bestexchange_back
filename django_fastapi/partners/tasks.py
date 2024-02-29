@@ -1,12 +1,17 @@
 import requests
 
 from time import sleep
+from datetime import timedelta
 
 from celery import shared_task
 
 from django.db.models import Q
 
+from general_models.utils.base import get_actual_datetime, get_timedelta
+
 from cash.models import Direction
+
+from .models import Direction as PartnerDirection
 
 
 @shared_task(name='parse_cash_courses')
@@ -40,3 +45,12 @@ def parse_cash_courses():
                 pass
         sleep(0.3)
 
+
+@shared_task(name='check_update_time_for_directions')
+def check_update_time_for_directions():
+    time_delta = get_timedelta()
+    check_time = get_actual_datetime() - time_delta
+    
+    PartnerDirection.objects\
+                    .filter(time_update__lt=check_time)\
+                    .update(is_active=False)

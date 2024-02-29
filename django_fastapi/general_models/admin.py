@@ -3,6 +3,7 @@ from typing import Any
 from django.db.models import Count
 from django.contrib import admin
 from django.contrib.auth.models import User, Group
+from django.db.models.query import QuerySet
 from django.utils.safestring import mark_safe
 from django.http.request import HttpRequest
 
@@ -12,9 +13,12 @@ from django_celery_beat.models import (SolarSchedule,
                                        ClockedSchedule,
                                        CrontabSchedule)
 
+from partners.utils.periodic_tasks import (edit_time_for_task_check_directions_on_active,
+                                           edit_time_live_for_partner_directions)
+
 from .utils.admin import ReviewAdminMixin
 from .utils.endpoints import try_generate_icon_url
-from .models import Valute
+from .models import Valute, PartnerTimeUpdate
 
 
 #DONT SHOW PERIODIC TASKS IN ADMIN PANEL
@@ -27,6 +31,47 @@ admin.site.unregister(CrontabSchedule)
 #DONT SHOW USER AND GROUP IN ADMIN PANEL
 # admin.site.unregister(User)
 # admin.site.unregister(Group)
+
+
+@admin.register(PartnerTimeUpdate)
+class PartnerTimeUpdateAdmin(admin.ModelAdmin):
+    list_display = ('name', )
+    # readonly_fields = ('name', )
+    fields = (
+        # 'name',
+        'amount',
+        'unit_time',
+    )
+
+    def has_delete_permission(self, request: HttpRequest, obj: Any | None = ...) -> bool:
+        return False
+    
+    def has_add_permission(self, request: HttpRequest) -> bool:
+        return False
+    
+    def save_model(self, request: Any, obj: Any, form: Any, change: Any) -> None:
+        update_fields = []
+        fields_to_update_task = {}
+
+        if change:
+            for key, value in form.cleaned_data.items():
+                if value != form.initial[key]:
+                    update_fields.append(key)
+                match key:
+                    case 'amount':
+                        fields_to_update_task[key] = value
+                    case 'unit_time':
+                        fields_to_update_task[key] = value
+
+            obj.save(update_fields=update_fields)
+
+            match obj.name:
+                case 'Управление временем проверки активности направлений':
+                    edit_time_for_task_check_directions_on_active(fields_to_update_task)
+                case 'Управление временем жизни направлений':
+                    edit_time_live_for_partner_directions(fields_to_update_task)
+        else:
+            return super().save_model(request, obj, form, change)
 
 
 #Отображение валют в админ панели
@@ -50,6 +95,7 @@ class BaseCommentAdmin(ReviewAdminMixin, admin.ModelAdmin):
     list_display = ("username", "get_exchange", "time_create", "moderation")
     readonly_fields = ('moderation', 'review')
     ordering = ('-time_create', 'moderation')
+    list_filter = ('time_create', )
 
     def get_exchange(self, obj):
         return obj.review.exchange
@@ -78,7 +124,8 @@ class BaseCommentStacked(admin.StackedInline):
 
 #Базовое отображение отзывов в админ панели
 class BaseReviewAdmin(ReviewAdminMixin, admin.ModelAdmin):
-    list_display = ("username", "exchange", "time_create", "comment_count", "moderation")
+    list_display = ("username", "exchange", "time_create", "moderation", "comment_count")
+    list_filter = ('time_create', )
     readonly_fields = ('moderation', )
     ordering = ('exchange__name', '-time_create', 'status')
     
@@ -161,3 +208,8 @@ class BaseDirectionAdmin(admin.ModelAdmin):
     
     def has_change_permission(self, request, obj = None):
         return False
+    
+    def get_queryset(self, request: HttpRequest) -> QuerySet[Any]:
+        return super().get_queryset(request)\
+                        .select_related('valute_from',
+                                        'valute_to')

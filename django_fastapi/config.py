@@ -15,3 +15,7 @@ CSRF_TOKEN = os.environ.get('CSRF_TOKEN')
 SELENIUM_DRIVER = os.environ.get('SELENIUM_DRIVER')
 
 REDIS_HOST = os.environ.get('REDIS_HOST')
+REDIS_PASSWORD = os.environ.get('REDIS_PASSWORD')
+REDIS_PORT = os.environ.get('REDIS_PORT')
+
+REDIS_URL = f"redis://:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}"

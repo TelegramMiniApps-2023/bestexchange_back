@@ -1,9 +1,32 @@
-import datetime
-
-from django.db.models.signals import post_save, post_delete, pre_save
+from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 
+from django_celery_beat.models import IntervalSchedule, PeriodicTask
+
+from general_models.utils.base import get_actual_datetime, UNIT_TIME_CHOICES
+from general_models.utils.periodic_tasks import get_or_create_schedule
+from general_models.models import PartnerTimeUpdate
+
 from .models import Direction, Exchange, Review, Comment
+
+
+# Сигнал для создания периодической задачи, которая проверяет
+# партнёрские направления на активность, если направление не изменялось
+# более 3 дней, направление становится неактивным
+@receiver(post_save, sender=PartnerTimeUpdate)
+def create_custom_user_for_user(sender, instance, created, **kwargs):
+    if instance.name == 'Управление временем проверки активности направлений':
+        if created:
+            amount = instance.amount
+            unit_time = instance.unit_time
+
+            schedule = get_or_create_schedule(amount,
+                                              UNIT_TIME_CHOICES[unit_time])
+            PeriodicTask.objects.create(
+                    interval=schedule,
+                    name='check_update_time_for_directions_task',
+                    task='check_update_time_for_directions',
+                    )
 
 
 #Сигнал для добавления поля en_name обменника
@@ -14,28 +37,12 @@ def add_en_name_for_exchange(sender, instance, **kwargs):
         instance.en_name = instance.name
 
 
-#Сигнал для удаления дубликатов созданного направления
-#(если такие есть)
-# @receiver(pre_save, sender=Direction)
-# def check_direction_on_unique(sender, instance, **kwargs):
-#     exchange_id = instance.exchange_id
-#     direction_id = instance.direction_id
-#     cities_id = instance.cities_id
-
-#     dublucate_direction = Exchange.objects.get(id=exchange_id)\
-#                                     .directions.filter(direction_id=direction_id,
-#                                                        cities_id=cities_id).all()
-
-#     if dublucate_direction:
-#         dublucate_direction.delete()
-
-
 #Сигнал для автоматической установки времени
 #по московскому часовому поясу при создании отзыва в БД
 @receiver(pre_save, sender=Review)
 def change_time_create_for_review(sender, instance, **kwargs):
     if instance.time_create is None:
-        instance.time_create = datetime.datetime.now() + datetime.timedelta(hours=9)
+        instance.time_create = get_actual_datetime()
 
 
 #Сигнал для автоматической установки времени
@@ -43,4 +50,10 @@ def change_time_create_for_review(sender, instance, **kwargs):
 @receiver(pre_save, sender=Comment)
 def change_time_create_for_comment(sender, instance, **kwargs):
     if instance.time_create is None:
-        instance.time_create = datetime.datetime.now() + datetime.timedelta(hours=9)
+        instance.time_create = get_actual_datetime()
+
+
+@receiver(pre_save, sender=Direction)
+def change_time_create_for_direction(sender, instance, **kwargs):
+    if instance.time_update is None:
+        instance.time_update = get_actual_datetime()

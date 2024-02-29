@@ -422,6 +422,30 @@
 
 
     {
+        "model": "general_models.partnertimeupdate",
+        "pk": 1,
+        "fields": {
+            "name": "Управление временем проверки активности направлений",
+            "amount": 1,
+            "unit_time": "MINUTE"
+                }
+    },
+
+    {
+        "model": "general_models.partnertimeupdate",
+        "pk": 2,
+        "fields": {
+            "name": "Управление временем жизни направлений",
+            "amount": 3,
+            "unit_time": "DAY"
+                }
+    },
+
+
+
+
+
+    {
         "model": "no_cash.exchange",
         "pk": 1,
         "fields": {

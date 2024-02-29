@@ -85,7 +85,6 @@ class ExchangeAdmin(BaseExchangeAdmin):
             parse_reviews_for_exchange.delay(obj.en_name, 'no_cash')
 
 
-
 #Отображение направлений в админ панели
 @admin.register(Direction)
 class DirectionAdmin(BaseDirectionAdmin):

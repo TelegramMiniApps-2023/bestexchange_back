@@ -43,7 +43,7 @@ services:
                     python manage.py migrate &&
                     python manage.py collectstatic --no-input &&
                     python manage.py loaddata media/base_db.json &&
-                    python manage.py loaddata media/new_country.json &&
+                    python manage.py loaddata media/countries.json &&
                     python manage.py create_periodic_task_for_delete_reviews &&
                     python manage.py create_cities &&
                     python manage.py create_moderator_group &&
@@ -58,32 +58,28 @@ services:
       - static:/static
       - media:/media
     ports:
-      # - '81:80'
-      - '80:80'
+      - '81:80'
+      # - '80:80'
     depends_on:
       - django_fastapi
     logging:
       driver: "json-file"
       options:
           max-size: "20m"
-    
-  # rabbitmq3:
-  #   image: rabbitmq:3.6.9
-  #   ports:
-  #   - "5672:5672"
-  #   - "15672:15672"
-  #   volumes:
-  #     - rabbitmq_data:/var/lib/rabbitmq
 
   redis_db:
     image: redis:latest
     ports:
       - 6379:6379
+    env_file:
+      - ./.env
+    command: redis-server --requirepass ${REDIS_PASSWORD}
     volumes:
-      - redis_data:/var/lib/redis
+      - redis_data:/data
 
   celery_worker:
     build: .
+    restart: on-failure
     command: sh -c 'celery -A project worker -l info -c 20 -Ofair'
     environment:
       - POSTGRES_HOST=psql_db
@@ -130,7 +126,6 @@ services:
 
 volumes:
   postgres-data:
-  # rabbitmq_data:
   redis_data:
   static:
   media:
