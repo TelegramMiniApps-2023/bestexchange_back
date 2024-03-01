@@ -110,13 +110,7 @@ class DirectionAdmin(admin.ModelAdmin):
             update_fields = set()
             for key, value in form.cleaned_data.items():
                 if value != form.initial[key]:
-                    # match key:
-                    #     case 'percent':
-                    #         update_field_time_update(obj, update_fields)
-                    #     case 'fix_amount':
-                    #         update_field_time_update(obj, update_fields)
                     update_field_time_update(obj, update_fields)
-
                     update_fields.add(key)
             obj.save(update_fields=update_fields)
         else:

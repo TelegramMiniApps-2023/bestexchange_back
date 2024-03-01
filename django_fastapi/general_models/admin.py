@@ -68,8 +68,8 @@ class PartnerTimeUpdateAdmin(admin.ModelAdmin):
             match obj.name:
                 case 'Управление временем проверки активности направлений':
                     edit_time_for_task_check_directions_on_active(fields_to_update_task)
-                case 'Управление временем жизни направлений':
-                    edit_time_live_for_partner_directions(fields_to_update_task)
+                # case 'Управление временем жизни направлений':
+                #     edit_time_live_for_partner_directions(fields_to_update_task)
         else:
             return super().save_model(request, obj, form, change)
 

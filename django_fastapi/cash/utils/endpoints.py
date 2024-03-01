@@ -1,5 +1,4 @@
 from cash.models import Country
-
 from cash.schemas import MultipleName
 
 from general_models.utils.endpoints import try_generate_icon_url

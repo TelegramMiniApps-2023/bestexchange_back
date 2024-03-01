@@ -9,9 +9,9 @@ def get_or_set_user_account_cache(user: User):
         account_user = CustomUser.objects\
                             .select_related('exchange', 'user')\
                             .filter(user=user).get()
-        cache.set(f'account_user_{user.pk}', account_user, 60)
+        cache.set(f'account_user_{user.pk}', account_user, 20)
     return account_user
 
 
 def set_user_account_cache(account_user: CustomUser):
-        cache.set(f'account_user_{account_user.user.pk}', account_user, 60)
+        cache.set(f'account_user_{account_user.user.pk}', account_user, 20)

@@ -2,6 +2,7 @@ from typing import List
 from collections import defaultdict
 
 from django.conf import settings
+from django.db import connection
 
 from cash.models import ExchangeDirection as CashExDir, City
 from no_cash.models import ExchangeDirection as NoCashExDir
@@ -26,6 +27,7 @@ def round_valute_values(exchange_direction_dict: dict):
     try:
         valute_from = exchange_direction_dict['valute_from']
         type_valute_from = exchange_direction_dict['type_valute_from']
+        
         min_amount = float(exchange_direction_dict['min_amount'].split()[0])
         max_amount = float(exchange_direction_dict['max_amount'].split()[0])
 
@@ -83,15 +85,18 @@ def get_exchange_direction_list(queries: List[NoCashExDir | CashExDir],
     for _id, query in enumerate(queries, start=1):
         if query.exchange.__dict__.get('partner_link') and not query.__dict__.get('direction_id'):
             query.exchange.__dict__['partner_link'] += partner_link_pattern
+
         exchange_direction = query.__dict__ | query.exchange.__dict__
         exchange_direction['id'] = _id
         exchange_direction['name'] = MultipleName(name=exchange_direction['name'],
                                                   en_name=exchange_direction['en_name'])
+        
         exchange_direction['icon_valute_from'] = icon_url_valute_from
         exchange_direction['type_valute_from'] = type_valute_from
 
         exchange_direction['icon_valute_to'] = icon_url_valute_to
         exchange_direction['type_valute_to'] = type_valute_to
+
         round_valute_values(exchange_direction)
         direction_list.append(exchange_direction)
 

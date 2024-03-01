@@ -18,7 +18,8 @@ def get_actual_datetime():
 
 
 def get_timedelta():
-    time_live_obj = PartnerTimeUpdate.objects.get(name='Управление временем жизни направлений')
+    time_live_obj = PartnerTimeUpdate.objects\
+                                        .get(name='Управление временем жизни направлений')
     amount = time_live_obj.amount
     unit_time = time_live_obj.unit_time
 

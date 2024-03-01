@@ -6,15 +6,14 @@ from django.db import connection
 from fastapi import APIRouter, Request
 
 from general_models.utils.http_exc import http_exception_json
-from general_models.utils.endpoints import (try_generate_icon_url,
-                                            get_exchange_direction_list,
+from general_models.utils.endpoints import (get_exchange_direction_list,
                                             get_valute_json)
 
 from partners.utils.endpoints import get_partner_directions
+from partners.models import Direction as PartnerDirection
 
-
-from .models import Country, City, ExchangeDirection
-from .schemas import MultipleName, RuEnCountryModel
+from .models import City, ExchangeDirection
+from .schemas import RuEnCountryModel
 from .utils.endpoints import get_available_countries
 
 
@@ -36,25 +35,6 @@ def get_available_coutries(request: Request):
 
     countries = get_available_countries(cities)
 
-    # country_names = sorted({city.country.name for city in cities})
-    
-    # countries = Country.objects.filter(name__in=country_names)\
-    #                             .prefetch_related('cities').all()
-
-    # # print(len(connection.queries))
-    # for country in countries:
-    #     country.city_list = list(filter(lambda el: el.is_parse == True,
-    #                                     country.cities.all()))
-
-    #     for city in country.city_list:
-    #         city.name = MultipleName(name=city.name,
-    #                                  en_name=city.en_name)
-        
-    #     country.country_flag = try_generate_icon_url(country)
-
-    #     country.name = MultipleName(name=country.name,
-    #                                en_name=country.en_name)
-    # print(len(connection.queries))
     return countries
 
 
@@ -67,18 +47,32 @@ def cash_valutes(request: Request,
     
     city, base = (params[key] for key in params)
 
-    queries = ExchangeDirection.objects\
-                                .select_related('exchange')\
-                                .filter(city=city,
-                                        is_active=True,
-                                        exchange__is_active=True)
+    cash_queries = ExchangeDirection.objects\
+                                    .select_related('exchange')\
+                                    .filter(city=city,
+                                            is_active=True,
+                                            exchange__is_active=True)
+    partner_queries = PartnerDirection.objects\
+                                        .select_related('direction',
+                                                        'direction__valute_from',
+                                                        'direction__valute_to',
+                                                        'city__exchange')\
+                                        .filter(city__city__code_name=city,
+                                                is_active=True,
+                                                city__exchange__isnull=False)
 
     if base == 'ALL':
-        queries = queries.values_list('valute_from').all()
+        cash_queries = cash_queries.values_list('valute_from').all()
+        partner_queries = partner_queries\
+                                .values_list('direction__valute_from__code_name').all()
     else:
-        queries = queries.filter(valute_from=base)\
-                            .values_list('valute_to').all()
-        
+        cash_queries = cash_queries.filter(valute_from=base)\
+                                    .values_list('valute_to').all()
+        partner_queries = partner_queries.filter(direction__valute_from__code_name=base)\
+                                        .values_list('direction__valute_to__code_name').all()
+
+    queries = cash_queries.union(partner_queries)
+
     if not queries:
         http_exception_json(status_code=404, param=request.url)
 
