@@ -48,12 +48,17 @@ def cash_valutes(request: Request,
     city, base = (params[key] for key in params)
 
     cash_queries = ExchangeDirection.objects\
-                                    .select_related('exchange')\
-                                    .filter(city=city,
+                                    .select_related('exchange',
+                                                    'city',
+                                                    'direction',
+                                                    'direction__valute_from',
+                                                    'direction__valute_to')\
+                                    .filter(city__code_name=city,
                                             is_active=True,
                                             exchange__is_active=True)
     partner_queries = PartnerDirection.objects\
                                         .select_related('direction',
+                                                        'city',
                                                         'direction__valute_from',
                                                         'direction__valute_to',
                                                         'city__exchange')\
@@ -62,12 +67,13 @@ def cash_valutes(request: Request,
                                                 city__exchange__isnull=False)
 
     if base == 'ALL':
-        cash_queries = cash_queries.values_list('valute_from').all()
+        cash_queries = cash_queries\
+                                .values_list('direction__valute_from').all()
         partner_queries = partner_queries\
                                 .values_list('direction__valute_from__code_name').all()
     else:
-        cash_queries = cash_queries.filter(valute_from=base)\
-                                    .values_list('valute_to').all()
+        cash_queries = cash_queries.filter(direction__valute_from=base)\
+                                    .values_list('direction__valute_to').all()
         partner_queries = partner_queries.filter(direction__valute_from__code_name=base)\
                                         .values_list('direction__valute_to__code_name').all()
 
@@ -91,11 +97,15 @@ def cash_exchange_directions(request: Request,
     review_count_filter = Count('exchange__reviews',
                                 filter=Q(exchange__reviews__moderation=True))
     queries = ExchangeDirection.objects\
-                                .select_related('exchange')\
+                                .select_related('exchange',
+                                                'city',
+                                                'direction',
+                                                'direction__valute_from',
+                                                'direction__valute_to')\
                                 .annotate(review_count=review_count_filter)\
-                                .filter(city=city,
-                                        valute_from=valute_from,
-                                        valute_to=valute_to,
+                                .filter(city__code_name=city,
+                                        direction__valute_from=valute_from,
+                                        direction__valute_to=valute_to,
                                         is_active=True,
                                         exchange__is_active=True).all()
 

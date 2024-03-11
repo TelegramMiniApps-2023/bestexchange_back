@@ -1,4 +1,5 @@
-from celery import shared_task
+from celery import shared_task, current_task
+from celery.app.task import Task
 
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
@@ -28,8 +29,9 @@ def delete_cancel_reviews():
 #WITH SELENIUM
 #Фоновая задача парсинга отзывов и комментариев
 #для всех обменников из БД при запуске сервиса
-@shared_task
+@shared_task(acks_late=True, task_reject_on_worker_lost=True)
 def parse_reviews_with_start_service():
+    print(current_task.__dict__)
     try:
         # driver = webdriver.Firefox()
         options = Options()
@@ -43,7 +45,7 @@ def parse_reviews_with_start_service():
                 parse_reviews(driver,
                               exchange_name,
                               marker)
-    except Exception as ex:
+    except (Exception, BaseException) as ex:
         print(ex)
     finally:
         driver.quit()

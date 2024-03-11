@@ -73,15 +73,24 @@ class ExchangeDirection(BaseExchangeDirection):
                                  on_delete=models.CASCADE,
                                  verbose_name='Обменник',
                                  related_name='directions')
+    direction = models.ForeignKey(Direction,
+                                  verbose_name='Направление для обмена',
+                                  on_delete=models.CASCADE,
+                                  related_name='exchange_directions')
     
     class Meta:
-        unique_together = (("exchange", "valute_from", "valute_to"), )
+        # unique_together = (("exchange", "valute_from", "valute_to"), )
+        unique_together = (("exchange", "direction"), )
         verbose_name = 'Готовое направление'
         verbose_name_plural = 'Готовые направления'
-        ordering = ['-is_active', 'exchange', 'valute_from', 'valute_to']
-        indexes = [
-            models.Index(fields=['valute_from', 'valute_to'])
-        ]
+        ordering = ['-is_active',
+                    'exchange',
+                    'direction__valute_from',
+                    'direction__valute_to']
+        # indexes = [
+        #     models.Index(fields=['direction__valute_from', 'direction__valute_to'])
+        # ]
 
     def __str__(self):
-        return f'{self.exchange}:  {self.valute_from} -> {self.valute_to}'
+        # return f'{self.exchange}:  {self.valute_from} -> {self.valute_to}'
+        return f'{self.exchange}:  {self.direction}'

@@ -33,21 +33,29 @@ def create_direction(dict_for_parse: dict,
                      xml_file: str):
     print('*' * 10)
     print('inside task')
+    ###
+    direction = Direction.objects.get(valute_to=dict_for_parse['valute_to_id'],
+                                      valute_from=dict_for_parse['valute_from_id'])
+    exchange = Exchange.objects.get(name=dict_for_parse['name'])
+    ###
 
     try:
         dict_for_create_exchange_direction = no_cash_parse_xml(dict_for_parse, xml_file)
     except NoFoundXmlElement:
-        not_found_direction = Direction.objects.get(valute_to=dict_for_parse['valute_to_id'],
-                                                    valute_from=dict_for_parse['valute_from_id'])
+        # not_found_direction = Direction.objects.get(valute_to=dict_for_parse['valute_to_id'],
+        #                                             valute_from=dict_for_parse['valute_from_id'])
+        not_found_direction = direction
         print('NOT FOUND DIRECTION', not_found_direction)
-        Exchange.objects.get(name=dict_for_parse['name'])\
-                        .direction_black_list.add(not_found_direction)
+        # Exchange.objects.get(name=dict_for_parse['name'])\
+        #                 .direction_black_list.add(not_found_direction)
+        exchange.direction_black_list.add(not_found_direction)
     except Exception as ex:
         print('PARSE FAILED', ex)
         pass
     else:
-        exchange = Exchange.objects.get(name=dict_for_parse['name'])
+        # exchange = Exchange.objects.get(name=dict_for_parse['name'])
         dict_for_create_exchange_direction['exchange'] = exchange
+        dict_for_create_exchange_direction['direction'] = direction
         try:
             ExchangeDirection.objects.create(**dict_for_create_exchange_direction)
         except Exception as ex:
@@ -61,9 +69,16 @@ def update_no_cash_diretions_for_exchange(exchange_name: str):
     exchange = Exchange.objects.get(name=exchange_name)
     xml_file = try_get_xml_file(exchange)
 
-    if xml_file is not None:
-        if exchange.is_active:
-            direction_list = exchange.directions.values_list('valute_from', 'valute_to').all()
+    # if xml_file is not None:
+    #     if exchange.is_active:
+    if xml_file is not None and exchange.is_active:
+            # direction_list = exchange.directions.values_list('valute_from', 'valute_to').all()
+            direction_list = exchange.directions\
+                                    .select_related('direction',
+                                                    'direction__valute_from',
+                                                    'direction__valute_to')\
+                                    .values_list('direction__valute_from',
+                                                 'direction__valute_to').all()
 
             if direction_list:
                 run_no_cash_background_tasks(try_update_direction,
@@ -78,12 +93,15 @@ def try_update_direction(dict_for_parse: dict,
     print('*' * 10)
     print('inside task')
 
+    exchange_direction = ExchangeDirection.objects\
+                        .select_related('direction',
+                                        'direction__valute_from',
+                                        'direction__valute_to')\
+                        .filter(exchange=dict_for_parse['id'],
+                                direction__valute_from=dict_for_parse['valute_from_id'],
+                                direction__valute_to=dict_for_parse['valute_to_id'])
+
     try:
-        exchange_direction = ExchangeDirection.objects\
-                            .filter(exchange=dict_for_parse['id'],
-                            valute_from=dict_for_parse['valute_from_id'],
-                            valute_to=dict_for_parse['valute_to_id'],
-                            )
         dict_for_update_exchange_direction = no_cash_parse_xml(dict_for_parse, xml_file)
     except NoFoundXmlElement as ex:
         print('CATCH EXCEPTION', ex)
@@ -108,7 +126,10 @@ def try_create_no_cash_directions_from_black_list(exchange_name: str):
     if xml_file is not None:
         if exchange.is_active:
             black_list_directions = exchange.direction_black_list\
-                                            .values_list('valute_from', 'valute_to').all()
+                                            .select_related('valute_from',
+                                                            'valute_to')\
+                                            .values_list('valute_from',
+                                                         'valute_to').all()
 
             if black_list_directions:
                 run_no_cash_background_tasks(try_create_black_list_direction,
@@ -133,13 +154,16 @@ def try_create_black_list_direction(dict_for_parse: dict,
         pass
     else:
         exchange = Exchange.objects.get(name=dict_for_parse['name'])
+        direction = Direction.objects.get(valute_from=dict_for_parse['valute_from_id'],
+                                          valute_to=dict_for_parse['valute_from_id'])
         dict_for_exchange_direction['exchange'] = exchange
+        dict_for_exchange_direction['direction'] = direction
         try:
             ExchangeDirection.objects.create(**dict_for_exchange_direction)
 
-            direction = Direction.objects\
-                        .get(valute_from=dict_for_exchange_direction['valute_from'],
-                             valute_to=dict_for_exchange_direction['valute_to'])
+            # direction = Direction.objects\
+            #             .get(valute_from=dict_for_exchange_direction['valute_from'],
+            #                  valute_to=dict_for_exchange_direction['valute_to'])
             exchange.direction_black_list.remove(direction)
         except Exception:
             pass

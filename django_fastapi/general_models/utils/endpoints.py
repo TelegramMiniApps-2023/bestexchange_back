@@ -67,14 +67,8 @@ def get_exchange_direction_list(queries: List[NoCashExDir | CashExDir],
     '''
     Возвращает список готовых направлений с необходимыми данными
     '''
-
-    valute_from_obj = Valute.objects.get(code_name=valute_from)
-    icon_url_valute_from = try_generate_icon_url(valute_from_obj)
-    type_valute_from = valute_from_obj.type_valute
-
-    valute_to_obj = Valute.objects.get(code_name=valute_to)
-    icon_url_valute_to = try_generate_icon_url(valute_to_obj)
-    type_valute_to = valute_to_obj.type_valute
+    
+    valute_from_obj = valute_to_obj = None
 
     direction_list = []
 
@@ -83,17 +77,30 @@ def get_exchange_direction_list(queries: List[NoCashExDir | CashExDir],
         partner_link_pattern += f'&city={city}'
 
     for _id, query in enumerate(queries, start=1):
-        if query.exchange.__dict__.get('partner_link') and not query.__dict__.get('direction_id'):
+        if query.exchange.__dict__.get('partner_link') and query.exchange.__dict__.get('period_for_create'):
             query.exchange.__dict__['partner_link'] += partner_link_pattern
+
+        if valute_from_obj is None:
+            valute_from_obj = query.direction.valute_from
+
+        icon_url_valute_from = try_generate_icon_url(valute_from_obj)
+        type_valute_from = valute_from_obj.type_valute
+
+        if valute_to_obj is None:
+            valute_to_obj = query.direction.valute_to
+
+        icon_url_valute_to = try_generate_icon_url(valute_to_obj)
+        type_valute_to = valute_to_obj.type_valute
 
         exchange_direction = query.__dict__ | query.exchange.__dict__
         exchange_direction['id'] = _id
         exchange_direction['name'] = MultipleName(name=exchange_direction['name'],
                                                   en_name=exchange_direction['en_name'])
-        
+        exchange_direction['valute_from'] = valute_from
         exchange_direction['icon_valute_from'] = icon_url_valute_from
         exchange_direction['type_valute_from'] = type_valute_from
 
+        exchange_direction['valute_to'] = valute_to
         exchange_direction['icon_valute_to'] = icon_url_valute_to
         exchange_direction['type_valute_to'] = type_valute_to
 

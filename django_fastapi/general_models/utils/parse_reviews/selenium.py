@@ -72,3 +72,6 @@ def parse_reviews(driver: WebDriver,
                             add_comment_to_db(review, data, marker)
     except Exception as ex:
         print(ex)
+    except BaseException as ex:
+        print(ex)
+        return

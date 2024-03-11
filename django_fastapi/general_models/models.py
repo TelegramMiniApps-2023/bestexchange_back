@@ -203,8 +203,8 @@ class BaseDirection(models.Model):
 
 #Абстрактная модель готового направления (для наследования)
 class BaseExchangeDirection(models.Model):
-    valute_from = models.CharField('Отдаём', max_length=10)
-    valute_to = models.CharField('Получаем', max_length=10)
+    # valute_from = models.CharField('Отдаём', max_length=10)
+    # valute_to = models.CharField('Получаем', max_length=10)
     in_count = models.DecimalField('Сколько отдаём',
                                    max_digits=20,
                                    decimal_places=2)

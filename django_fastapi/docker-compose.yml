@@ -7,6 +7,8 @@ services:
     ports:
       - "4444:4444"
       - "7900:7900"
+    volumes:
+      - selenium-data:/home/seluser/Downloads
     environment:
       - SE_SESSION_REQUEST_TIMEOUT=3600
       - SE_NODE_SESSION_TIMEOUT=3600
@@ -26,11 +28,11 @@ services:
       - REDIS_HOST=redis_db
     env_file:
       - ./.env
-    container_name: django_fastapi
+    # container_name: django_fastapi
     depends_on:
       - psql_db
       - redis_db
-      - celery_worker
+      # - celery_worker
       - firefox
     logging:
       driver: "json-file"
@@ -58,8 +60,8 @@ services:
       - static:/static
       - media:/media
     ports:
-      # - '81:80'
-      - '80:80'
+      - '81:80'
+      # - '80:80'
     depends_on:
       - django_fastapi
     logging:
@@ -73,7 +75,7 @@ services:
       - 6379:6379
     env_file:
       - ./.env
-    command: redis-server --requirepass ${REDIS_PASSWORD}
+    command: redis-server --requirepass ${REDIS_PASSWORD} --appendonly yes --replica-read-only no
     volumes:
       - redis_data:/data
 
@@ -125,6 +127,7 @@ services:
           max-size: "20m"
 
 volumes:
+  selenium-data:
   postgres-data:
   redis_data:
   static:

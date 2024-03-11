@@ -13,11 +13,11 @@ from .periodic_tasks import (manage_periodic_task_for_create,
 
 #Сигнал для удаления всех связанных готовых направлений
 #при удалении направления из БД
-@receiver(post_delete, sender=Direction)
-def delete_directions_from_exchanges(sender, instance, **kwargs):
-    direction_list = ExchangeDirection.objects.filter(valute_from=instance.valute_from,
-                                                      valute_to=instance.valute_to).all()
-    direction_list.delete()
+# @receiver(post_delete, sender=Direction)
+# def delete_directions_from_exchanges(sender, instance, **kwargs):
+#     direction_list = ExchangeDirection.objects.filter(valute_from=instance.valute_from,
+#                                                       valute_to=instance.valute_to).all()
+#     direction_list.delete()
 
 
 #Сигнал для добавления поля en_name обменника

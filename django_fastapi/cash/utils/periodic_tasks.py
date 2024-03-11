@@ -1,6 +1,6 @@
 from celery.local import Proxy
 
-from cash.models import Exchange as CashExchange, BlackListElement
+from cash.models import Exchange as CashExchange, BlackListElement, Direction, City
 from .parsers import check_city_in_xml_file
 
 
@@ -19,11 +19,16 @@ def run_cash_background_tasks(task: Proxy,
             print(f'Нет города {city} в {exchange.name}')
             if not black_list_parse:
                 for valute_from, valute_to in direction_dict[city]:
+                    direction = Direction.objects.get(valute_from=valute_from,
+                                                      valute_to=valute_to)
+                    city_model = City.objects.get(code_name=city)
                     black_list_element, _ = BlackListElement\
                                             .objects\
-                                            .get_or_create(city=city,
-                                                           valute_from=valute_from,
-                                                           valute_to=valute_to)
+                                            .get_or_create(city=city_model,
+                                                           direction=direction)
+                                            # .get_or_create(city=city,
+                                            #                valute_from=valute_from,
+                                            #                valute_to=valute_to)
                     try:
                         exchange.direction_black_list.add(black_list_element)
                     except Exception:

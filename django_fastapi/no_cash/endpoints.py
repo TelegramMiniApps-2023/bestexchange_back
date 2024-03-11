@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Request
 
 from django.db.models import Count, Q
+from django.db import connection
 
 from general_models.utils.http_exc import http_exception_json
 from general_models.utils.endpoints import (get_exchange_direction_list,
@@ -22,15 +23,18 @@ def no_cash_valutes(request: Request,
     base = params['base']
 
     queries = ExchangeDirection.objects\
-                                .select_related('exchange')\
+                                .select_related('exchange',
+                                                'direction',
+                                                'direction__valute_from',
+                                                'direction__valute_to')\
                                 .filter(is_active=True,
                                         exchange__is_active=True)
 
     if base == 'ALL':
-        queries = queries.values_list('valute_from').all()
+        queries = queries.values_list('direction__valute_from').all()
     else:
-        queries = queries.filter(valute_from=base)\
-                            .values_list('valute_to').all()
+        queries = queries.filter(direction__valute_from=base)\
+                            .values_list('directon__valute_to').all()
         
     if not queries:
         http_exception_json(status_code=404, param=request.url)
@@ -45,16 +49,19 @@ def no_cash_exchange_directions(request: Request,
     for param in params:
         if not params[param]:
             http_exception_json(status_code=400, param=param)
-    
+
     valute_from, valute_to = (params[key] for key in params)
 
     review_count_filter = Count('exchange__reviews',
                                 filter=Q(exchange__reviews__moderation=True))
     queries = ExchangeDirection.objects\
-                                .select_related('exchange')\
+                                .select_related('exchange',
+                                                'direction',
+                                                'direction__valute_from',
+                                                'direction__valute_to')\
                                 .annotate(review_count=review_count_filter)\
-                                .filter(valute_from=valute_from,
-                                        valute_to=valute_to,
+                                .filter(direction__valute_from=valute_from,
+                                        direction__valute_to=valute_to,
                                         is_active=True,
                                         exchange__is_active=True)\
                                 .order_by('-out_count', 'in_count').all()

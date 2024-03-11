@@ -141,38 +141,64 @@ class ExchangeDirection(BaseExchangeDirection):
                                  on_delete=models.CASCADE,
                                  verbose_name='Обменник',
                                  related_name='directions')
-    city = models.CharField('Город', max_length=100)
+    direction = models.ForeignKey(Direction,
+                                  verbose_name='Направление для обмена',
+                                  on_delete=models.CASCADE,
+                                  related_name='exchange_directions')
+    # city = models.CharField('Город', max_length=100)
+    city = models.ForeignKey(City,
+                             verbose_name='Город',
+                             on_delete=models.CASCADE,
+                             related_name='cash_directions')
     fromfee = models.FloatField('Процент', blank=True, null=True)
     params = models.CharField('Параметры', max_length=100, blank=True, null=True)
 
     class Meta:
-        unique_together = (("exchange", "city", "valute_from", "valute_to"), )
+        # unique_together = (("exchange", "city", "valute_from", "valute_to"), )
+        unique_together = (("exchange", "city", "direction"), )
         verbose_name = 'Готовое направление'
         verbose_name_plural = 'Готовые направления'
-        ordering = ['-is_active', 'exchange', 'city', 'valute_from', 'valute_to']
-        indexes = [
-            models.Index(fields=['city', 'valute_from', 'valute_to'])
-        ]
+        ordering = ['-is_active',
+                    'exchange',
+                    'city',
+                    'direction__valute_from',
+                    'direction__valute_to']
+        # indexes = [
+        #     models.Index(fields=['city', 'valute_from', 'valute_to'])
+        # ]
 
     def __str__(self):
-        return f'{self.city}: {self.valute_from} -> {self.valute_to}'
+        # return f'{self.city}: {self.valute_from} -> {self.valute_to}'
+        return f'{self.city}: {self.direction}'
 
 
 #Модель элемента чёрного списка
 class BlackListElement(models.Model):
-    city = models.CharField('Город', max_length=100)
-    valute_from = models.CharField('Отдаём', max_length=10)
-    valute_to = models.CharField('Получаем', max_length=10)
+    # city = models.CharField('Город', max_length=100)
+    city = models.ForeignKey(City,
+                             verbose_name='Город',
+                             on_delete=models.CASCADE,
+                             related_name='black_list_cash_directions')
+    # valute_from = models.CharField('Отдаём', max_length=10)
+    # valute_to = models.CharField('Получаем', max_length=10)
+    direction = models.ForeignKey(Direction,
+                                  verbose_name='Направление для обмена',
+                                  on_delete=models.CASCADE,
+                                  related_name='black_list_directions')
 
     class Meta:
         verbose_name = 'Элемент чёрного списка'
         verbose_name_plural = 'Элементы чёрного списка'
-        unique_together = (("city",  "valute_from", "valute_to"), )
-        ordering = ['city', 'valute_from', 'valute_to']
-        indexes = [
-            models.Index(fields=['city', 'valute_from', 'valute_to'])
-        ]
+        # unique_together = (("city",  "valute_from", "valute_to"), )
+        unique_together = (("city",  "direction"), )
+        ordering = ['city',
+                    'direction__valute_from',
+                    'direction__valute_to']
+        # indexes = [
+        #     models.Index(fields=['city', 'valute_from', 'valute_to'])
+        # ]
 
     #для более красивого вывода в чёрном списке
     def __str__(self):
-        return f'({self.city}): {self.valute_from} -> {self.valute_to}\n\n'
+        # return f'({self.city}): {self.valute_from} -> {self.valute_to}\n\n'
+        return f'({self.city}): {self.direction}\n\n'

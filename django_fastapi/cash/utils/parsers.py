@@ -61,9 +61,9 @@ def generate_exchange_direction_dict(element: Element,
         params = params.text
 
     dict_for_exchange_direction = {
-        'valute_from': valute_from,
-        'valute_to': valute_to,
-        'city': city.upper(),
+        # 'valute_from': valute_from,
+        # 'valute_to': valute_to,
+        # 'city': city.upper(),
         'in_count': element.find('in').text,
         'out_count': element.find('out').text,
         'min_amount': element.find('minamount').text,

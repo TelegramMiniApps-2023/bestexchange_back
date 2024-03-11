@@ -17,8 +17,8 @@ def no_cash_parse_xml(dict_for_parser: dict,
 
         if element is not None:
             dict_for_exchange_direction = {
-                'valute_from': valute_from,
-                'valute_to': valute_to,
+                # 'valute_from': valute_from,
+                # 'valute_to': valute_to,
                 'in_count': element.find('in').text,
                 'out_count': element.find('out').text,
                 'min_amount': element.find('minamount').text,
