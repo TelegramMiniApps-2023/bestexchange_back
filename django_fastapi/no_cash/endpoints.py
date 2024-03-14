@@ -5,7 +5,8 @@ from django.db import connection
 
 from general_models.utils.http_exc import http_exception_json
 from general_models.utils.endpoints import (get_exchange_direction_list,
-                                            get_valute_json)
+                                            get_valute_json,
+                                            increase_popular_count_direction)
 
 from .models import ExchangeDirection
 
@@ -68,6 +69,9 @@ def no_cash_exchange_directions(request: Request,
     
     if not queries:
         http_exception_json(status_code=404, param=request.url)
+
+    increase_popular_count_direction(valute_from=valute_from,
+                                     valute_to=valute_to)
     
     return get_exchange_direction_list(queries,
                                        valute_from,

@@ -77,6 +77,7 @@ class Review(BaseReview):
                                  related_name='reviews')
     
     class Meta:
+        unique_together = (('exchange','username','time_create'), )
         verbose_name = 'Отзыв'
         verbose_name_plural = 'Отзывы'
         ordering = ('-time_create', 'status', 'exchange')
@@ -93,6 +94,7 @@ class Comment(BaseComment):
                                related_name='comments')
     
     class Meta:
+        unique_together = (('review','username','time_create'), )
         verbose_name = 'Комментарий'
         verbose_name_plural = 'Комментарии'
         ordering = ('-time_create', 'status', 'review')

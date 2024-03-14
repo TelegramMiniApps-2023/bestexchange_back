@@ -29,7 +29,9 @@ SECRET_KEY = CSRF_TOKEN
 
 LANGUAGE_CODE = 'ru'
 
-# TIME_ZONE = 'Europe/Moscow'
+TIME_ZONE = 'Europe/Moscow'
+
+USE_TZ = True
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -41,11 +43,13 @@ INSTALLED_APPS = [
     
     'debug_toolbar',
     "django_celery_beat",
+    'django_summernote',
 
     "general_models",
     "no_cash",
     "cash",
     "partners",
+    'seo_admin'
 ]
 
 MIDDLEWARE = [
@@ -156,3 +160,5 @@ CSRF_TRUSTED_ORIGINS = [f'{PROTOCOL}{SITE_DOMAIN}']
 
 CELERY_BROKER_URL = REDIS_URL
 CELERY_RESULT_BACKEND = REDIS_URL
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'

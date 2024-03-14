@@ -13,8 +13,7 @@ from django_celery_beat.models import (SolarSchedule,
                                        ClockedSchedule,
                                        CrontabSchedule)
 
-from partners.utils.periodic_tasks import (edit_time_for_task_check_directions_on_active,
-                                           edit_time_live_for_partner_directions)
+from partners.utils.periodic_tasks import edit_time_for_task_check_directions_on_active
 
 from .utils.admin import ReviewAdminMixin
 from .utils.endpoints import try_generate_icon_url
@@ -67,7 +66,13 @@ class PartnerTimeUpdateAdmin(admin.ModelAdmin):
 
             match obj.name:
                 case 'Управление временем проверки активности направлений':
-                    edit_time_for_task_check_directions_on_active(fields_to_update_task)
+                    task = 'check_update_time_for_directions_task'
+                    edit_time_for_task_check_directions_on_active(task,
+                                                                  fields_to_update_task)
+                case 'Управление временем обнуления популярности направления':
+                    task = 'update_popular_count_direction_time_task'
+                    edit_time_for_task_check_directions_on_active(task,
+                                                                  fields_to_update_task)
                 # case 'Управление временем жизни направлений':
                 #     edit_time_live_for_partner_directions(fields_to_update_task)
         else:
@@ -200,6 +205,7 @@ class BaseDirectionAdmin(admin.ModelAdmin):
     list_display = ('get_direction_name', )
     list_select_related = ('valute_from', 'valute_to')
     search_fields = ('valute_from__code_name', 'valute_to__code_name')
+    readonly_fields = ('popular_count', )
 
     def get_direction_name(self, obj):
         return f'{obj.valute_from} -> {obj.valute_to}'

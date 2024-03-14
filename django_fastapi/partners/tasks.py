@@ -1,7 +1,7 @@
 import requests
 
 from time import sleep
-from datetime import timedelta
+from datetime import datetime
 
 from celery import shared_task
 
@@ -49,7 +49,7 @@ def parse_cash_courses():
 @shared_task(name='check_update_time_for_directions')
 def check_update_time_for_directions():
     time_delta = get_timedelta()
-    check_time = get_actual_datetime() - time_delta
+    check_time = datetime.now() - time_delta
     
     PartnerDirection.objects\
                     .filter(time_update__lt=check_time)\

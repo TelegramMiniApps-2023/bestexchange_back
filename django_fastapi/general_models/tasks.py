@@ -4,13 +4,13 @@ from celery.app.task import Task
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 
-from .utils.parse_reviews.selenium import parse_reviews
-
 from cash import models as cash_models
 from no_cash import models as no_cash_models
 from partners import models as partner_models
 
 from config import SELENIUM_DRIVER
+
+from .utils.parse_reviews.selenium import parse_reviews
 
 
 #Задача для периодического удаления отзывов и комментариев
@@ -31,7 +31,6 @@ def delete_cancel_reviews():
 #для всех обменников из БД при запуске сервиса
 @shared_task(acks_late=True, task_reject_on_worker_lost=True)
 def parse_reviews_with_start_service():
-    print(current_task.__dict__)
     try:
         # driver = webdriver.Firefox()
         options = Options()
@@ -53,7 +52,7 @@ def parse_reviews_with_start_service():
 
 #Фоновая задача парсинга отзывов и комментариев обменника
 #при добавлении обменника через админ панель
-@shared_task
+@shared_task(acks_late=True, task_reject_on_worker_lost=True)
 def parse_reviews_for_exchange(exchange_name: str, marker: str):
     exchange_name = exchange_name.lower()
 
@@ -65,3 +64,12 @@ def parse_reviews_for_exchange(exchange_name: str, marker: str):
         print(ex)
     finally:
         driver.quit()
+
+
+@shared_task(name='update_popular_count_direction_time')
+def update_popular_count_direction():
+    cash_direction = cash_models.Direction.objects.all()
+    no_cash_directions = no_cash_models.Direction.objects.all()
+
+    cash_direction.update(popular_count=0)
+    no_cash_directions.update(popular_count=0)

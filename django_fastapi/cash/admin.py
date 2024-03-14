@@ -157,7 +157,12 @@ class ExchangeAdmin(BaseExchangeAdmin):
 #Отображение направлений в админ панели
 @admin.register(Direction)
 class DirectionAdmin(BaseDirectionAdmin):
-    readonly_fields = ('display_name', 'actual_course')
+    # readonly_fields = ('display_name', 'actual_course')
+
+    def get_readonly_fields(self, request: HttpRequest, obj: Any | None = ...) -> list[str] | tuple[Any, ...]:
+        readonly_fileds = super().get_readonly_fields(request, obj)
+        readonly_fileds += ('display_name', 'actual_course')
+        return readonly_fileds
 
     def get_queryset(self, request: HttpRequest) -> QuerySet[Any]:
         return super().get_queryset(request).select_related('valute_from', 'valute_to')

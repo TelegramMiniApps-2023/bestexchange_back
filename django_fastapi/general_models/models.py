@@ -1,4 +1,6 @@
 from typing import Iterable
+from datetime import datetime
+
 from django.db import models
 
 from .utils.model_validators import is_positive_validate
@@ -91,9 +93,9 @@ class BaseReviewComment(models.Model):
                                 max_length=255)
     text = models.TextField('Текст сообщения')
     time_create = models.DateTimeField('Дата создания',
-                                       default=None,
                                        blank=True,
                                        null=True,
+                                       default=None,
                                        help_text='Если оставить поля пустыми, время установится автоматически по московскому часовому поясу')
     status = models.CharField('Статус модерации',
                                   max_length=20,
@@ -185,6 +187,8 @@ class ParseExchange(BaseExchange):
 
 #Абстрактная модель направления (для наследования)
 class BaseDirection(models.Model):
+    popular_count = models.IntegerField('Счётчик популярности',
+                                        default=0)
     
     class Meta:
         abstract = True

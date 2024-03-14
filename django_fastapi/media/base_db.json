@@ -440,6 +440,15 @@
             "unit_time": "DAY"
                 }
     },
+    {
+        "model": "general_models.partnertimeupdate",
+        "pk": 3,
+        "fields": {
+            "name": "Управление временем обнуления популярности направления",
+            "amount": 30,
+            "unit_time": "DAY"
+                }
+    },
 
 
 

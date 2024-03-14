@@ -4,8 +4,8 @@ from collections import defaultdict
 from django.conf import settings
 from django.db import connection
 
-from cash.models import ExchangeDirection as CashExDir, City
-from no_cash.models import ExchangeDirection as NoCashExDir
+from cash.models import ExchangeDirection as CashExDir, City, Direction as CashDirection
+from no_cash.models import ExchangeDirection as NoCashExDir, Direction as NoCashDirection
 
 from general_models.models import Valute, en_type_valute_dict
 from general_models.schemas import ValuteModel, EnValuteModel, MultipleName
@@ -137,3 +137,12 @@ def get_valute_json(queries: List[NoCashExDir | CashExDir]):
                                                  + [EnValuteModel(**valute.__dict__)]
 
     return json_dict
+
+
+def increase_popular_count_direction(**kwargs):
+    direction = CashDirection if kwargs.get('city') else NoCashDirection
+    valute_from, valute_to = kwargs['valute_from'], kwargs['valute_to']
+    direction = direction.objects.get(valute_from=valute_from,
+                                      valute_to=valute_to)
+    direction.popular_count += 1
+    direction.save()

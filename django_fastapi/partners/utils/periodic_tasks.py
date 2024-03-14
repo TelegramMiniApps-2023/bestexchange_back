@@ -6,9 +6,11 @@ from general_models.utils.periodic_tasks import get_or_create_schedule
 from general_models.utils.base import UNIT_TIME_CHOICES
 
 
-def edit_time_for_task_check_directions_on_active(fields_to_update: dict):
+def edit_time_for_task_check_directions_on_active(task: str,
+                                                  fields_to_update: dict):
     try:
-        task = PeriodicTask.objects.get(name='check_update_time_for_directions_task')
+        # task = PeriodicTask.objects.get(name='check_update_time_for_directions_task')
+        task = PeriodicTask.objects.get(name=task)
     except PeriodicTask.DoesNotExist:
         pass
     else:
@@ -19,9 +21,5 @@ def edit_time_for_task_check_directions_on_active(fields_to_update: dict):
         task.interval = schedule
         task.save()
 
-
-def edit_time_live_for_partner_directions(fields_to_update: dict):
-    amount = fields_to_update['amount']
-    unit_time = fields_to_update['unit_time']
 
     

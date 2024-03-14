@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 
@@ -15,17 +17,25 @@ from .models import Direction, Exchange, Review, Comment
 # более 3 дней, направление становится неактивным
 @receiver(post_save, sender=PartnerTimeUpdate)
 def create_custom_user_for_user(sender, instance, created, **kwargs):
-    if instance.name == 'Управление временем проверки активности направлений':
+    if instance.name != 'Управление временем жизни направлений':
         if created:
             amount = instance.amount
             unit_time = instance.unit_time
 
             schedule = get_or_create_schedule(amount,
                                               UNIT_TIME_CHOICES[unit_time])
+            match instance.name:
+                case 'Управление временем проверки активности направлений':
+                    task_name = 'check_update_time_for_directions_task'
+                    background_task = 'check_update_time_for_directions'
+                case 'Управление временем обнуления популярности направления':
+                    task_name = 'update_popular_count_direction_time_task'
+                    background_task = 'update_popular_count_direction_time'
+
             PeriodicTask.objects.create(
                     interval=schedule,
-                    name='check_update_time_for_directions_task',
-                    task='check_update_time_for_directions',
+                    name=task_name,
+                    task=background_task,
                     )
 
 
@@ -42,7 +52,7 @@ def add_en_name_for_exchange(sender, instance, **kwargs):
 @receiver(pre_save, sender=Review)
 def change_time_create_for_review(sender, instance, **kwargs):
     if instance.time_create is None:
-        instance.time_create = get_actual_datetime()
+        instance.time_create = datetime.now()
 
 
 #Сигнал для автоматической установки времени
@@ -50,10 +60,10 @@ def change_time_create_for_review(sender, instance, **kwargs):
 @receiver(pre_save, sender=Comment)
 def change_time_create_for_comment(sender, instance, **kwargs):
     if instance.time_create is None:
-        instance.time_create = get_actual_datetime()
+        instance.time_create = datetime.now()
 
 
-@receiver(pre_save, sender=Direction)
-def change_time_create_for_direction(sender, instance, **kwargs):
-    if instance.time_update is None:
-        instance.time_update = get_actual_datetime()
+# @receiver(pre_save, sender=Direction)
+# def change_time_create_for_direction(sender, instance, **kwargs):
+#     if instance.time_update is None:
+#         instance.time_update = get_actual_datetime()

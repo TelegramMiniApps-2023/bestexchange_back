@@ -15,6 +15,7 @@ def trigger_error(request):
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('sentry-debug/', trigger_error),
+    path('summernote/', include('django_summernote.urls')),
     ]
 
 

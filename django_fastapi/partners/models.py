@@ -86,7 +86,7 @@ class Direction(models.Model):
                                    default=0,
                                    validators=[is_positive_validator])
     time_update = models.DateTimeField('Последнее обновление',
-                                       default=None,
+                                       auto_now_add=True,
                                        help_text='Время указано по московскому часовому поясу. При не обновлении процентов или фикс. ставки в течении 3 дней, направление становится неактивным.')
     is_active = models.BooleanField('Активно?', default=True)
 
