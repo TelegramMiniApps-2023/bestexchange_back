@@ -35,7 +35,7 @@ def no_cash_valutes(request: Request,
         queries = queries.values_list('direction__valute_from').all()
     else:
         queries = queries.filter(direction__valute_from=base)\
-                            .values_list('directon__valute_to').all()
+                            .values_list('direction__valute_to').all()
         
     if not queries:
         http_exception_json(status_code=404, param=request.url)
