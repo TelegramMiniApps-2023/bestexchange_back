@@ -357,7 +357,7 @@ class ReviewStacked(BaseReviewStacked):
 
 @admin.register(Exchange)
 class ExchangeAdmin(ReviewAdminMixin, admin.ModelAdmin):
-    list_display = ('name', 'en_name', 'has_partner_link')
+    list_display = ('name', 'en_name', 'account', 'has_partner_link')
     readonly_fields = ('is_active', )
     filter_horizontal = ()
     inlines = [PartnerCityStacked, ReviewStacked]
