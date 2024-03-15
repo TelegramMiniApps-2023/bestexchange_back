@@ -22,6 +22,7 @@ services:
 
   django_fastapi:
     build: .
+    pull_policy: build
     environment:
       - POSTGRES_HOST=psql_db
       - SELENIUM_DRIVER=firefox
