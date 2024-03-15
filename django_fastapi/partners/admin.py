@@ -173,17 +173,17 @@ class DirectionAdmin(admin.ModelAdmin):
     
     @admin.action(description='Обновить активность выбранных Направлений')
     def get_directions_active(modeladmin, request, queryset):
-        time_update = datetime.now() + timedelta(hours=9)
+        time_update = datetime.now()
         queryset.update(is_active=True,
                         time_update=time_update)
         messages.success(request,
                          f'Выбранные направления успешно обновлены!({len(queryset)} шт)')
         
-    def get_actions(self, request: HttpRequest) -> OrderedDict[Any, Any]:
-        actions = super().get_actions(request)
-        if request.user.is_superuser:
-            del actions['get_directions_active']
-        return actions
+    # def get_actions(self, request: HttpRequest) -> OrderedDict[Any, Any]:
+    #     actions = super().get_actions(request)
+    #     if request.user.is_superuser:
+    #         del actions['get_directions_active']
+    #     return actions
 
 
 class PartnerCityStacked(admin.StackedInline):
